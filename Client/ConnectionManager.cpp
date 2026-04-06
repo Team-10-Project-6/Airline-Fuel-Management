@@ -65,7 +65,7 @@ const string& ConnectionManager::getAircraftId() const {
 SOCKET ConnectionManager::openSocket() const {
     SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (sock == INVALID_SOCKET) {
-        cerr << "[ERROR] Failed to create socket. Error: " << WSAGetLastError() << endl;
+        cerr << "[ERROR] Failed to create socket. Error: " << GET_SOCKET_ERR() << endl;
         return INVALID_SOCKET;
     }
 
@@ -77,7 +77,7 @@ SOCKET ConnectionManager::openSocket() const {
     cout << "[INFO] Connecting to " << m_serverIp << ":" << m_serverPort << " ..." << endl;
 
     if (::connect(sock, reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
-        cerr << "[ERROR] Connection failed. Error: " << WSAGetLastError() << endl;
+        cerr << "[ERROR] Connection failed. Error: " << GET_SOCKET_ERR() << endl;
         closesocket(sock);
         return INVALID_SOCKET;
     }
@@ -91,7 +91,7 @@ bool ConnectionManager::doHandshake(SOCKET sock, const string& clientID, string&
     // Send "HELLO <clientID>\n"
     string greeting = "HELLO " + clientID + "\n";
     if (send(sock, greeting.c_str(), static_cast<int>(greeting.size()), 0) == SOCKET_ERROR) {
-        cerr << "[ERROR] Handshake send failed. Error: " << WSAGetLastError() << endl;
+        cerr << "[ERROR] Handshake send failed. Error: " << GET_SOCKET_ERR() << endl;
         return false;
     }
 
@@ -99,7 +99,7 @@ bool ConnectionManager::doHandshake(SOCKET sock, const string& clientID, string&
     char buf[256] = {};
     int  bytes    = recv(sock, buf, sizeof(buf) - 1, 0);
     if (bytes <= 0) {
-        cerr << "[ERROR] Handshake recv failed. Error: " << WSAGetLastError() << endl;
+        cerr << "[ERROR] Handshake recv failed. Error: " << GET_SOCKET_ERR() << endl;
         return false;
     }
 

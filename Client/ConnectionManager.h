@@ -1,7 +1,25 @@
 #pragma once
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#pragma comment(lib, "Ws2_32.lib")
+
+#ifdef _WIN32
+    #include <winsock2.h>
+    #include <ws2tcpip.h>
+    #define GET_SOCKET_ERR() WSAGetLastError()
+    #pragma comment(lib, "Ws2_32.lib")
+#else
+    #include <sys/socket.h>
+    #include <arpa/inet.h>
+    #include <netdb.h>
+    #include <unistd.h>
+    #include <errno.h>
+    #include <string.h>
+    // Create common types
+    typedef int SOCKET;
+    #define INVALID_SOCKET  (SOCKET)(~0)
+    #define SOCKET_ERROR            (-1)
+    #define closesocket(s) close(s)
+    #define GET_SOCKET_ERR() errno
+#endif
+
 #include <string>
 
 class ConnectionManager {
