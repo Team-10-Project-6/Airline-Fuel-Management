@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include "ConnectionManager.h"
+#include "TelemetryParser.h"
+#include "PacketHandler.h"
 
 using namespace std;
 
@@ -39,10 +41,39 @@ int main(int argc, char* argv[]) {
             return -1;
         }
 
-		//TODO: Create a PacketHandler/TelemetryParser to read the telemetry file line by line, sending each line to the server
+		//Open telemetry file.
+        TelemetryParser parser(filePath);
+        if (!parser.open()) {
+            cerr << "[ERROR] Failed to open telemetry file." << endl;
+            connManager.disconnect();
+#ifdef _WIN32
+            WSACleanup();   
+#endif
+            return -1;
+        }
+
+        //Create a PacketHandler and start sending lines until end of file or an error occurs
+        PacketHandler packetHandler(connManager);
+        while (parser.hasMore()) {
+            string line;
+            if (parser.nextLine(line)) {
+                //cout << "DEBUG: Sending line: " << line << " (Line " << parser.lineNumber() << ")" << endl;
+                if (!packetHandler.sendLine(line, parser.lineNumber())) {
+                    cerr << "[ERROR] Failed to send line " << parser.lineNumber() << ". Aborting." << endl;
+                    connManager.disconnect();
+#ifdef _WIN32
+                    WSACleanup();
+#endif
+                    return -1;
+                }
+            }
+        }
 
         //Flight completion
         cout << "[INFO] Flight complete for aircraft: " << connManager.getAircraftId() << endl;
+
+        // //Must be a better way to ensure all packets are sent before disconnecting
+        // Sleep(10000); // Sleep for 1 second 
 
         connManager.disconnect();
 
