@@ -48,6 +48,7 @@ bool ConnectionManager::reconnect(int maxAttempts) {
 
 void ConnectionManager::disconnect() {
     if (m_socket != INVALID_SOCKET) {
+        shutdown(m_socket, SD_SEND);  //Flush send buffer before closing. (SD_SEND on Windows, SHUT_WR on Linux)
         closesocket(m_socket);
         m_socket = INVALID_SOCKET;
     }
@@ -93,6 +94,12 @@ bool ConnectionManager::doHandshake(SOCKET sock, const string& clientID, string&
     if (send(sock, greeting.c_str(), static_cast<int>(greeting.size()), 0) == SOCKET_ERROR) {
         cerr << "[ERROR] Handshake send failed. Error: " << GET_SOCKET_ERR() << endl;
         return false;
+    }
+
+    if (clientID != "NEW") {
+        assignedId = clientID;
+        cout << "[INFO] Resuming flight with Aircraft ID: " << assignedId << endl;
+        return true;
     }
 
     // Read the assigned ID from the server

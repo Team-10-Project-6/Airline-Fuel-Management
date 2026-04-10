@@ -18,6 +18,7 @@
     #define SOCKET_ERROR            (-1)
     #define closesocket(s) close(s)
     #define GET_SOCKET_ERR() errno
+    #define SD_SEND SHUT_WR
 #endif
 
 #include <string>
