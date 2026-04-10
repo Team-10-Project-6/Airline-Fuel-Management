@@ -95,7 +95,7 @@ bool ConnectionManager::doHandshake(SOCKET sock, const string& clientID, string&
         return false;
     }
 
-    // Read "ID <id>\n"
+    // Read the assigned ID from the server
     char buf[256] = {};
     int  bytes    = recv(sock, buf, sizeof(buf) - 1, 0);
     if (bytes <= 0) {
@@ -103,17 +103,19 @@ bool ConnectionManager::doHandshake(SOCKET sock, const string& clientID, string&
         return false;
     }
 
+    //Remove any trailing newline characters from the response
     string response(buf, bytes);
     while (!response.empty() && (response.back() == '\n' || response.back() == '\r')) {
         response.pop_back();
     }
 
-    if (response.size() > 3 && response.substr(0, 3) == "ID ") {
-        assignedId = response.substr(3);
+    //Expect a non-empty response containing the assigned aircraft ID
+    if (!response.empty()) {
+        assignedId = response;
         cout << "[INFO] Server assigned Aircraft ID: " << assignedId << endl;
         return true;
     }
 
-    cerr << "[ERROR] Unexpected handshake response: " << response << endl;
+    cerr << "[ERROR] Empty handshake response from server." << endl;
     return false;
 }
