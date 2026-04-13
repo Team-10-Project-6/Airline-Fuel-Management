@@ -1,0 +1,17 @@
+# Visual Studio Build Artifacts
+Debug/
+Release/
+x64/
+*.exe
+*.pdb
+*.obj
+*.ilk
+
+# Visual Studio Local Settings & Cache
+.vs/
+*.user
+*.suo
+
+# Log files and temporary data
+*.log
+[abdy@archlinux Documents]$
