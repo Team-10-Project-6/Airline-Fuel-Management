@@ -2,9 +2,19 @@
 #include <iostream>
 using namespace std;
 
-PacketHandler::PacketHandler(ConnectionManager& connMgr) : m_connMgr(connMgr) {}
+PacketHandler::PacketHandler(ConnectionManager& connMgr) : m_connMgr(connMgr), m_prevTimestamp(0) {}
 
-bool PacketHandler::sendLine(const string& dataLine, int lineNumber) {
+bool PacketHandler::sendLine(const string& dataLine, int lineNumber, time_t timestamp) {
+
+    // Sleep for the time delta between this line and the previous one
+    if (m_prevTimestamp != 0 && timestamp != 0) {
+        double delta = difftime(timestamp, m_prevTimestamp);
+        if (delta > 0 && delta < 60) { //Ignore gaps longer than 60s (pauses, file gaps, etc.)
+            Sleep(static_cast<int>(delta * 1000));
+        }
+    }
+
+    m_prevTimestamp = timestamp;
 
     string packet = m_connMgr.getAircraftId() + "," + dataLine + "\n";
 
