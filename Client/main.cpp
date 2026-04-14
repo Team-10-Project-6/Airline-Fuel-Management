@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
             string line;
             if (parser.nextLine(line)) {
                 //cout << "DEBUG: Sending line: " << line << " (Line " << parser.lineNumber() << ")" << endl;
-                if (!packetHandler.sendLine(line, parser.lineNumber())) {
+                if (!packetHandler.sendLine(line, parser.lineNumber(), parser.currentTimestamp())) {
                     cerr << "[ERROR] Failed to send line " << parser.lineNumber() << ". Aborting." << endl;
                     connManager.disconnect();
 #ifdef _WIN32
@@ -68,6 +68,10 @@ int main(int argc, char* argv[]) {
                 }
             }
         }
+
+		//Notify server of flight completion to let server know if connection was accidentally dropped or if this was an intentional disconnect after a successful flight
+        string completionMsg = "FLIGHT_COMPLETE\n";
+        send(connManager.getSocket(), completionMsg.c_str(), (int)completionMsg.size(), 0);
 
         //Flight completion
         cout << "[INFO] Flight complete for aircraft: " << connManager.getAircraftId() << endl;
