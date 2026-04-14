@@ -1,6 +1,8 @@
 #include "ServerConnectionManager.h"
 #include <iostream>
 #include <thread>
+#include <boost/asio/thread_pool.hpp>
+#include <boost/asio/post.hpp>
 
 using namespace std;
 
@@ -30,8 +32,8 @@ void ServerConnectionManager::startListening() {
     SvrAddr.sin_addr.s_addr = INADDR_ANY; 
     SvrAddr.sin_port = htons(port); 
 
-    // bind socket
-    if ((bind(WelcomeSocket, (struct sockaddr *)&SvrAddr, sizeof(SvrAddr))) == SOCKET_ERROR) {
+    // Add '::' before bind to use the global/WinSock version
+    if ((::bind(WelcomeSocket, (struct sockaddr*)&SvrAddr, sizeof(SvrAddr))) == SOCKET_ERROR) {
         cerr << "Bind failed." << endl;
         closesocket(WelcomeSocket);
         WSACleanup();
@@ -51,6 +53,10 @@ void ServerConnectionManager::startListening() {
 
     SOCKET ConnectionSocket = SOCKET_ERROR;
 
+    // Create a simple boost thread pool for handling parallel connections
+    // Emulating 'unlimited' connections by allocating a large pool size
+    boost::asio::thread_pool pool(100);
+
     while (isRunning) {
         // wait for incoming connection
         if ((ConnectionSocket = accept(WelcomeSocket, NULL, NULL)) == SOCKET_ERROR) {
@@ -60,16 +66,18 @@ void ServerConnectionManager::startListening() {
 
         cout << "Client connection made." << endl;
 
-        // Each client runs on its own thread so the server can accept new connections immediately
-        std::thread([this](SOCKET sock) {
+        // Post the client connection handling to the thread pool
+        boost::asio::post(pool, [this, ConnectionSocket]() {
             std::string clientID;
-            if (handleHandshake(sock, clientID)) {
-                handleClientSession(sock, clientID);
+            if (handleHandshake(ConnectionSocket, clientID)) {
+                handleClientSession(ConnectionSocket, clientID);
             }
-            closesocket(sock);
-        }, ConnectionSocket).detach();
+            closesocket(ConnectionSocket);
+        });
 
     }
+    
+    pool.join();
 }
 
 bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& clientID) {
