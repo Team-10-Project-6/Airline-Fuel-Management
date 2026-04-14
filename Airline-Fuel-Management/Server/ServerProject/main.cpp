@@ -26,8 +26,11 @@ int main(int argc, char* argv[]) {
 
     cout << "Initializing server on port " << port << "..." << endl;
 
+    // initialize task scheduler
+    TaskScheduler scheduler(8);
+
     // create connection manager
-    ServerConnectionManager connectionManager(port);
+    ServerConnectionManager connectionManager(port, scheduler);
 
     // start listening for client
     connectionManager.startListening();

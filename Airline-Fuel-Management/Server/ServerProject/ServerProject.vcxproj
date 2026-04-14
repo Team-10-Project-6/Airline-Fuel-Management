@@ -130,10 +130,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ServerConnectionManager.cpp" />
     <ClCompile Include="ServerPacketParser.cpp" />
+    <ClCompile Include="TaskScheduler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerConnectionManager.h" />
     <ClInclude Include="ServerPacketParser.h" />
+    <ClInclude Include="TaskScheduler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

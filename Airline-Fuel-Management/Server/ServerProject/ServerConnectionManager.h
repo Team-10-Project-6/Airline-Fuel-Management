@@ -5,11 +5,13 @@
 #pragma comment(lib, "ws2_32.lib")
 
 #include <string>
+#include <boost/asio/thread_pool.hpp>
 #include "ServerPacketParser.h"
+#include "TaskScheduler.h"
 
 class ServerConnectionManager {
 public:
-    ServerConnectionManager(int port);
+    ServerConnectionManager(int port, TaskScheduler& scheduler);
     ~ServerConnectionManager();
 
     void startListening();
@@ -22,6 +24,12 @@ private:
 
     // counter for airplane id
     int airplaneCounter;
+
+    // task queue pool
+	TaskScheduler& scheduler;
+
+    // internal connection thread pool
+	boost::asio::thread_pool connectionPool;
 
     // Performs the HELLO handshake; sets clientID and returns true on success
     bool handleHandshake(SOCKET ConnectionSocket, std::string& clientID);
