@@ -18,4 +18,10 @@ private:
     int port;
     SOCKET WelcomeSocket;
     bool isRunning;
+
+    // counter for airplane id
+    int airplaneCounter;
+
+    // function for handling handshake
+    void handleHandshake(SOCKET ConnectionSocket);
 };
