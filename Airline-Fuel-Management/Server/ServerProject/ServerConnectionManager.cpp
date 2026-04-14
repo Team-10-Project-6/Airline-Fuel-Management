@@ -6,8 +6,9 @@
 
 using namespace std;
 
-ServerConnectionManager::ServerConnectionManager(int serverPort) 
-    : port(serverPort), WelcomeSocket(INVALID_SOCKET), isRunning(false) {}
+ServerConnectionManager::ServerConnectionManager(int serverPort)
+    : port(serverPort), WelcomeSocket(INVALID_SOCKET), isRunning(false),
+      airplaneCounter(0), m_dataStorage("fuel_data.db") {}
 
 ServerConnectionManager::~ServerConnectionManager() {
     stop();
@@ -131,7 +132,6 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
     while (true) {
         int bytesReceived = recv(ConnectionSocket, rxBuffer, sizeof(rxBuffer), 0);
         if (bytesReceived <= 0) {
-            // Connection closed or error
             if (bytesReceived == 0) {
                 cout << "[" << clientID << "] Client disconnected." << endl;
             } else {
@@ -155,6 +155,20 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
                  << "ts=" << packet.timestamp
                  << " fuel=" << packet.fuel
                  << endl;
+
+            // --- Telemetry Processor: calculate fuel consumption ---
+            FuelConsumptionRecord record;
+            if (m_telemetryProcessor.process(packet, record)) {
+                cout << "[" << clientID << "] "
+                     << "consumed=" << record.fuelConsumed
+                     << " rate=" << record.consumptionRate << "/s"
+                     << endl;
+
+                // --- Data Storage: persist to SQLite ---
+                if (!m_dataStorage.insert(record)) {
+                    cerr << "[" << clientID << "] Failed to store record." << endl;
+                }
+            }
         }
     }
 

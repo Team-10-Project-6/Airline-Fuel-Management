@@ -6,6 +6,8 @@
 
 #include <string>
 #include "ServerPacketParser.h"
+#include "TelemetryProcessor.h"
+#include "DataStorage.h"
 
 class ServerConnectionManager {
 public:
@@ -22,6 +24,10 @@ private:
 
     // counter for airplane id
     int airplaneCounter;
+
+    // Shared across all client sessions
+    TelemetryProcessor m_telemetryProcessor;
+    DataStorage        m_dataStorage;
 
     // Performs the HELLO handshake; sets clientID and returns true on success
     bool handleHandshake(SOCKET ConnectionSocket, std::string& clientID);

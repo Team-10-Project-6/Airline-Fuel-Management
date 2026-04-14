@@ -5,7 +5,6 @@
 // <aircraftId>,<telemetryId>,<timestamp>,<fuel>\n
 struct TelemetryPacket {
     std::string aircraftId;
-    std::string telemetryId;
     std::string timestamp;
     double      fuel;
 };

@@ -127,13 +127,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DataStorage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ServerConnectionManager.cpp" />
     <ClCompile Include="ServerPacketParser.cpp" />
+    <ClCompile Include="sqlite3.c" />
+    <ClCompile Include="TelemetryProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DataStorage.h" />
     <ClInclude Include="ServerConnectionManager.h" />
     <ClInclude Include="ServerPacketParser.h" />
+    <ClInclude Include="sqlite3.h" />
+    <ClInclude Include="TelemetryProcessor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
