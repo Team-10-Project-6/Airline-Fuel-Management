@@ -59,7 +59,55 @@ void ServerConnectionManager::startListening() {
 
         cout << "Client Connection Made\n" << endl;
 
+        // handlle the TCP handshake
+        handleHandshake(ConnectionSocket);
+
     }
+}
+
+void ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket) {
+    char RxBuffer[256] = {0};
+
+    // receive hello message from client
+    int bytesReceived = recv(ConnectionSocket, RxBuffer, sizeof(RxBuffer), 0);
+    if (bytesReceived <= 0) {
+        cerr << "Handshake failed: No data received." << endl;
+        closesocket(ConnectionSocket);
+        return;
+    }
+
+    string request(RxBuffer);
+    string clientID;
+
+    // parse handshake message
+    if (request.find("HELLO NEW") != string::npos) {    // if new client...
+        clientID = to_string(airplaneCounter++);        // ...assign new ID
+        cout << "Assigning new Aircraft ID: " << clientID << endl;
+    } 
+    else if (request.find("HELLO ") != string::npos) {  // if existing client...
+        clientID = request.substr(6);                   // ...extract existing ID
+        
+        // remove newline if found
+        size_t pos = clientID.find('\n');
+        if (pos != string::npos) {
+            clientID.erase(pos);
+        }
+        cout << "Resuming flight for Aircraft ID: " << clientID << endl;
+    } 
+    else {
+        cerr << "Invalid handshake request." << endl;
+        closesocket(ConnectionSocket);
+        return;
+    }
+
+    // send back assigned or existing ID
+    string response = clientID + "\n"; 
+    if (send(ConnectionSocket, response.c_str(), response.size(), 0) == SOCKET_ERROR) {
+        cerr << "Failed to send handshake response." << endl;
+        closesocket(ConnectionSocket);
+    }
+
+    closesocket(ConnectionSocket);
 }
 
 void ServerConnectionManager::stop() {
