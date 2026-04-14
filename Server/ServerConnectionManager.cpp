@@ -1,5 +1,6 @@
 #include "ServerConnectionManager.h"
 #include <iostream>
+#include <thread>
 
 using namespace std;
 
@@ -57,57 +58,99 @@ void ServerConnectionManager::startListening() {
             continue;
         }
 
-        cout << "Client Connection Made\n" << endl;
+        cout << "Client connection made." << endl;
 
-        // handlle the TCP handshake
-        handleHandshake(ConnectionSocket);
+        // Each client runs on its own thread so the server can accept new connections immediately
+        std::thread([this](SOCKET sock) {
+            std::string clientID;
+            if (handleHandshake(sock, clientID)) {
+                handleClientSession(sock, clientID);
+            }
+            closesocket(sock);
+        }, ConnectionSocket).detach();
 
     }
 }
 
-void ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket) {
+bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& clientID) {
     char RxBuffer[256] = {0};
 
     // receive hello message from client
     int bytesReceived = recv(ConnectionSocket, RxBuffer, sizeof(RxBuffer), 0);
     if (bytesReceived <= 0) {
         cerr << "Handshake failed: No data received." << endl;
-        closesocket(ConnectionSocket);
-        return;
+        return false;
     }
 
     string request(RxBuffer);
-    string clientID;
 
     // parse handshake message
     if (request.find("HELLO NEW") != string::npos) {    // if new client...
         clientID = to_string(airplaneCounter++);        // ...assign new ID
         cout << "Assigning new Aircraft ID: " << clientID << endl;
-    } 
+    }
     else if (request.find("HELLO ") != string::npos) {  // if existing client...
         clientID = request.substr(6);                   // ...extract existing ID
-        
+
         // remove newline if found
         size_t pos = clientID.find('\n');
         if (pos != string::npos) {
             clientID.erase(pos);
         }
         cout << "Resuming flight for Aircraft ID: " << clientID << endl;
-    } 
+    }
     else {
         cerr << "Invalid handshake request." << endl;
-        closesocket(ConnectionSocket);
-        return;
+        return false;
     }
 
     // send back assigned or existing ID
-    string response = clientID + "\n"; 
+    string response = clientID + "\n";
     if (send(ConnectionSocket, response.c_str(), response.size(), 0) == SOCKET_ERROR) {
         cerr << "Failed to send handshake response." << endl;
-        closesocket(ConnectionSocket);
+        return false;
     }
 
-    closesocket(ConnectionSocket);
+    return true;
+}
+
+void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const string& clientID) {
+    cout << "[" << clientID << "] Session started." << endl;
+
+    ServerPacketParser parser;
+    char rxBuffer[4096];
+
+    while (true) {
+        int bytesReceived = recv(ConnectionSocket, rxBuffer, sizeof(rxBuffer), 0);
+        if (bytesReceived <= 0) {
+            // Connection closed or error
+            if (bytesReceived == 0) {
+                cout << "[" << clientID << "] Client disconnected." << endl;
+            } else {
+                cerr << "[" << clientID << "] recv error: " << WSAGetLastError() << endl;
+            }
+            break;
+        }
+
+        // Check for flight completion message before feeding the parser
+        string chunk(rxBuffer, bytesReceived);
+        if (chunk.find("FLIGHT_COMPLETE") != string::npos) {
+            cout << "[" << clientID << "] Flight complete." << endl;
+            break;
+        }
+
+        parser.feed(rxBuffer, bytesReceived);
+
+        TelemetryPacket packet;
+        while (parser.tryParse(packet)) {
+            cout << "[" << clientID << "] "
+                 << "ts=" << packet.timestamp
+                 << " fuel=" << packet.fuel
+                 << endl;
+        }
+    }
+
+    cout << "[" << clientID << "] Session ended." << endl;
 }
 
 void ServerConnectionManager::stop() {

@@ -7,7 +7,21 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
     // parse port number
-    int port = stoi(argv[1]);
+    if (argc < 2) {
+        cerr << "Usage: server <port>" << endl;
+        return 1;
+    }
+    int port;
+    try {
+        port = stoi(argv[1]);
+    } catch (const exception&) {
+        cerr << "Invalid port number: " << argv[1] << endl;
+        return 1;
+    }
+    if (port < 1 || port > 65535) {
+        cerr << "Port must be between 1 and 65535." << endl;
+        return 1;
+    }
 
     cout << "Initializing server on port " << port << "..." << endl;
 

@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
         while (parser.hasMore()) {
             string line;
             if (parser.nextLine(line)) {
-                //cout << "DEBUG: Sending line: " << line << " (Line " << parser.lineNumber() << ")" << endl;
+                cout << "DEBUG: Sending line: " << line << " (Line " << parser.lineNumber() << ")" << endl;
                 if (!packetHandler.sendLine(line, parser.lineNumber(), parser.currentTimestamp())) {
                     cerr << "[ERROR] Failed to send line " << parser.lineNumber() << ". Aborting." << endl;
                     connManager.disconnect();
