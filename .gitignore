@@ -16,3 +16,5 @@ x64/
 # Log files and temporary data
 *.log
 [abdy@archlinux Documents]$
+
+**/packages/*
