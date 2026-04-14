@@ -1,13 +1,13 @@
 #include "ServerConnectionManager.h"
 #include <iostream>
 #include <thread>
-#include <boost/asio/thread_pool.hpp>
+//#include <boost/asio/thread_pool.hpp>
 #include <boost/asio/post.hpp>
 
 using namespace std;
 
-ServerConnectionManager::ServerConnectionManager(int serverPort) 
-    : port(serverPort), WelcomeSocket(INVALID_SOCKET), isRunning(false) {}
+ServerConnectionManager::ServerConnectionManager(int serverPort, TaskScheduler& scheduler) 
+    : port(serverPort), WelcomeSocket(INVALID_SOCKET), isRunning(false), scheduler(scheduler), connectionPool(100) {}
 
 ServerConnectionManager::~ServerConnectionManager() {
     stop();
@@ -53,10 +53,6 @@ void ServerConnectionManager::startListening() {
 
     SOCKET ConnectionSocket = SOCKET_ERROR;
 
-    // Create a simple boost thread pool for handling parallel connections
-    // Emulating 'unlimited' connections by allocating a large pool size
-    boost::asio::thread_pool pool(100);
-
     while (isRunning) {
         // wait for incoming connection
         if ((ConnectionSocket = accept(WelcomeSocket, NULL, NULL)) == SOCKET_ERROR) {
@@ -67,7 +63,7 @@ void ServerConnectionManager::startListening() {
         cout << "Client connection made." << endl;
 
         // Post the client connection handling to the thread pool
-        boost::asio::post(pool, [this, ConnectionSocket]() {
+        boost::asio::post(connectionPool, [this, ConnectionSocket]() {
             std::string clientID;
             if (handleHandshake(ConnectionSocket, clientID)) {
                 handleClientSession(ConnectionSocket, clientID);
@@ -77,7 +73,7 @@ void ServerConnectionManager::startListening() {
 
     }
     
-    pool.join();
+    connectionPool.join();
 }
 
 bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& clientID) {
@@ -151,10 +147,19 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
 
         TelemetryPacket packet;
         while (parser.tryParse(packet)) {
-            cout << "[" << clientID << "] "
-                 << "ts=" << packet.timestamp
-                 << " fuel=" << packet.fuel
-                 << endl;
+
+            // post telemetry processing to task scheduler
+            scheduler.enqueueTask([packet, clientID]() {
+                // insert telemetry processing function
+
+
+                // telemetry log to console
+                cout << "[" << clientID << "] "
+                    << "ts=" << packet.timestamp
+                    << " fuel=" << packet.fuel
+                    << endl;
+
+				});
         }
     }
 
