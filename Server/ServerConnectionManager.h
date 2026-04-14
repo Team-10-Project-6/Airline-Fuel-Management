@@ -5,6 +5,7 @@
 #pragma comment(lib, "ws2_32.lib")
 
 #include <string>
+#include "ServerPacketParser.h"
 
 class ServerConnectionManager {
 public:
@@ -22,6 +23,9 @@ private:
     // counter for airplane id
     int airplaneCounter;
 
-    // function for handling handshake
-    void handleHandshake(SOCKET ConnectionSocket);
+    // Performs the HELLO handshake; sets clientID and returns true on success
+    bool handleHandshake(SOCKET ConnectionSocket, std::string& clientID);
+
+    // Receives telemetry packets for an already-handshaked connection
+    void handleClientSession(SOCKET ConnectionSocket, const std::string& clientID);
 };

@@ -6,6 +6,7 @@ x64/
 *.pdb
 *.obj
 *.ilk
+*.txt
 
 # Visual Studio Local Settings & Cache
 .vs/
