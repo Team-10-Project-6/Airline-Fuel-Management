@@ -15,4 +15,5 @@ public:
 
 private:
     std::vector<char> m_buffer;
+    size_t            m_offset = 0;
 };
