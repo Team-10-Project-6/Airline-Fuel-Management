@@ -1,6 +1,8 @@
 #include "ServerConnectionManager.h"
 #include <iostream>
 #include <thread>
+#include <memory>
+#include <atomic>
 #include <boost/asio/post.hpp>
 
 #pragma warning(disable : 4996)
@@ -126,6 +128,24 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
     ServerPacketParser parser;
     char rxBuffer[4096];
 
+    // Reference-counted completion guard.
+    // Starts at 1 as a sentinel for "FLIGHT_COMPLETE not yet received".
+    // Each telemetry task increments before enqueue, decrements on completion.
+    // FLIGHT_COMPLETE decrements the sentinel.
+    // Whoever reaches 0 last runs the summary — exactly once, no polling, no blocking.
+    auto pending = std::make_shared<std::atomic<int>>(1);
+
+    auto runSummary = [this, clientID]() {
+        double total = m_dataStorage.sumConsumed(clientID);
+        if (total >= 0.0) {
+            cout << "[" + clientID + "] Total fuel consumed: " + to_string(total) + "\n";
+        } else {
+            cout << "[" + clientID + "] Flight complete (no consumption records found).\n";
+        }
+        std::lock_guard<std::mutex> lock(m_initialFuelMutex);
+        m_initialFuel.erase(clientID);
+    };
+
     while (true) {
         int bytesReceived = recv(ConnectionSocket, rxBuffer, sizeof(rxBuffer), 0);
         if (bytesReceived <= 0) {
@@ -141,16 +161,10 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
         string chunk(rxBuffer, bytesReceived);
         if (chunk.find("FLIGHT_COMPLETE") != string::npos) {
             cout << "[" << clientID << "] Flight complete." << endl;
-            scheduler.enqueueTask([this, clientID]() {
-                double total = m_dataStorage.sumConsumed(clientID);
-                if (total >= 0.0) {
-                    cout << "[" << clientID << "] Total fuel consumed: " << total << endl;
-                } else {
-                    cout << "[" << clientID << "] Flight complete (no consumption records found)." << endl;
-                }
-                std::lock_guard<std::mutex> lock(m_initialFuelMutex);
-                m_initialFuel.erase(clientID);
-            });
+            // Decrement the sentinel. If all telemetry tasks already finished, run summary now.
+            if (--(*pending) == 0) {
+                scheduler.enqueueTask(runSummary);
+            }
             break;
         }
 
@@ -158,12 +172,9 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
 
         TelemetryPacket packet;
         while (parser.tryParse(packet)) {
-            // post telemetry processing to task scheduler
-            scheduler.enqueueTask([this, packet, clientID]() {
-                cout << "[" << clientID << "] "
-                    << "ts=" << packet.timestamp
-                    << " fuel=" << packet.fuel
-                    << endl;
+            ++(*pending); // claim a slot before posting
+            scheduler.enqueueTask([this, packet, clientID, pending, runSummary]() {
+                cout << "[" + clientID + "] ts=" + packet.timestamp + " fuel=" + to_string(packet.fuel) + "\n";
 
                 // record initial fuel for this aircraft
                 {
@@ -173,13 +184,17 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
 
                 FuelConsumptionRecord record;
                 if (m_telemetryProcessor.process(packet, record)) {
-                    cout << "[" << clientID << "] "
-                         << "consumed=" << record.fuelConsumed
-                         << " rate=" << record.consumptionRate << "/hr"
-                         << endl;
+                    cout << "[" + clientID + "] consumed: " + to_string(record.fuelConsumed) + " liters"
+                            " rate: " + to_string(record.consumptionRate) + " liters per second\n";
                     if (!m_dataStorage.insert(record)) {
-                        cerr << "[" << clientID << "] Failed to persist fuel record." << endl;
+                        cerr << "[" + clientID + "] Failed to persist fuel record.\n";
                     }
+                }
+
+                // Release this task's slot. If FLIGHT_COMPLETE already fired and we're
+                // the last task to finish, run the summary.
+                if (--(*pending) == 0) {
+                    runSummary();
                 }
             });
         }

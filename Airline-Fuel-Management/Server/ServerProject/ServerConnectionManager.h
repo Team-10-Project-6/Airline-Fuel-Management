@@ -27,7 +27,7 @@ private:
     bool isRunning;
 
     // counter for airplane id
-    int airplaneCounter;
+    std::atomic<int> airplaneCounter{0};
 
     // task queue pool
 	TaskScheduler& scheduler;
