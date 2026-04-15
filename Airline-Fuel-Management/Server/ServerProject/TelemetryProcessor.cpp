@@ -33,8 +33,7 @@ static double parseTimestamp(const std::string& ts) {
 bool TelemetryProcessor::process(const TelemetryPacket& packet, FuelConsumptionRecord& out) {
     double currTimestamp = parseTimestamp(packet.timestamp);
     if (currTimestamp == 0) {
-        std::cerr << "[TelemetryProcessor] Could not parse timestamp: "
-                  << packet.timestamp << std::endl;
+        std::cerr << ("[TelemetryProcessor] Could not parse timestamp: " + packet.timestamp + "\n");
         return false;
     }
 

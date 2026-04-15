@@ -20,13 +20,13 @@ ServerConnectionManager::~ServerConnectionManager() {
 void ServerConnectionManager::startListening() {
     WSADATA wsaData;
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-        cerr << "WSAStartup failed." << endl;
+        cerr << "WSAStartup failed.\n";
         return;
     }
 
     // create welcome socket
     if ((WelcomeSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == INVALID_SOCKET) {
-        cerr << "Failed to create WelcomeSocket." << endl;
+        cerr << "Failed to create WelcomeSocket.\n";
         return;
     }
 
@@ -38,7 +38,7 @@ void ServerConnectionManager::startListening() {
 
     // Add '::' before bind to use the global/WinSock version
     if ((::bind(WelcomeSocket, (struct sockaddr*)&SvrAddr, sizeof(SvrAddr))) == SOCKET_ERROR) {
-        cerr << "Bind failed." << endl;
+        cerr << "Bind failed.\n";
         closesocket(WelcomeSocket);
         WSACleanup();
         return;
@@ -46,25 +46,25 @@ void ServerConnectionManager::startListening() {
 
     // listen for new clients
     if (listen(WelcomeSocket, SOMAXCONN) == SOCKET_ERROR) {
-        cerr << "Listen failed." << endl;
+        cerr << "Listen failed.\n";
         closesocket(WelcomeSocket);
         WSACleanup();
         return;
     }
 
     isRunning = true;
-    cout << "Waiting for client connection on port " << port << "..." << endl;
+    cout << ("Waiting for client connection on port " + to_string(port) + "...\n");
 
     SOCKET ConnectionSocket = SOCKET_ERROR;
 
     while (isRunning) {
         // wait for incoming connection
         if ((ConnectionSocket = accept(WelcomeSocket, NULL, NULL)) == SOCKET_ERROR) {
-            if (isRunning) cerr << "Accept failed." << endl;
+            if (isRunning) cerr << "Accept failed.\n";
             continue;
         }
 
-        cout << "Client connection made." << endl;
+        cout << "Client connection made.\n";
 
         // Post the client connection handling to the thread pool
         boost::asio::post(connectionPool, [this, ConnectionSocket]() {
@@ -86,7 +86,7 @@ bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& c
     // receive hello message from client
     int bytesReceived = recv(ConnectionSocket, RxBuffer, sizeof(RxBuffer), 0);
     if (bytesReceived <= 0) {
-        cerr << "Handshake failed: No data received." << endl;
+        cerr << "Handshake failed: No data received.\n";
         return false;
     }
 
@@ -95,7 +95,7 @@ bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& c
     // parse handshake message
     if (request.find("HELLO NEW") != string::npos) {    // if new client...
         clientID = to_string(airplaneCounter++);        // ...assign new ID
-        cout << "Assigning new Aircraft ID: " << clientID << endl;
+        cout << ("Assigning new Aircraft ID: " + clientID + "\n");
     }
     else if (request.find("HELLO ") != string::npos) {  // if existing client...
         clientID = request.substr(6);                   // ...extract existing ID
@@ -105,17 +105,17 @@ bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& c
         if (pos != string::npos) {
             clientID.erase(pos);
         }
-        cout << "Resuming flight for Aircraft ID: " << clientID << endl;
+        cout << ("Resuming flight for Aircraft ID: " + clientID + "\n");
     }
     else {
-        cerr << "Invalid handshake request." << endl;
+        cerr << "Invalid handshake request.\n";
         return false;
     }
 
     // send back assigned or existing ID
     string response = clientID + "\n";
     if (send(ConnectionSocket, response.c_str(), response.size(), 0) == SOCKET_ERROR) {
-        cerr << "Failed to send handshake response." << endl;
+        cerr << "Failed to send handshake response.\n";
         return false;
     }
 
@@ -123,7 +123,7 @@ bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& c
 }
 
 void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const string& clientID) {
-    cout << "[" << clientID << "] Session started." << endl;
+    cout << ("[" + clientID + "] Session started.\n");
 
     ServerPacketParser parser;
     char rxBuffer[4096];
@@ -150,9 +150,9 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
         int bytesReceived = recv(ConnectionSocket, rxBuffer, sizeof(rxBuffer), 0);
         if (bytesReceived <= 0) {
             if (bytesReceived == 0) {
-                cout << "[" << clientID << "] Client disconnected." << endl;
+                cout << ("[" + clientID + "] Client disconnected.\n");
             } else {
-                cerr << "[" << clientID << "] recv error: " << WSAGetLastError() << endl;
+                cerr << ("[" + clientID + "] recv error: " + to_string(WSAGetLastError()) + "\n");
             }
             break;
         }
@@ -160,7 +160,7 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
         // Check for flight completion message before feeding the parser
         string chunk(rxBuffer, bytesReceived);
         if (chunk.find("FLIGHT_COMPLETE") != string::npos) {
-            cout << "[" << clientID << "] Flight complete." << endl;
+            cout << ("[" + clientID + "] Flight complete.\n");
             // Decrement the sentinel. If all telemetry tasks already finished, run summary now.
             if (--(*pending) == 0) {
                 scheduler.enqueueTask(runSummary);
@@ -200,7 +200,7 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
         }
     }
 
-    cout << "[" << clientID << "] Session ended." << endl;
+    cout << ("[" + clientID + "] Session ended.\n");
 }
 
 void ServerConnectionManager::stop() {
