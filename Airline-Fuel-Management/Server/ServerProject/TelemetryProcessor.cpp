@@ -43,7 +43,7 @@ bool TelemetryProcessor::process(const TelemetryPacket& packet, FuelConsumptionR
     auto it = m_state.find(packet.aircraftId);
     if (it == m_state.end()) {
         // First packet for this aircraft — store baseline, cannot calculate consumption yet
-        m_state[packet.aircraftId] = { packet.fuel, currTimestamp };
+        m_state[packet.aircraftId] = { packet.fuel, currTimestamp, packet.fuel, currTimestamp };
         return false;
     }
 
@@ -57,8 +57,10 @@ bool TelemetryProcessor::process(const TelemetryPacket& packet, FuelConsumptionR
         return false;
     }
 
-    double fuelConsumed = prev.prevFuel - packet.fuel;
-    double rate         = fuelConsumed / deltaTime;
+    double fuelConsumed  = prev.prevFuel - packet.fuel;
+    double totalConsumed = prev.initialFuel - packet.fuel;
+    double totalElapsed  = currTimestamp - prev.initialTimestamp;
+    double rate          = (totalElapsed > 0.0) ? (totalConsumed / totalElapsed) : 0.0;
 
     out.aircraftId      = packet.aircraftId;
     out.timestamp       = packet.timestamp;

@@ -17,6 +17,10 @@ public:
     // Returns true on success.
     bool insert(const FuelConsumptionRecord& record);
 
+    // Returns the sum of fuel_consumed for the given aircraft across all stored records.
+    // Returns -1.0 on error or if the database is not open.
+    double sumConsumed(const std::string& aircraftId);
+
 private:
     sqlite3*   m_db;
     std::mutex m_mutex;

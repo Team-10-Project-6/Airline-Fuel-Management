@@ -1,14 +1,15 @@
 #include "ServerConnectionManager.h"
 #include <iostream>
 #include <thread>
-#include <boost/asio/thread_pool.hpp>
 #include <boost/asio/post.hpp>
+
+#pragma warning(disable : 4996)
 
 using namespace std;
 
-ServerConnectionManager::ServerConnectionManager(int serverPort)
-    : port(serverPort), WelcomeSocket(INVALID_SOCKET), isRunning(false),
-      airplaneCounter(0), m_dataStorage("fuel_data.db") {}
+ServerConnectionManager::ServerConnectionManager(int serverPort, TaskScheduler& scheduler)
+    : port(serverPort), WelcomeSocket(INVALID_SOCKET), isRunning(false), airplaneCounter(0),
+      scheduler(scheduler), connectionPool(100), m_dataStorage("fuel_data.db") {}
 
 ServerConnectionManager::~ServerConnectionManager() {
     stop();
@@ -54,10 +55,6 @@ void ServerConnectionManager::startListening() {
 
     SOCKET ConnectionSocket = SOCKET_ERROR;
 
-    // Create a simple boost thread pool for handling parallel connections
-    // Emulating 'unlimited' connections by allocating a large pool size
-    boost::asio::thread_pool pool(100);
-
     while (isRunning) {
         // wait for incoming connection
         if ((ConnectionSocket = accept(WelcomeSocket, NULL, NULL)) == SOCKET_ERROR) {
@@ -68,7 +65,7 @@ void ServerConnectionManager::startListening() {
         cout << "Client connection made." << endl;
 
         // Post the client connection handling to the thread pool
-        boost::asio::post(pool, [this, ConnectionSocket]() {
+        boost::asio::post(connectionPool, [this, ConnectionSocket]() {
             std::string clientID;
             if (handleHandshake(ConnectionSocket, clientID)) {
                 handleClientSession(ConnectionSocket, clientID);
@@ -78,7 +75,7 @@ void ServerConnectionManager::startListening() {
 
     }
     
-    pool.join();
+    connectionPool.join();
 }
 
 bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& clientID) {
@@ -144,6 +141,16 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
         string chunk(rxBuffer, bytesReceived);
         if (chunk.find("FLIGHT_COMPLETE") != string::npos) {
             cout << "[" << clientID << "] Flight complete." << endl;
+            scheduler.enqueueTask([this, clientID]() {
+                double total = m_dataStorage.sumConsumed(clientID);
+                if (total >= 0.0) {
+                    cout << "[" << clientID << "] Total fuel consumed: " << total << endl;
+                } else {
+                    cout << "[" << clientID << "] Flight complete (no consumption records found)." << endl;
+                }
+                std::lock_guard<std::mutex> lock(m_initialFuelMutex);
+                m_initialFuel.erase(clientID);
+            });
             break;
         }
 
@@ -151,24 +158,30 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
 
         TelemetryPacket packet;
         while (parser.tryParse(packet)) {
-            cout << "[" << clientID << "] "
-                 << "ts=" << packet.timestamp
-                 << " fuel=" << packet.fuel
-                 << endl;
-
-            // --- Telemetry Processor: calculate fuel consumption ---
-            FuelConsumptionRecord record;
-            if (m_telemetryProcessor.process(packet, record)) {
+            // post telemetry processing to task scheduler
+            scheduler.enqueueTask([this, packet, clientID]() {
                 cout << "[" << clientID << "] "
-                     << "consumed=" << record.fuelConsumed
-                     << " rate=" << record.consumptionRate << "/s"
-                     << endl;
+                    << "ts=" << packet.timestamp
+                    << " fuel=" << packet.fuel
+                    << endl;
 
-                // --- Data Storage: persist to SQLite ---
-                if (!m_dataStorage.insert(record)) {
-                    cerr << "[" << clientID << "] Failed to store record." << endl;
+                // record initial fuel for this aircraft
+                {
+                    std::lock_guard<std::mutex> lock(m_initialFuelMutex);
+                    m_initialFuel.emplace(clientID, packet.fuel); // no-op if already present
                 }
-            }
+
+                FuelConsumptionRecord record;
+                if (m_telemetryProcessor.process(packet, record)) {
+                    cout << "[" << clientID << "] "
+                         << "consumed=" << record.fuelConsumed
+                         << " rate=" << record.consumptionRate << "/hr"
+                         << endl;
+                    if (!m_dataStorage.insert(record)) {
+                        cerr << "[" << clientID << "] Failed to persist fuel record." << endl;
+                    }
+                }
+            });
         }
     }
 

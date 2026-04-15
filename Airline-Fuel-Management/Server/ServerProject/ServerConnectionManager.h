@@ -5,13 +5,17 @@
 #pragma comment(lib, "ws2_32.lib")
 
 #include <string>
+#include <unordered_map>
+#include <mutex>
+#include <boost/asio/thread_pool.hpp>
 #include "ServerPacketParser.h"
+#include "TaskScheduler.h"
 #include "TelemetryProcessor.h"
 #include "DataStorage.h"
 
 class ServerConnectionManager {
 public:
-    ServerConnectionManager(int port);
+    ServerConnectionManager(int port, TaskScheduler& scheduler);
     ~ServerConnectionManager();
 
     void startListening();
@@ -25,9 +29,21 @@ private:
     // counter for airplane id
     int airplaneCounter;
 
-    // Shared across all client sessions
+    // task queue pool
+	TaskScheduler& scheduler;
+
+    // internal connection thread pool
+	boost::asio::thread_pool connectionPool;
+
+    // computes per-packet fuel consumption and rate
     TelemetryProcessor m_telemetryProcessor;
-    DataStorage        m_dataStorage;
+
+    // persists fuel consumption records to SQLite
+    DataStorage m_dataStorage;
+
+    // tracks the first fuel reading per aircraft for FLIGHT_COMPLETE totals
+    std::unordered_map<std::string, double> m_initialFuel;
+    std::mutex m_initialFuelMutex;
 
     // Performs the HELLO handshake; sets clientID and returns true on success
     bool handleHandshake(SOCKET ConnectionSocket, std::string& clientID);

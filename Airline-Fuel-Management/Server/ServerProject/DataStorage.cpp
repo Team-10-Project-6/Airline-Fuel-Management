@@ -76,3 +76,31 @@ bool DataStorage::insert(const FuelConsumptionRecord& record) {
     sqlite3_finalize(stmt);
     return ok;
 }
+
+double DataStorage::sumConsumed(const std::string& aircraftId) {
+    if (!m_db) return -1.0;
+
+    const char* sql =
+        "SELECT SUM(fuel_consumed) FROM fuel_consumption WHERE aircraft_id = ?;";
+
+    std::lock_guard<std::mutex> lock(m_mutex);
+
+    sqlite3_stmt* stmt = nullptr;
+    if (sqlite3_prepare_v2(m_db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "[DataStorage] sumConsumed prepare failed: " << sqlite3_errmsg(m_db) << std::endl;
+        return -1.0;
+    }
+
+    sqlite3_bind_text(stmt, 1, aircraftId.c_str(), -1, SQLITE_TRANSIENT);
+
+    double total = -1.0;
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        // SUM returns NULL if there are no rows — column_type check guards against that
+        if (sqlite3_column_type(stmt, 0) != SQLITE_NULL) {
+            total = sqlite3_column_double(stmt, 0);
+        }
+    }
+
+    sqlite3_finalize(stmt);
+    return total;
+}

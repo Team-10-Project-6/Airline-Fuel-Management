@@ -9,7 +9,7 @@ struct FuelConsumptionRecord {
     std::string aircraftId;
     std::string timestamp;
     double fuelConsumed;      // fuel delta since last packet (same unit as telemetry)
-    double consumptionRate;   // fuelConsumed / deltaTime (per second)
+    double consumptionRate;   // average fuel burned per hour since first packet ((initialFuel - currentFuel) / totalElapsedSeconds)
 };
 
 class TelemetryProcessor {
@@ -23,6 +23,8 @@ private:
     struct AircraftState {
         double prevFuel;
         double prevTimestamp;
+        double initialFuel;
+        double initialTimestamp;
     };
 
     std::unordered_map<std::string, AircraftState> m_state;
