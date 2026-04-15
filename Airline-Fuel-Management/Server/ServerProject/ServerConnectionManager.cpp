@@ -3,7 +3,6 @@
 #include <thread>
 #include <memory>
 #include <atomic>
-#include <boost/asio/post.hpp>
 
 #pragma warning(disable : 4996)
 
@@ -11,7 +10,7 @@ using namespace std;
 
 ServerConnectionManager::ServerConnectionManager(int serverPort, TaskScheduler& scheduler)
     : port(serverPort), WelcomeSocket(INVALID_SOCKET), isRunning(false), airplaneCounter(0),
-      scheduler(scheduler), connectionPool(100), m_dataStorage("fuel_data.db") {}
+      scheduler(scheduler), m_dataStorage("fuel_data.db") {}
 
 ServerConnectionManager::~ServerConnectionManager() {
     stop();
@@ -66,18 +65,15 @@ void ServerConnectionManager::startListening() {
 
         cout << "Client connection made.\n";
 
-        // Post the client connection handling to the thread pool
-        boost::asio::post(connectionPool, [this, ConnectionSocket]() {
+        std::thread([this, ConnectionSocket]() {
             std::string clientID;
             if (handleHandshake(ConnectionSocket, clientID)) {
                 handleClientSession(ConnectionSocket, clientID);
             }
             closesocket(ConnectionSocket);
-        });
+        }).detach();
 
     }
-    
-    connectionPool.join();
 }
 
 bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& clientID) {
