@@ -23,7 +23,7 @@ bool ServerPacketParser::tryParse(TelemetryPacket& out) {
 }
 
 bool ServerPacketParser::parseLine(const std::string& line, TelemetryPacket& out) const {
-    //<aircraftId>,<telemetryId>,<timestamp>,<fuel>
+    //<aircraftId>,<timestamp>,<fuel>
     std::istringstream ss(line);
     std::string aircraftId, timestamp, fuelStr;
 

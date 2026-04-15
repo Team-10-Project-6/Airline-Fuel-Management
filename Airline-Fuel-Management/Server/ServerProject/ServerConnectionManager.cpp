@@ -1,28 +1,17 @@
 #include "ServerConnectionManager.h"
 #include <iostream>
 #include <thread>
-//#include <boost/asio/thread_pool.hpp>
+#include <memory>
+#include <atomic>
 #include <boost/asio/post.hpp>
-#include <mutex>
-#include <unordered_map>
-#include <fstream>
-#include <ctime>
 
 #pragma warning(disable : 4996)
 
 using namespace std;
 
-struct FlightState {
-    double initialFuel = -1;
-    double lastFuel = -1;
-    long long lastTime = -1;
-};
-
-static std::unordered_map<std::string, FlightState> flightStates;
-static std::mutex flightStatesMutex;
-
-ServerConnectionManager::ServerConnectionManager(int serverPort, TaskScheduler& scheduler) 
-    : port(serverPort), WelcomeSocket(INVALID_SOCKET), isRunning(false), scheduler(scheduler), connectionPool(100) {}
+ServerConnectionManager::ServerConnectionManager(int serverPort, TaskScheduler& scheduler)
+    : port(serverPort), WelcomeSocket(INVALID_SOCKET), isRunning(false), airplaneCounter(0),
+      scheduler(scheduler), connectionPool(100), m_dataStorage("fuel_data.db") {}
 
 ServerConnectionManager::~ServerConnectionManager() {
     stop();
@@ -139,10 +128,27 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
     ServerPacketParser parser;
     char rxBuffer[4096];
 
+    // Reference-counted completion guard.
+    // Starts at 1 as a sentinel for "FLIGHT_COMPLETE not yet received".
+    // Each telemetry task increments before enqueue, decrements on completion.
+    // FLIGHT_COMPLETE decrements the sentinel.
+    // Whoever reaches 0 last runs the summary — exactly once, no polling, no blocking.
+    auto pending = std::make_shared<std::atomic<int>>(1);
+
+    auto runSummary = [this, clientID]() {
+        double total = m_dataStorage.sumConsumed(clientID);
+        if (total >= 0.0) {
+            cout << "[" + clientID + "] Total fuel consumed: " + to_string(total) + "\n";
+        } else {
+            cout << "[" + clientID + "] Flight complete (no consumption records found).\n";
+        }
+        std::lock_guard<std::mutex> lock(m_initialFuelMutex);
+        m_initialFuel.erase(clientID);
+    };
+
     while (true) {
         int bytesReceived = recv(ConnectionSocket, rxBuffer, sizeof(rxBuffer), 0);
         if (bytesReceived <= 0) {
-            // Connection closed or error
             if (bytesReceived == 0) {
                 cout << "[" << clientID << "] Client disconnected." << endl;
             } else {
@@ -155,20 +161,10 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
         string chunk(rxBuffer, bytesReceived);
         if (chunk.find("FLIGHT_COMPLETE") != string::npos) {
             cout << "[" << clientID << "] Flight complete." << endl;
-            // post final average calculation to scheduler
-            scheduler.enqueueTask([clientID]() {
-                std::lock_guard<std::mutex> lock(flightStatesMutex);
-                auto it = flightStates.find(clientID);
-                if (it != flightStates.end()) {
-                    double totalFuelConsumed = it->second.initialFuel - it->second.lastFuel;
-                    std::ofstream outFile("telemetry_Client" + clientID + ".txt", std::ios::app);
-                    if (outFile.is_open()) {
-                        outFile << "FLIGHT_COMPLETE: Total Fuel Consumed: " << totalFuelConsumed << "\n";
-                    }
-                    cout << "[" << clientID << "] Final total fuel consumed: " << totalFuelConsumed << endl;
-                    flightStates.erase(it);
-                }
-            });
+            // Decrement the sentinel. If all telemetry tasks already finished, run summary now.
+            if (--(*pending) == 0) {
+                scheduler.enqueueTask(runSummary);
+            }
             break;
         }
 
@@ -176,43 +172,29 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
 
         TelemetryPacket packet;
         while (parser.tryParse(packet)) {
+            ++(*pending); // claim a slot before posting
+            scheduler.enqueueTask([this, packet, clientID, pending, runSummary]() {
+                cout << "[" + clientID + "] ts=" + packet.timestamp + " fuel=" + to_string(packet.fuel) + "\n";
 
-            // post telemetry processing to task scheduler
-            scheduler.enqueueTask([packet, clientID]() {
-                // telemetry log to console
-                cout << "[" << clientID << "] "
-                    << "ts=" << packet.timestamp
-                    << " fuel=" << packet.fuel
-                    << endl;
-                    
-                std::lock_guard<std::mutex> lock(flightStatesMutex);
-                auto& state = flightStates[clientID];
-                
-                long long currentSeconds = 0;
-                int m=0, d=0, y=0, h=0, min=0, s=0;
-                if (sscanf(packet.timestamp.c_str(), "%d_%d_%d %d:%d:%d", &m, &d, &y, &h, &min, &s) == 6) {
-                    struct tm tm = {0};
-                    tm.tm_year = y - 1900;
-                    tm.tm_mon = m - 1;
-                    tm.tm_mday = d;
-                    tm.tm_hour = h;
-                    tm.tm_min = min;
-                    tm.tm_sec = s;
-                    currentSeconds = mktime(&tm);
+                // record initial fuel for this aircraft
+                {
+                    std::lock_guard<std::mutex> lock(m_initialFuelMutex);
+                    m_initialFuel.emplace(clientID, packet.fuel); // no-op if already present
                 }
 
-                if (state.initialFuel < 0) {
-                    state.initialFuel = packet.fuel;
-                    state.lastFuel = packet.fuel;
-                    state.lastTime = currentSeconds;
-                } else {
-                    double fuelConsumed = state.lastFuel - packet.fuel; // per interval consumption
-                    std::ofstream outFile("telemetry_Client" + clientID + ".txt", std::ios::app);
-                    if (outFile.is_open()) {
-                        outFile << "ts=" << packet.timestamp << " fuel_consumed=" << fuelConsumed << "\n";
+                FuelConsumptionRecord record;
+                if (m_telemetryProcessor.process(packet, record)) {
+                    cout << "[" + clientID + "] consumed: " + to_string(record.fuelConsumed) + " liters"
+                            " rate: " + to_string(record.consumptionRate) + " liters per second\n";
+                    if (!m_dataStorage.insert(record)) {
+                        cerr << "[" + clientID + "] Failed to persist fuel record.\n";
                     }
-                    state.lastFuel = packet.fuel;
-                    state.lastTime = currentSeconds;
+                }
+
+                // Release this task's slot. If FLIGHT_COMPLETE already fired and we're
+                // the last task to finish, run the summary.
+                if (--(*pending) == 0) {
+                    runSummary();
                 }
             });
         }
