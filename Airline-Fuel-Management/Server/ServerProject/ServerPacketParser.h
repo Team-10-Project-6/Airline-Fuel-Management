@@ -1,12 +1,11 @@
 #pragma once
 
-#include <string>
+#include <vector>
 
-// <aircraftId>,<telemetryId>,<timestamp>,<fuel>\n
 struct TelemetryPacket {
-    std::string aircraftId;
-    std::string timestamp;
-    double      fuel;
+    unsigned short aircraftId;  // Aircraft ID
+    unsigned int   timestamp;   // Unix epoch seconds
+    float          fuel;        // Fuel quantity
 };
 
 class ServerPacketParser {
@@ -15,6 +14,5 @@ public:
     bool tryParse(TelemetryPacket& out);
 
 private:
-    std::string m_buffer;
-    bool parseLine(const std::string& line, TelemetryPacket& out) const;
+    std::vector<char> m_buffer;
 };

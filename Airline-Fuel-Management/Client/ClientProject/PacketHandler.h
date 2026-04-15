@@ -1,8 +1,15 @@
 #pragma once
 
 #include "ConnectionManager.h"
-#include <string>
+#include <cstring>
 #include <ctime>
+#include <string>
+
+struct TelemetryWirePacket {
+    unsigned int  timestamp;        // Unix epoch seconds
+    float         fuel;             // Fuel quantity
+    unsigned int  aircraftId : 16;  // Aircraft ID (0-65535)
+};
 
 class PacketHandler {
 public:
@@ -10,7 +17,7 @@ public:
     bool sendLine(const std::string& dataLine, int lineNumber, time_t timestamp);
 
 private:
-    ConnectionManager& m_connMgr;  
-    time_t m_prevTimestamp; // Timestamp of the previous line
-    bool transmit(const std::string& packet) const;
+    ConnectionManager& m_connMgr;
+    time_t m_prevTimestamp;
+    bool transmit(const TelemetryWirePacket& pkt) const;
 };

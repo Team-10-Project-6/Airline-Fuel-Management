@@ -1,39 +1,10 @@
 #include "TelemetryProcessor.h"
-#include <iostream>
-#include <sstream>
-#include <ctime>
-
-//cuz of broken stod() due to our timestamp format, we need to parse manually
-static double parseTimestamp(const std::string& ts) {
-    std::string s = ts;
-    // trim leading whitespace
-    size_t start = s.find_first_not_of(" \t");
-    if (start == std::string::npos) return 0;
-    s = s.substr(start);
-
-    int day, month, year, hour, minute, second;
-    char sep;
-    std::istringstream ss(s);
-    ss >> day >> sep >> month >> sep >> year >> hour >> sep >> minute >> sep >> second;
-    if (ss.fail()) return 0;
-
-    std::tm t{};
-    t.tm_mday  = day;
-    t.tm_mon   = month - 1;
-    t.tm_year  = year - 1900;
-    t.tm_hour  = hour;
-    t.tm_min   = minute;
-    t.tm_sec   = second;
-    t.tm_isdst = -1;
-
-    std::time_t result = std::mktime(&t);
-    return (result == -1) ? 0 : static_cast<double>(result);
-}
+#include <cstdio>
+#include <string>
 
 bool TelemetryProcessor::process(const TelemetryPacket& packet, FuelConsumptionRecord& out) {
-    double currTimestamp = parseTimestamp(packet.timestamp);
+    double currTimestamp = static_cast<double>(packet.timestamp);
     if (currTimestamp == 0) {
-        std::cerr << ("[TelemetryProcessor] Could not parse timestamp: " + packet.timestamp + "\n");
         return false;
     }
 
@@ -61,8 +32,11 @@ bool TelemetryProcessor::process(const TelemetryPacket& packet, FuelConsumptionR
     double totalElapsed  = currTimestamp - prev.initialTimestamp;
     double rate          = (totalElapsed > 0.0) ? (totalConsumed / totalElapsed) : 0.0;
 
-    out.aircraftId      = packet.aircraftId;
-    out.timestamp       = packet.timestamp;
+    char buf[32];
+    sprintf_s(buf, sizeof(buf), "%u", (unsigned int)packet.aircraftId);
+    out.aircraftId = buf;
+    sprintf_s(buf, sizeof(buf), "%u", packet.timestamp);
+    out.timestamp  = buf;
     out.fuelConsumed    = fuelConsumed;
     out.consumptionRate = rate;
 

@@ -110,7 +110,7 @@ bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& c
 
     // send back assigned or existing ID
     string response = clientID + "\n";
-    if (send(ConnectionSocket, response.c_str(), response.size(), 0) == SOCKET_ERROR) {
+    if (send(ConnectionSocket, response.c_str(), (int)response.size(), 0) == SOCKET_ERROR) {
         cerr << "Failed to send handshake response.\n";
         return false;
     }
@@ -170,7 +170,7 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
         while (parser.tryParse(packet)) {
             ++(*pending); // claim a slot before posting
             scheduler.enqueueTask([this, packet, clientID, pending, runSummary]() {
-                cout << "[" + clientID + "] ts=" + packet.timestamp + " fuel=" + to_string(packet.fuel) + "\n";
+                cout << ("[" + clientID + "] ts=" + to_string(packet.timestamp) + " fuel=" + to_string(packet.fuel) + "\n");
 
                 // record initial fuel for this aircraft
                 {
