@@ -7,7 +7,6 @@
 #include <string>
 #include <unordered_map>
 #include <mutex>
-#include <boost/asio/thread_pool.hpp>
 #include "ServerPacketParser.h"
 #include "TaskScheduler.h"
 #include "TelemetryProcessor.h"
@@ -31,9 +30,6 @@ private:
 
     // task queue pool
 	TaskScheduler& scheduler;
-
-    // internal connection thread pool
-	boost::asio::thread_pool connectionPool;
 
     // computes per-packet fuel consumption and rate
     TelemetryProcessor m_telemetryProcessor;
