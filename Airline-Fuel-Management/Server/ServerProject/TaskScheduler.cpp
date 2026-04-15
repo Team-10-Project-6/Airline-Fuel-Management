@@ -4,7 +4,7 @@
 using namespace std;
 
 TaskScheduler::TaskScheduler(size_t threadNum) : pool(threadNum) {
-    cout << "Task Scheduler started with " << threadNum << " worker threads." << endl;
+    cout << ("Task Scheduler started with " + to_string(threadNum) + " worker threads.\n");
 }
 
 TaskScheduler::~TaskScheduler() {
