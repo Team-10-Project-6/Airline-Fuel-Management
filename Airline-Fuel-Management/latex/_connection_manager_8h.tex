@@ -1,0 +1,88 @@
+\doxysection{Client/\+\+Client\+Project/\+\+Connection\+Manager.h File Reference}
+\hypertarget{_connection_manager_8h}{}\label{_connection_manager_8h}\index{Client/ClientProject/ConnectionManager.h@{Client/ClientProject/ConnectionManager.h}}
+{\ttfamily \+\#include $<$sys/\+socket.\+h$>$}\newline
+{\ttfamily \+\#include $<$arpa/\+inet.\+h$>$}\newline
+{\ttfamily \+\#include $<$netdb.\+h$>$}\newline
+{\ttfamily \+\#include $<$unistd.\+h$>$}\newline
+{\ttfamily \+\#include $<$errno.\+h$>$}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+{\ttfamily \+\#include $<$string$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_connection_manager}{Connection\+Manager}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{_connection_manager_8h_a26769957ec1a2beaf223f33b66ee64ab}{INVALID\+\_\+\+SOCKET}}~(\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}})(\texorpdfstring{$\sim$}{\string~}0)
+\item 
+\+\#define \doxymbox{\hyperlink{_connection_manager_8h_a633b0396ff93d336a088412a190a5072}{SOCKET\+\_\+\+ERROR}}~(-\/1)
+\item 
+\+\#define \doxymbox{\hyperlink{_connection_manager_8h_a5a3eb971b466278ada4f7f87399a537c}{closesocket}}(s)
+\item 
+\+\#define \doxymbox{\hyperlink{_connection_manager_8h_a9cb8b297270f066497daa921579c49a7}{GET\+\_\+\+SOCKET\+\_\+\+ERR}}()
+\item 
+\+\#define \doxymbox{\hyperlink{_connection_manager_8h_ab8d2ae8532f7f1a85345500eacfd3b84}{SD\+\_\+\+SEND}}~SHUT\+\_\+\+WR
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int \doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_connection_manager_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_connection_manager_8h_a5a3eb971b466278ada4f7f87399a537c}\index{ConnectionManager.h@{ConnectionManager.h}!closesocket@{closesocket}}
+\index{closesocket@{closesocket}!ConnectionManager.h@{ConnectionManager.h}}
+\doxysubsubsection{\texorpdfstring{closesocket}{closesocket}}
+{\footnotesize\ttfamily \label{_connection_manager_8h_a5a3eb971b466278ada4f7f87399a537c} 
+\+\#define closesocket(\begin{DoxyParamCaption}\item[{}]{s}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{close(s)}
+
+\end{DoxyCode}
+\Hypertarget{_connection_manager_8h_a9cb8b297270f066497daa921579c49a7}\index{ConnectionManager.h@{ConnectionManager.h}!GET\_SOCKET\_ERR@{GET\_SOCKET\_ERR}}
+\index{GET\_SOCKET\_ERR@{GET\_SOCKET\_ERR}!ConnectionManager.h@{ConnectionManager.h}}
+\doxysubsubsection{\texorpdfstring{GET\_SOCKET\_ERR}{GET\_SOCKET\_ERR}}
+{\footnotesize\ttfamily \label{_connection_manager_8h_a9cb8b297270f066497daa921579c49a7} 
+\+\#define GET\+\_\+\+SOCKET\+\_\+\+ERR(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{errno}
+
+\end{DoxyCode}
+\Hypertarget{_connection_manager_8h_a26769957ec1a2beaf223f33b66ee64ab}\index{ConnectionManager.h@{ConnectionManager.h}!INVALID\_SOCKET@{INVALID\_SOCKET}}
+\index{INVALID\_SOCKET@{INVALID\_SOCKET}!ConnectionManager.h@{ConnectionManager.h}}
+\doxysubsubsection{\texorpdfstring{INVALID\_SOCKET}{INVALID\_SOCKET}}
+{\footnotesize\ttfamily \label{_connection_manager_8h_a26769957ec1a2beaf223f33b66ee64ab} 
+\+\#define INVALID\+\_\+\+SOCKET~(\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}})(\texorpdfstring{$\sim$}{\string~}0)}
+
+\Hypertarget{_connection_manager_8h_ab8d2ae8532f7f1a85345500eacfd3b84}\index{ConnectionManager.h@{ConnectionManager.h}!SD\_SEND@{SD\_SEND}}
+\index{SD\_SEND@{SD\_SEND}!ConnectionManager.h@{ConnectionManager.h}}
+\doxysubsubsection{\texorpdfstring{SD\_SEND}{SD\_SEND}}
+{\footnotesize\ttfamily \label{_connection_manager_8h_ab8d2ae8532f7f1a85345500eacfd3b84} 
+\+\#define SD\+\_\+\+SEND~SHUT\+\_\+\+WR}
+
+\Hypertarget{_connection_manager_8h_a633b0396ff93d336a088412a190a5072}\index{ConnectionManager.h@{ConnectionManager.h}!SOCKET\_ERROR@{SOCKET\_ERROR}}
+\index{SOCKET\_ERROR@{SOCKET\_ERROR}!ConnectionManager.h@{ConnectionManager.h}}
+\doxysubsubsection{\texorpdfstring{SOCKET\_ERROR}{SOCKET\_ERROR}}
+{\footnotesize\ttfamily \label{_connection_manager_8h_a633b0396ff93d336a088412a190a5072} 
+\+\#define SOCKET\+\_\+\+ERROR~(-\/1)}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{_connection_manager_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}\index{ConnectionManager.h@{ConnectionManager.h}!SOCKET@{SOCKET}}
+\index{SOCKET@{SOCKET}!ConnectionManager.h@{ConnectionManager.h}}
+\doxysubsubsection{\texorpdfstring{SOCKET}{SOCKET}}
+{\footnotesize\ttfamily \label{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831} 
+typedef int \doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}}
+

@@ -1,0 +1,325 @@
+\doxysection{Src\+Item Struct Reference}
+\hypertarget{struct_src_item}{}\label{struct_src_item}\index{SrcItem@{SrcItem}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_a8f8be9c45763fefeebd92acf8702d640}{z\+Name}}
+\item 
+char \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_a88defa197cbf16068887c2a316aa850b}{z\+Alias}}
+\item 
+\doxymbox{\hyperlink{struct_table}{Table}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_a18979c51016bcea1fc71aca9da1bb190}{p\+STab}}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>\doxymbox{\hyperlink{sqlite3_8c_a74a0f6424ae628af25f23f0a35f6ead3}{u8}} \doxymbox{\hyperlink{struct_src_item_a2eafa800b828ace03575c55237bd65c3}{jointype}}\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a2802c9ac695d746aee94c8782ed9e23a}{notIndexed}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a965b54cd484e6c2c2331b93bdc3e86f7}{isIndexedBy}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a81b9f962f39d5dd2821090781a4c02ae}{isSubquery}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a4bf74cdcf192f23cd3767465f8b14503}{isTabFunc}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a049b95a79d9cb565a189cd71fe6b77bc}{isCorrelated}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_accb61f180009d5e81a2bbbdfac1c167f}{isMaterialized}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_ab92ddd3738c486deaa42f469b7ea1b33}{viaCoroutine}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_aaa56ec3f68465462bf70fec32b4918f0}{isRecursive}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_aa262fc2c4a6b5051ec7f1df6e367083c}{fromDDL}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_aca1b9eb73c86bce791be27d26f3de8d9}{isCte}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a4fab3d4415b1efeddd98f3ba3d68d532}{notCte}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_adda398ec4dabf1a0b5d022434c7d6e95}{isUsing}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a95fe9f96fbef97f97a3f6b43fc45dc6f}{isOn}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_ad4bdb02c2c1ab627a73fc828fd05043c}{isSynthUsing}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a94054ef21d022c2afd94fea20c469b84}{isNestedFrom}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_abaa8f11e825941970b7ca274a229a78e}{rowidUsed}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a77652cc50be8c2400355e816ba4b857e}{fixedSchema}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a1134911935b56269c2ad308fb2ec012d}{hadSchema}}:1\\
+\>unsigned \doxymbox{\hyperlink{struct_src_item_a48929ea571d94567b51acbfa28f34aed}{fromExists}}:1\\
+\} \doxymbox{\hyperlink{struct_src_item_a0532b5b37e5d8155699805d43ec47425}{fg}}\\
+
+\end{tabbing}\item 
+int \doxymbox{\hyperlink{struct_src_item_a6d54c09f58c35057b41d9091dbb2e64f}{i\+Cursor}}
+\item 
+\doxymbox{\hyperlink{sqlite3_8c_afa77b629897c4457bfdc47d364ba5c3f}{Bitmask}} \doxymbox{\hyperlink{struct_src_item_a95cc4352dae584c5abeaf28c5dbdc6bf}{col\+Used}}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>char \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_a845b578ba01d857111f9e0010850ebed}{zIndexedBy}}\\
+\>\doxymbox{\hyperlink{struct_expr_list}{ExprList}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_a11976ca3f28a6ef25c11abfa753355eb}{pFuncArg}}\\
+\>\doxymbox{\hyperlink{sqlite3_8c_a03ad5adfaeb9b7640dde78a0cc390319}{u32}} \doxymbox{\hyperlink{struct_src_item_a82258c8c38344e3172f0db098cb23909}{nRow}}\\
+\} \doxymbox{\hyperlink{struct_src_item_a055c6d84d53227a36364b469bfa8e5d6}{u1}}\\
+
+\end{tabbing}\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\doxymbox{\hyperlink{struct_index}{Index}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_a1df9de568f7642398e227e76d6ced423}{pIBIndex}}\\
+\>\doxymbox{\hyperlink{struct_cte_use}{CteUse}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_a6b5adebb6ca58248df2dc1046084cc8a}{pCteUse}}\\
+\} \doxymbox{\hyperlink{struct_src_item_a2623e3432e621ccaffb13a01553f84b8}{u2}}\\
+
+\end{tabbing}\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\doxymbox{\hyperlink{struct_expr}{Expr}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_a9b3d3251eef82ac0ca687864d36632b4}{pOn}}\\
+\>\doxymbox{\hyperlink{struct_id_list}{IdList}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_a57bd1836a3e369ba1657e65d73a0adc8}{pUsing}}\\
+\} \doxymbox{\hyperlink{struct_src_item_a5fa2a4c1bec220e36501ed7a14dad514}{u3}}\\
+
+\end{tabbing}\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\doxymbox{\hyperlink{struct_schema}{Schema}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_ac0fb7ed36a99df6c91adee1d4f0bd545}{pSchema}}\\
+\>char \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_ae93f739e4463fba8072a60b6f132e07b}{zDatabase}}\\
+\>\doxymbox{\hyperlink{struct_subquery}{Subquery}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_src_item_a187df7eef6781ec0ad1dc2d2d4541b76}{pSubq}}\\
+\} \doxymbox{\hyperlink{struct_src_item_ab130b9df497f7e5b17c2ce7e1e4f5d13}{u4}}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_src_item_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_src_item_a95cc4352dae584c5abeaf28c5dbdc6bf}\index{SrcItem@{SrcItem}!colUsed@{colUsed}}
+\index{colUsed@{colUsed}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{colUsed}{colUsed}}
+{\footnotesize\ttfamily \label{struct_src_item_a95cc4352dae584c5abeaf28c5dbdc6bf} 
+\doxymbox{\hyperlink{sqlite3_8c_afa77b629897c4457bfdc47d364ba5c3f}{Bitmask}} Src\+Item::\+col\+Used}
+
+\Hypertarget{struct_src_item_a0532b5b37e5d8155699805d43ec47425}\index{SrcItem@{SrcItem}!fg@{fg}}
+\index{fg@{fg}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{[struct]}{[struct]}}
+{\footnotesize\ttfamily \label{struct_src_item_a0532b5b37e5d8155699805d43ec47425} 
+struct  \{ ... \}  Src\+Item::\+fg}
+
+\Hypertarget{struct_src_item_a77652cc50be8c2400355e816ba4b857e}\index{SrcItem@{SrcItem}!fixedSchema@{fixedSchema}}
+\index{fixedSchema@{fixedSchema}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{fixedSchema}{fixedSchema}}
+{\footnotesize\ttfamily \label{struct_src_item_a77652cc50be8c2400355e816ba4b857e} 
+unsigned Src\+Item::\+fixed\+Schema}
+
+\Hypertarget{struct_src_item_aa262fc2c4a6b5051ec7f1df6e367083c}\index{SrcItem@{SrcItem}!fromDDL@{fromDDL}}
+\index{fromDDL@{fromDDL}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{fromDDL}{fromDDL}}
+{\footnotesize\ttfamily \label{struct_src_item_aa262fc2c4a6b5051ec7f1df6e367083c} 
+unsigned Src\+Item::\+from\+DDL}
+
+\Hypertarget{struct_src_item_a48929ea571d94567b51acbfa28f34aed}\index{SrcItem@{SrcItem}!fromExists@{fromExists}}
+\index{fromExists@{fromExists}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{fromExists}{fromExists}}
+{\footnotesize\ttfamily \label{struct_src_item_a48929ea571d94567b51acbfa28f34aed} 
+unsigned Src\+Item::\+from\+Exists}
+
+\Hypertarget{struct_src_item_a1134911935b56269c2ad308fb2ec012d}\index{SrcItem@{SrcItem}!hadSchema@{hadSchema}}
+\index{hadSchema@{hadSchema}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{hadSchema}{hadSchema}}
+{\footnotesize\ttfamily \label{struct_src_item_a1134911935b56269c2ad308fb2ec012d} 
+unsigned Src\+Item::\+had\+Schema}
+
+\Hypertarget{struct_src_item_a6d54c09f58c35057b41d9091dbb2e64f}\index{SrcItem@{SrcItem}!iCursor@{iCursor}}
+\index{iCursor@{iCursor}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{iCursor}{iCursor}}
+{\footnotesize\ttfamily \label{struct_src_item_a6d54c09f58c35057b41d9091dbb2e64f} 
+int Src\+Item::\+i\+Cursor}
+
+\Hypertarget{struct_src_item_a049b95a79d9cb565a189cd71fe6b77bc}\index{SrcItem@{SrcItem}!isCorrelated@{isCorrelated}}
+\index{isCorrelated@{isCorrelated}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isCorrelated}{isCorrelated}}
+{\footnotesize\ttfamily \label{struct_src_item_a049b95a79d9cb565a189cd71fe6b77bc} 
+unsigned Src\+Item::\+is\+Correlated}
+
+\Hypertarget{struct_src_item_aca1b9eb73c86bce791be27d26f3de8d9}\index{SrcItem@{SrcItem}!isCte@{isCte}}
+\index{isCte@{isCte}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isCte}{isCte}}
+{\footnotesize\ttfamily \label{struct_src_item_aca1b9eb73c86bce791be27d26f3de8d9} 
+unsigned Src\+Item::\+is\+Cte}
+
+\Hypertarget{struct_src_item_a965b54cd484e6c2c2331b93bdc3e86f7}\index{SrcItem@{SrcItem}!isIndexedBy@{isIndexedBy}}
+\index{isIndexedBy@{isIndexedBy}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isIndexedBy}{isIndexedBy}}
+{\footnotesize\ttfamily \label{struct_src_item_a965b54cd484e6c2c2331b93bdc3e86f7} 
+unsigned Src\+Item::\+is\+Indexed\+By}
+
+\Hypertarget{struct_src_item_accb61f180009d5e81a2bbbdfac1c167f}\index{SrcItem@{SrcItem}!isMaterialized@{isMaterialized}}
+\index{isMaterialized@{isMaterialized}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isMaterialized}{isMaterialized}}
+{\footnotesize\ttfamily \label{struct_src_item_accb61f180009d5e81a2bbbdfac1c167f} 
+unsigned Src\+Item::\+is\+Materialized}
+
+\Hypertarget{struct_src_item_a94054ef21d022c2afd94fea20c469b84}\index{SrcItem@{SrcItem}!isNestedFrom@{isNestedFrom}}
+\index{isNestedFrom@{isNestedFrom}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isNestedFrom}{isNestedFrom}}
+{\footnotesize\ttfamily \label{struct_src_item_a94054ef21d022c2afd94fea20c469b84} 
+unsigned Src\+Item::\+is\+Nested\+From}
+
+\Hypertarget{struct_src_item_a95fe9f96fbef97f97a3f6b43fc45dc6f}\index{SrcItem@{SrcItem}!isOn@{isOn}}
+\index{isOn@{isOn}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isOn}{isOn}}
+{\footnotesize\ttfamily \label{struct_src_item_a95fe9f96fbef97f97a3f6b43fc45dc6f} 
+unsigned Src\+Item::\+is\+On}
+
+\Hypertarget{struct_src_item_aaa56ec3f68465462bf70fec32b4918f0}\index{SrcItem@{SrcItem}!isRecursive@{isRecursive}}
+\index{isRecursive@{isRecursive}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isRecursive}{isRecursive}}
+{\footnotesize\ttfamily \label{struct_src_item_aaa56ec3f68465462bf70fec32b4918f0} 
+unsigned Src\+Item::\+is\+Recursive}
+
+\Hypertarget{struct_src_item_a81b9f962f39d5dd2821090781a4c02ae}\index{SrcItem@{SrcItem}!isSubquery@{isSubquery}}
+\index{isSubquery@{isSubquery}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isSubquery}{isSubquery}}
+{\footnotesize\ttfamily \label{struct_src_item_a81b9f962f39d5dd2821090781a4c02ae} 
+unsigned Src\+Item::\+is\+Subquery}
+
+\Hypertarget{struct_src_item_ad4bdb02c2c1ab627a73fc828fd05043c}\index{SrcItem@{SrcItem}!isSynthUsing@{isSynthUsing}}
+\index{isSynthUsing@{isSynthUsing}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isSynthUsing}{isSynthUsing}}
+{\footnotesize\ttfamily \label{struct_src_item_ad4bdb02c2c1ab627a73fc828fd05043c} 
+unsigned Src\+Item::\+is\+Synth\+Using}
+
+\Hypertarget{struct_src_item_a4bf74cdcf192f23cd3767465f8b14503}\index{SrcItem@{SrcItem}!isTabFunc@{isTabFunc}}
+\index{isTabFunc@{isTabFunc}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isTabFunc}{isTabFunc}}
+{\footnotesize\ttfamily \label{struct_src_item_a4bf74cdcf192f23cd3767465f8b14503} 
+unsigned Src\+Item::\+is\+Tab\+Func}
+
+\Hypertarget{struct_src_item_adda398ec4dabf1a0b5d022434c7d6e95}\index{SrcItem@{SrcItem}!isUsing@{isUsing}}
+\index{isUsing@{isUsing}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{isUsing}{isUsing}}
+{\footnotesize\ttfamily \label{struct_src_item_adda398ec4dabf1a0b5d022434c7d6e95} 
+unsigned Src\+Item::\+is\+Using}
+
+\Hypertarget{struct_src_item_a2eafa800b828ace03575c55237bd65c3}\index{SrcItem@{SrcItem}!jointype@{jointype}}
+\index{jointype@{jointype}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{jointype}{jointype}}
+{\footnotesize\ttfamily \label{struct_src_item_a2eafa800b828ace03575c55237bd65c3} 
+\doxymbox{\hyperlink{sqlite3_8c_a74a0f6424ae628af25f23f0a35f6ead3}{u8}} Src\+Item::\+jointype}
+
+\Hypertarget{struct_src_item_a4fab3d4415b1efeddd98f3ba3d68d532}\index{SrcItem@{SrcItem}!notCte@{notCte}}
+\index{notCte@{notCte}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{notCte}{notCte}}
+{\footnotesize\ttfamily \label{struct_src_item_a4fab3d4415b1efeddd98f3ba3d68d532} 
+unsigned Src\+Item::\+not\+Cte}
+
+\Hypertarget{struct_src_item_a2802c9ac695d746aee94c8782ed9e23a}\index{SrcItem@{SrcItem}!notIndexed@{notIndexed}}
+\index{notIndexed@{notIndexed}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{notIndexed}{notIndexed}}
+{\footnotesize\ttfamily \label{struct_src_item_a2802c9ac695d746aee94c8782ed9e23a} 
+unsigned Src\+Item::\+not\+Indexed}
+
+\Hypertarget{struct_src_item_a82258c8c38344e3172f0db098cb23909}\index{SrcItem@{SrcItem}!nRow@{nRow}}
+\index{nRow@{nRow}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{nRow}{nRow}}
+{\footnotesize\ttfamily \label{struct_src_item_a82258c8c38344e3172f0db098cb23909} 
+\doxymbox{\hyperlink{sqlite3_8c_a03ad5adfaeb9b7640dde78a0cc390319}{u32}} Src\+Item::\+n\+Row}
+
+\Hypertarget{struct_src_item_a6b5adebb6ca58248df2dc1046084cc8a}\index{SrcItem@{SrcItem}!pCteUse@{pCteUse}}
+\index{pCteUse@{pCteUse}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{pCteUse}{pCteUse}}
+{\footnotesize\ttfamily \label{struct_src_item_a6b5adebb6ca58248df2dc1046084cc8a} 
+\doxymbox{\hyperlink{struct_cte_use}{Cte\+Use}}\texorpdfstring{$\ast$}{*} Src\+Item::\+p\+Cte\+Use}
+
+\Hypertarget{struct_src_item_a11976ca3f28a6ef25c11abfa753355eb}\index{SrcItem@{SrcItem}!pFuncArg@{pFuncArg}}
+\index{pFuncArg@{pFuncArg}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{pFuncArg}{pFuncArg}}
+{\footnotesize\ttfamily \label{struct_src_item_a11976ca3f28a6ef25c11abfa753355eb} 
+\doxymbox{\hyperlink{struct_expr_list}{Expr\+List}}\texorpdfstring{$\ast$}{*} Src\+Item::\+p\+Func\+Arg}
+
+\Hypertarget{struct_src_item_a1df9de568f7642398e227e76d6ced423}\index{SrcItem@{SrcItem}!pIBIndex@{pIBIndex}}
+\index{pIBIndex@{pIBIndex}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{pIBIndex}{pIBIndex}}
+{\footnotesize\ttfamily \label{struct_src_item_a1df9de568f7642398e227e76d6ced423} 
+\doxymbox{\hyperlink{struct_index}{Index}}\texorpdfstring{$\ast$}{*} Src\+Item::\+p\+IBIndex}
+
+\Hypertarget{struct_src_item_a9b3d3251eef82ac0ca687864d36632b4}\index{SrcItem@{SrcItem}!pOn@{pOn}}
+\index{pOn@{pOn}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{pOn}{pOn}}
+{\footnotesize\ttfamily \label{struct_src_item_a9b3d3251eef82ac0ca687864d36632b4} 
+\doxymbox{\hyperlink{struct_expr}{Expr}}\texorpdfstring{$\ast$}{*} Src\+Item::\+p\+On}
+
+\Hypertarget{struct_src_item_ac0fb7ed36a99df6c91adee1d4f0bd545}\index{SrcItem@{SrcItem}!pSchema@{pSchema}}
+\index{pSchema@{pSchema}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{pSchema}{pSchema}}
+{\footnotesize\ttfamily \label{struct_src_item_ac0fb7ed36a99df6c91adee1d4f0bd545} 
+\doxymbox{\hyperlink{struct_schema}{Schema}}\texorpdfstring{$\ast$}{*} Src\+Item::\+p\+Schema}
+
+\Hypertarget{struct_src_item_a18979c51016bcea1fc71aca9da1bb190}\index{SrcItem@{SrcItem}!pSTab@{pSTab}}
+\index{pSTab@{pSTab}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{pSTab}{pSTab}}
+{\footnotesize\ttfamily \label{struct_src_item_a18979c51016bcea1fc71aca9da1bb190} 
+\doxymbox{\hyperlink{struct_table}{Table}}\texorpdfstring{$\ast$}{*} Src\+Item::\+p\+STab}
+
+\Hypertarget{struct_src_item_a187df7eef6781ec0ad1dc2d2d4541b76}\index{SrcItem@{SrcItem}!pSubq@{pSubq}}
+\index{pSubq@{pSubq}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{pSubq}{pSubq}}
+{\footnotesize\ttfamily \label{struct_src_item_a187df7eef6781ec0ad1dc2d2d4541b76} 
+\doxymbox{\hyperlink{struct_subquery}{Subquery}}\texorpdfstring{$\ast$}{*} Src\+Item::\+p\+Subq}
+
+\Hypertarget{struct_src_item_a57bd1836a3e369ba1657e65d73a0adc8}\index{SrcItem@{SrcItem}!pUsing@{pUsing}}
+\index{pUsing@{pUsing}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{pUsing}{pUsing}}
+{\footnotesize\ttfamily \label{struct_src_item_a57bd1836a3e369ba1657e65d73a0adc8} 
+\doxymbox{\hyperlink{struct_id_list}{Id\+List}}\texorpdfstring{$\ast$}{*} Src\+Item::\+p\+Using}
+
+\Hypertarget{struct_src_item_abaa8f11e825941970b7ca274a229a78e}\index{SrcItem@{SrcItem}!rowidUsed@{rowidUsed}}
+\index{rowidUsed@{rowidUsed}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{rowidUsed}{rowidUsed}}
+{\footnotesize\ttfamily \label{struct_src_item_abaa8f11e825941970b7ca274a229a78e} 
+unsigned Src\+Item::\+rowid\+Used}
+
+\Hypertarget{struct_src_item_a055c6d84d53227a36364b469bfa8e5d6}\index{SrcItem@{SrcItem}!u1@{u1}}
+\index{u1@{u1}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{[union]}{[union]}}
+{\footnotesize\ttfamily \label{struct_src_item_a055c6d84d53227a36364b469bfa8e5d6} 
+union  \{ ... \}  Src\+Item::\+u1}
+
+\Hypertarget{struct_src_item_a2623e3432e621ccaffb13a01553f84b8}\index{SrcItem@{SrcItem}!u2@{u2}}
+\index{u2@{u2}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{[union]}{[union]}}
+{\footnotesize\ttfamily \label{struct_src_item_a2623e3432e621ccaffb13a01553f84b8} 
+union  \{ ... \}  Src\+Item::\+u2}
+
+\Hypertarget{struct_src_item_a5fa2a4c1bec220e36501ed7a14dad514}\index{SrcItem@{SrcItem}!u3@{u3}}
+\index{u3@{u3}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{[union]}{[union]}}
+{\footnotesize\ttfamily \label{struct_src_item_a5fa2a4c1bec220e36501ed7a14dad514} 
+union  \{ ... \}  Src\+Item::\+u3}
+
+\Hypertarget{struct_src_item_ab130b9df497f7e5b17c2ce7e1e4f5d13}\index{SrcItem@{SrcItem}!u4@{u4}}
+\index{u4@{u4}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{[union]}{[union]}}
+{\footnotesize\ttfamily \label{struct_src_item_ab130b9df497f7e5b17c2ce7e1e4f5d13} 
+union  \{ ... \}  Src\+Item::\+u4}
+
+\Hypertarget{struct_src_item_ab92ddd3738c486deaa42f469b7ea1b33}\index{SrcItem@{SrcItem}!viaCoroutine@{viaCoroutine}}
+\index{viaCoroutine@{viaCoroutine}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{viaCoroutine}{viaCoroutine}}
+{\footnotesize\ttfamily \label{struct_src_item_ab92ddd3738c486deaa42f469b7ea1b33} 
+unsigned Src\+Item::\+via\+Coroutine}
+
+\Hypertarget{struct_src_item_a88defa197cbf16068887c2a316aa850b}\index{SrcItem@{SrcItem}!zAlias@{zAlias}}
+\index{zAlias@{zAlias}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{zAlias}{zAlias}}
+{\footnotesize\ttfamily \label{struct_src_item_a88defa197cbf16068887c2a316aa850b} 
+char\texorpdfstring{$\ast$}{*} Src\+Item::\+z\+Alias}
+
+\Hypertarget{struct_src_item_ae93f739e4463fba8072a60b6f132e07b}\index{SrcItem@{SrcItem}!zDatabase@{zDatabase}}
+\index{zDatabase@{zDatabase}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{zDatabase}{zDatabase}}
+{\footnotesize\ttfamily \label{struct_src_item_ae93f739e4463fba8072a60b6f132e07b} 
+char\texorpdfstring{$\ast$}{*} Src\+Item::\+z\+Database}
+
+\Hypertarget{struct_src_item_a845b578ba01d857111f9e0010850ebed}\index{SrcItem@{SrcItem}!zIndexedBy@{zIndexedBy}}
+\index{zIndexedBy@{zIndexedBy}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{zIndexedBy}{zIndexedBy}}
+{\footnotesize\ttfamily \label{struct_src_item_a845b578ba01d857111f9e0010850ebed} 
+char\texorpdfstring{$\ast$}{*} Src\+Item::\+z\+Indexed\+By}
+
+\Hypertarget{struct_src_item_a8f8be9c45763fefeebd92acf8702d640}\index{SrcItem@{SrcItem}!zName@{zName}}
+\index{zName@{zName}!SrcItem@{SrcItem}}
+\doxysubsubsection{\texorpdfstring{zName}{zName}}
+{\footnotesize\ttfamily \label{struct_src_item_a8f8be9c45763fefeebd92acf8702d640} 
+char\texorpdfstring{$\ast$}{*} Src\+Item::\+z\+Name}
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Server/\+\+Server\+Project/\+\doxymbox{\hyperlink{sqlite3_8c}{sqlite3.\+c}}\end{DoxyCompactItemize}

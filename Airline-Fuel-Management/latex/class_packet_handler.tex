@@ -1,0 +1,76 @@
+\doxysection{Packet\+Handler Class Reference}
+\hypertarget{class_packet_handler}{}\label{class_packet_handler}\index{PacketHandler@{PacketHandler}}
+
+
+{\ttfamily \+\#include $<$Packet\+Handler.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_packet_handler_aa40928c6890af214593cb1c91606451d}{Packet\+Handler}} (\doxymbox{\hyperlink{class_connection_manager}{Connection\+Manager}} \&conn\+Mgr)
+\item 
+bool \doxymbox{\hyperlink{class_packet_handler_ab65b3e814734a909f83d8994264e844d}{send\+Line}} (const std::\+string \&data\+Line, int line\+Number, time\+\_\+t timestamp)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_packet_handler_a58c3b6527b71342e06e0bea250848cf4}{transmit}} (const \doxymbox{\hyperlink{struct_telemetry_wire_packet}{Telemetry\+Wire\+Packet}} \&pkt) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_connection_manager}{Connection\+Manager}} \& \doxymbox{\hyperlink{class_packet_handler_a1549eee8bf6312b18894994dbd2468c2}{m\+\_\+conn\+Mgr}}
+\item 
+time\+\_\+t \doxymbox{\hyperlink{class_packet_handler_a838b52ea352fb68383b7d621d17585c9}{m\+\_\+prev\+Timestamp}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_packet_handler_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_packet_handler_aa40928c6890af214593cb1c91606451d}\index{PacketHandler@{PacketHandler}!PacketHandler@{PacketHandler}}
+\index{PacketHandler@{PacketHandler}!PacketHandler@{PacketHandler}}
+\doxysubsubsection{\texorpdfstring{PacketHandler()}{PacketHandler()}}
+{\footnotesize\ttfamily \label{class_packet_handler_aa40928c6890af214593cb1c91606451d} 
+Packet\+Handler::\+\+Packet\+Handler (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_connection_manager}{Connection\+Manager}} \&}]{conn\+Mgr}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_packet_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_packet_handler_ab65b3e814734a909f83d8994264e844d}\index{PacketHandler@{PacketHandler}!sendLine@{sendLine}}
+\index{sendLine@{sendLine}!PacketHandler@{PacketHandler}}
+\doxysubsubsection{\texorpdfstring{sendLine()}{sendLine()}}
+{\footnotesize\ttfamily \label{class_packet_handler_ab65b3e814734a909f83d8994264e844d} 
+bool Packet\+Handler::\+send\+Line (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{data\+Line}{, }\item[{int}]{line\+Number}{, }\item[{time\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_packet_handler_a58c3b6527b71342e06e0bea250848cf4}\index{PacketHandler@{PacketHandler}!transmit@{transmit}}
+\index{transmit@{transmit}!PacketHandler@{PacketHandler}}
+\doxysubsubsection{\texorpdfstring{transmit()}{transmit()}}
+{\footnotesize\ttfamily \label{class_packet_handler_a58c3b6527b71342e06e0bea250848cf4} 
+bool Packet\+Handler::\+transmit (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_telemetry_wire_packet}{Telemetry\+Wire\+Packet}} \&}]{pkt}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_packet_handler_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_packet_handler_a1549eee8bf6312b18894994dbd2468c2}\index{PacketHandler@{PacketHandler}!m\_connMgr@{m\_connMgr}}
+\index{m\_connMgr@{m\_connMgr}!PacketHandler@{PacketHandler}}
+\doxysubsubsection{\texorpdfstring{m\_connMgr}{m\_connMgr}}
+{\footnotesize\ttfamily \label{class_packet_handler_a1549eee8bf6312b18894994dbd2468c2} 
+\doxymbox{\hyperlink{class_connection_manager}{Connection\+Manager}}\& Packet\+Handler::\+m\+\_\+conn\+Mgr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_packet_handler_a838b52ea352fb68383b7d621d17585c9}\index{PacketHandler@{PacketHandler}!m\_prevTimestamp@{m\_prevTimestamp}}
+\index{m\_prevTimestamp@{m\_prevTimestamp}!PacketHandler@{PacketHandler}}
+\doxysubsubsection{\texorpdfstring{m\_prevTimestamp}{m\_prevTimestamp}}
+{\footnotesize\ttfamily \label{class_packet_handler_a838b52ea352fb68383b7d621d17585c9} 
+time\+\_\+t Packet\+Handler::\+m\+\_\+prev\+Timestamp\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Client/\+\+Client\+Project/\+\doxymbox{\hyperlink{_packet_handler_8h}{Packet\+Handler.\+h}}\item 
+Client/\+\+Client\+Project/\+\doxymbox{\hyperlink{_packet_handler_8cpp}{Packet\+Handler.\+cpp}}\end{DoxyCompactItemize}

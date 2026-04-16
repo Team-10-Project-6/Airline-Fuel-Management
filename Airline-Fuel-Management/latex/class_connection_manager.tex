@@ -1,0 +1,140 @@
+\doxysection{Connection\+Manager Class Reference}
+\hypertarget{class_connection_manager}{}\label{class_connection_manager}\index{ConnectionManager@{ConnectionManager}}
+
+
+{\ttfamily \+\#include $<$Connection\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_connection_manager_a23c47794cff2ab07476071ed01394827}{Connection\+Manager}} (const std::\+string \&server\+Ip, int server\+Port)
+\item 
+\doxymbox{\hyperlink{class_connection_manager_a5c2a49d02244fc399deba3ce6ffe77ac}{\texorpdfstring{$\sim$}{\string~}\+Connection\+Manager}} ()
+\item 
+bool \doxymbox{\hyperlink{class_connection_manager_a37841cd78e733546b8835922a1343640}{connect\+To\+Server}} (const std::\+string \&client\+ID)
+\item 
+bool \doxymbox{\hyperlink{class_connection_manager_a3c500efc30693e936a88b2b0a3c5f349}{reconnect}} (int max\+Attempts=10)
+\item 
+void \doxymbox{\hyperlink{class_connection_manager_a329f2a4206aa1a8474f02fa8a70dc2e1}{disconnect}} ()
+\item 
+\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} \doxymbox{\hyperlink{class_connection_manager_a92c54ab0999963149189aa58ed22c3dd}{get\+Socket}} () const
+\item 
+const std::\+string \& \doxymbox{\hyperlink{class_connection_manager_afe4f3f933999dc4914b52cfb15d51bcf}{get\+Aircraft\+Id}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} \doxymbox{\hyperlink{class_connection_manager_aefcec4ecacd8e77a71276f06e8c4ceca}{open\+Socket}} () const
+\item 
+bool \doxymbox{\hyperlink{class_connection_manager_a239f58ca928f3bd1e9aeb64ab4901c49}{do\+Handshake}} (\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} sock, const std::\+string \&client\+ID, std::\+string \&assigned\+Id) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_connection_manager_a598d289533c650d914d6ad8cc378d134}{m\+\_\+server\+Ip}}
+\item 
+int \doxymbox{\hyperlink{class_connection_manager_a120a997e360121e350d76e621ace6322}{m\+\_\+server\+Port}}
+\item 
+\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} \doxymbox{\hyperlink{class_connection_manager_ad29d7f4bfff3a4c2d06e3ffd526f0aa2}{m\+\_\+socket}}
+\item 
+std::\+string \doxymbox{\hyperlink{class_connection_manager_afbc446310196b184f99f977824dcb31a}{m\+\_\+aircraft\+Id}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_connection_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_connection_manager_a23c47794cff2ab07476071ed01394827}\index{ConnectionManager@{ConnectionManager}!ConnectionManager@{ConnectionManager}}
+\index{ConnectionManager@{ConnectionManager}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{ConnectionManager()}{ConnectionManager()}}
+{\footnotesize\ttfamily \label{class_connection_manager_a23c47794cff2ab07476071ed01394827} 
+Connection\+Manager::\+\+Connection\+Manager (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{server\+Ip}{, }\item[{int}]{server\+Port}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_connection_manager_a5c2a49d02244fc399deba3ce6ffe77ac}\index{ConnectionManager@{ConnectionManager}!````~ConnectionManager@{\texorpdfstring{$\sim$}{\string~}ConnectionManager}}
+\index{````~ConnectionManager@{\texorpdfstring{$\sim$}{\string~}ConnectionManager}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConnectionManager()}{\string~ConnectionManager()}}
+{\footnotesize\ttfamily \label{class_connection_manager_a5c2a49d02244fc399deba3ce6ffe77ac} 
+Connection\+Manager::\+\texorpdfstring{$\sim$}{\string~}\+Connection\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_connection_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_connection_manager_a37841cd78e733546b8835922a1343640}\index{ConnectionManager@{ConnectionManager}!connectToServer@{connectToServer}}
+\index{connectToServer@{connectToServer}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{connectToServer()}{connectToServer()}}
+{\footnotesize\ttfamily \label{class_connection_manager_a37841cd78e733546b8835922a1343640} 
+bool Connection\+Manager::\+connect\+To\+Server (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{client\+ID}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_connection_manager_a329f2a4206aa1a8474f02fa8a70dc2e1}\index{ConnectionManager@{ConnectionManager}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily \label{class_connection_manager_a329f2a4206aa1a8474f02fa8a70dc2e1} 
+void Connection\+Manager::\+disconnect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_connection_manager_a239f58ca928f3bd1e9aeb64ab4901c49}\index{ConnectionManager@{ConnectionManager}!doHandshake@{doHandshake}}
+\index{doHandshake@{doHandshake}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{doHandshake()}{doHandshake()}}
+{\footnotesize\ttfamily \label{class_connection_manager_a239f58ca928f3bd1e9aeb64ab4901c49} 
+bool Connection\+Manager::\+do\+Handshake (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}}]{sock}{, }\item[{const std::\+string \&}]{client\+ID}{, }\item[{std::\+string \&}]{assigned\+Id}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_connection_manager_afe4f3f933999dc4914b52cfb15d51bcf}\index{ConnectionManager@{ConnectionManager}!getAircraftId@{getAircraftId}}
+\index{getAircraftId@{getAircraftId}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{getAircraftId()}{getAircraftId()}}
+{\footnotesize\ttfamily \label{class_connection_manager_afe4f3f933999dc4914b52cfb15d51bcf} 
+const string \& Connection\+Manager::\+get\+Aircraft\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_connection_manager_a92c54ab0999963149189aa58ed22c3dd}\index{ConnectionManager@{ConnectionManager}!getSocket@{getSocket}}
+\index{getSocket@{getSocket}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{getSocket()}{getSocket()}}
+{\footnotesize\ttfamily \label{class_connection_manager_a92c54ab0999963149189aa58ed22c3dd} 
+\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} Connection\+Manager::\+get\+Socket (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_connection_manager_aefcec4ecacd8e77a71276f06e8c4ceca}\index{ConnectionManager@{ConnectionManager}!openSocket@{openSocket}}
+\index{openSocket@{openSocket}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{openSocket()}{openSocket()}}
+{\footnotesize\ttfamily \label{class_connection_manager_aefcec4ecacd8e77a71276f06e8c4ceca} 
+\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} Connection\+Manager::\+open\+Socket (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_connection_manager_a3c500efc30693e936a88b2b0a3c5f349}\index{ConnectionManager@{ConnectionManager}!reconnect@{reconnect}}
+\index{reconnect@{reconnect}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{reconnect()}{reconnect()}}
+{\footnotesize\ttfamily \label{class_connection_manager_a3c500efc30693e936a88b2b0a3c5f349} 
+bool Connection\+Manager::\+reconnect (\begin{DoxyParamCaption}\item[{int}]{max\+Attempts}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_connection_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_connection_manager_afbc446310196b184f99f977824dcb31a}\index{ConnectionManager@{ConnectionManager}!m\_aircraftId@{m\_aircraftId}}
+\index{m\_aircraftId@{m\_aircraftId}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{m\_aircraftId}{m\_aircraftId}}
+{\footnotesize\ttfamily \label{class_connection_manager_afbc446310196b184f99f977824dcb31a} 
+std::\+string Connection\+Manager::\+m\+\_\+aircraft\+Id\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_connection_manager_a598d289533c650d914d6ad8cc378d134}\index{ConnectionManager@{ConnectionManager}!m\_serverIp@{m\_serverIp}}
+\index{m\_serverIp@{m\_serverIp}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{m\_serverIp}{m\_serverIp}}
+{\footnotesize\ttfamily \label{class_connection_manager_a598d289533c650d914d6ad8cc378d134} 
+std::\+string Connection\+Manager::\+m\+\_\+server\+Ip\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_connection_manager_a120a997e360121e350d76e621ace6322}\index{ConnectionManager@{ConnectionManager}!m\_serverPort@{m\_serverPort}}
+\index{m\_serverPort@{m\_serverPort}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{m\_serverPort}{m\_serverPort}}
+{\footnotesize\ttfamily \label{class_connection_manager_a120a997e360121e350d76e621ace6322} 
+int Connection\+Manager::\+m\+\_\+server\+Port\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_connection_manager_ad29d7f4bfff3a4c2d06e3ffd526f0aa2}\index{ConnectionManager@{ConnectionManager}!m\_socket@{m\_socket}}
+\index{m\_socket@{m\_socket}!ConnectionManager@{ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{m\_socket}{m\_socket}}
+{\footnotesize\ttfamily \label{class_connection_manager_ad29d7f4bfff3a4c2d06e3ffd526f0aa2} 
+\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} Connection\+Manager::\+m\+\_\+socket\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Client/\+\+Client\+Project/\+\doxymbox{\hyperlink{_connection_manager_8h}{Connection\+Manager.\+h}}\item 
+Client/\+\+Client\+Project/\+\doxymbox{\hyperlink{_connection_manager_8cpp}{Connection\+Manager.\+cpp}}\end{DoxyCompactItemize}

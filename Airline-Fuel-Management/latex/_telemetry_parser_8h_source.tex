@@ -1,0 +1,35 @@
+\doxysection{Telemetry\+Parser.\+h}
+\hypertarget{_telemetry_parser_8h_source}{}\label{_telemetry_parser_8h_source}\index{Client/ClientProject/TelemetryParser.h@{Client/ClientProject/TelemetryParser.h}}
+\doxymbox{\hyperlink{_telemetry_parser_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_telemetry_parser_a9c94806b352d7b421dee0a385cc75074}{TelemetryParser}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00008\ \ \ \ \ \doxymbox{\hyperlink{class_telemetry_parser_a9c94806b352d7b421dee0a385cc75074}{TelemetryParser}}(\textcolor{keyword}{const}\ std::string\&\ filePath);}
+\DoxyCodeLine{00009\ \ \ \ \ \doxymbox{\hyperlink{class_telemetry_parser_a9a05a4fb6f18cdc568bc4e8f52534977}{\string~TelemetryParser}}();}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_telemetry_parser_ac331bcb654d19c86f04546eec9980774}{open}}();}
+\DoxyCodeLine{00012\ \ \ \ \ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_telemetry_parser_a2a5116f0fd7b7d0788aede30dffeb281}{hasMore}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00014\ \ \ \ \ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_telemetry_parser_aaf9488765711f33d1cb95024acbcaa7a}{nextLine}}(std::string\&\ line);}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_telemetry_parser_a0cb24a98591deec125d7f2d04c4d1467}{lineNumber}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ time\_t\ \doxymbox{\hyperlink{class_telemetry_parser_a3587cfd202405ade2b7f15d6506c3b62}{currentTimestamp}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Returns\ parsed\ timestamp\ of\ current\ line}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00022\ \ \ \ \ std::string\ \ \doxymbox{\hyperlink{class_telemetry_parser_a5e9b6b279503dd9c3e958f00387b11ef}{m\_filePath}};\ \textcolor{comment}{//Path\ to\ the\ telemetry\ CSV\ file.}}
+\DoxyCodeLine{00023\ \ \ \ \ std::ifstream\ \doxymbox{\hyperlink{class_telemetry_parser_a994702771521137ea5237d5b52300261}{m\_file}};\ \textcolor{comment}{//File\ stream.}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_telemetry_parser_a387a41887ad075116ee7c703f6039861}{m\_lineNumber}};\ \textcolor{comment}{//Count\ of\ total\ lines\ delivered.}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_telemetry_parser_a51309cd51162d755e0d25b52239b3178}{m\_hasMore}};\ \textcolor{comment}{//Keeps\ track\ of\ whether\ there\ are\ more\ lines\ to\ read\ after\ the\ current\ one.}}
+\DoxyCodeLine{00026\ \ \ \ \ time\_t\ \doxymbox{\hyperlink{class_telemetry_parser_a044354f3cbecde7688099c41534b0549}{m\_currentTimestamp}};\ \textcolor{comment}{//Parsed\ timestamp\ of\ current\ line}}
+\DoxyCodeLine{00027\ \ \ \ \ time\_t\ \doxymbox{\hyperlink{class_telemetry_parser_a7aaf759960e24a2c1642539fa6b7f05e}{parseTimestamp}}(\textcolor{keyword}{const}\ std::string\&\ line)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \};}
+
+\end{DoxyCode}
