@@ -2,26 +2,31 @@
 \hypertarget{class_server_connection_manager}{}\label{class_server_connection_manager}\index{ServerConnectionManager@{ServerConnectionManager}}
 
 
+Controls the main network listener and coordinates handshakes, tasks parsing, and session disconnects.  
+
+
+
+
 {\ttfamily \+\#include $<$Server\+Connection\+Manager.\+h$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \doxymbox{\hyperlink{class_server_connection_manager_a88dc03672971c0321ebb07df107b5199}{Server\+Connection\+Manager}} (int \doxymbox{\hyperlink{class_server_connection_manager_ae59ad773698ba4e94a507cc33136f9ec}{port}}, \doxymbox{\hyperlink{class_task_scheduler}{Task\+Scheduler}} \&\doxymbox{\hyperlink{class_server_connection_manager_a579f7679e9a0679b5e300e513dd5909e}{scheduler}})
-\item 
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_server_connection_manager}{Server\+Connection\+Manager}. \end{DoxyCompactList}\item 
 \doxymbox{\hyperlink{class_server_connection_manager_a272bcc07022ae6dd33288e3bbd12917e}{\texorpdfstring{$\sim$}{\string~}\+Server\+Connection\+Manager}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em \doxylink{class_server_connection_manager}{Server\+Connection\+Manager} Destructor. Cleans up sockets. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{class_server_connection_manager_ab745912ae93096ffdb7e28a1f570f94b}{start\+Listening}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Binds the listening socket and begins accepting client connections in an infinite loop. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{class_server_connection_manager_a8f4917f0e1ce79b1becfb744cf19c675}{stop}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Stops the server listener immediately. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 bool \doxymbox{\hyperlink{class_server_connection_manager_a45f197630dc0182e99bedd7467222523}{handle\+Handshake}} (\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} Connection\+Socket, std::\+string \&client\+ID)
-\item 
+\begin{DoxyCompactList}\small\item\em Performs the initial HELLO handshake process with a connected client. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{class_server_connection_manager_a8a961b7f1891f338af5d14e75079acaf}{handle\+Client\+Session}} (\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} Connection\+Socket, const std::\+string \&client\+ID)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constantly reads loop telemetry packets for an already-\/handshaked connection session. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -45,6 +50,9 @@ std::\+mutex \doxymbox{\hyperlink{class_server_connection_manager_a6fd3f91832510
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+Controls the main network listener and coordinates handshakes, tasks parsing, and session disconnects. 
+
 \label{doc-constructors}
 \Hypertarget{class_server_connection_manager_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -54,11 +62,26 @@ std::\+mutex \doxymbox{\hyperlink{class_server_connection_manager_a6fd3f91832510
 {\footnotesize\ttfamily \label{class_server_connection_manager_a88dc03672971c0321ebb07df107b5199} 
 Server\+Connection\+Manager::\+\+Server\+Connection\+Manager (\begin{DoxyParamCaption}\item[{int}]{port}{, }\item[{\doxymbox{\hyperlink{class_task_scheduler}{Task\+Scheduler}} \&}]{scheduler}{}\end{DoxyParamCaption})}
 
+
+
+Constructs a new \doxylink{class_server_connection_manager}{Server\+Connection\+Manager}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \doxylink{class_server_connection_manager_ae59ad773698ba4e94a507cc33136f9ec}{port}} & The port to listen on. \\
+\hline
+{\em \doxylink{class_server_connection_manager_a579f7679e9a0679b5e300e513dd5909e}{scheduler}} & \doxylink{class_task_scheduler}{Task\+Scheduler} pool to delegate tasks into. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{class_server_connection_manager_a272bcc07022ae6dd33288e3bbd12917e}\index{ServerConnectionManager@{ServerConnectionManager}!````~ServerConnectionManager@{\texorpdfstring{$\sim$}{\string~}ServerConnectionManager}}
 \index{````~ServerConnectionManager@{\texorpdfstring{$\sim$}{\string~}ServerConnectionManager}!ServerConnectionManager@{ServerConnectionManager}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ServerConnectionManager()}{\string~ServerConnectionManager()}}
 {\footnotesize\ttfamily \label{class_server_connection_manager_a272bcc07022ae6dd33288e3bbd12917e} 
 Server\+Connection\+Manager::\+\texorpdfstring{$\sim$}{\string~}\+Server\+Connection\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_server_connection_manager}{Server\+Connection\+Manager} Destructor. Cleans up sockets. 
 
 
 
@@ -71,23 +94,56 @@ Server\+Connection\+Manager::\+\texorpdfstring{$\sim$}{\string~}\+Server\+Connec
 {\footnotesize\ttfamily \label{class_server_connection_manager_a8a961b7f1891f338af5d14e75079acaf} 
 void Server\+Connection\+Manager::\+handle\+Client\+Session (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}}]{Connection\+Socket}{, }\item[{const std::\+string \&}]{client\+ID}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
+
+
+Constantly reads loop telemetry packets for an already-\/handshaked connection session. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Connection\+Socket} & The raw client socket handle. \\
+\hline
+{\em client\+ID} & The associated Client/\+\+Aircraft ID for log/\+metrics associations. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{class_server_connection_manager_a45f197630dc0182e99bedd7467222523}\index{ServerConnectionManager@{ServerConnectionManager}!handleHandshake@{handleHandshake}}
 \index{handleHandshake@{handleHandshake}!ServerConnectionManager@{ServerConnectionManager}}
 \doxysubsubsection{\texorpdfstring{handleHandshake()}{handleHandshake()}}
 {\footnotesize\ttfamily \label{class_server_connection_manager_a45f197630dc0182e99bedd7467222523} 
 bool Server\+Connection\+Manager::\+handle\+Handshake (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}}]{Connection\+Socket}{, }\item[{std::\+string \&}]{client\+ID}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
+
+
+Performs the initial HELLO handshake process with a connected client. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em Connection\+Socket} & The raw client socket handle. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em client\+ID} & The parsed or generated Client/\+\+Aircraft ID passed by reference. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if string handshake successfully completed, false on timeouts or bad formats. 
+\end{DoxyReturn}
 \Hypertarget{class_server_connection_manager_ab745912ae93096ffdb7e28a1f570f94b}\index{ServerConnectionManager@{ServerConnectionManager}!startListening@{startListening}}
 \index{startListening@{startListening}!ServerConnectionManager@{ServerConnectionManager}}
 \doxysubsubsection{\texorpdfstring{startListening()}{startListening()}}
 {\footnotesize\ttfamily \label{class_server_connection_manager_ab745912ae93096ffdb7e28a1f570f94b} 
 void Server\+Connection\+Manager::\+start\+Listening (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Binds the listening socket and begins accepting client connections in an infinite loop. 
+
 \Hypertarget{class_server_connection_manager_a8f4917f0e1ce79b1becfb744cf19c675}\index{ServerConnectionManager@{ServerConnectionManager}!stop@{stop}}
 \index{stop@{stop}!ServerConnectionManager@{ServerConnectionManager}}
 \doxysubsubsection{\texorpdfstring{stop()}{stop()}}
 {\footnotesize\ttfamily \label{class_server_connection_manager_a8f4917f0e1ce79b1becfb744cf19c675} 
 void Server\+Connection\+Manager::\+stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the server listener immediately. 
 
 
 

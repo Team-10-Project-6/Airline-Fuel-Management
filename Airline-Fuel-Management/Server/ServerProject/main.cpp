@@ -1,3 +1,7 @@
+/**
+ * @file main.cpp
+ * @brief Entry point for the Airline Fuel Management Server application.
+ */
 #include <iostream>
 #include <string>
 #include <boost/asio.hpp>
@@ -5,6 +9,12 @@
 
 using namespace std;
 
+/**
+ * @brief Main execution function of the server binary.
+ * @param argc Number of command-line arguments.
+ * @param argv Array of command-line arguments (expects port number). 
+ * @return int Exit status code.
+ */
 int main(int argc, char* argv[]) {
 
     // parse port number

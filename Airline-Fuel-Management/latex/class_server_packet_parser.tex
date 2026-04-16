@@ -2,15 +2,20 @@
 \hypertarget{class_server_packet_parser}{}\label{class_server_packet_parser}\index{ServerPacketParser@{ServerPacketParser}}
 
 
+Buffers raw incoming bytes and extracts complete \doxylink{struct_telemetry_packet}{Telemetry\+Packet} structures.  
+
+
+
+
 {\ttfamily \+\#include $<$Server\+Packet\+Parser.\+h$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \doxymbox{\hyperlink{class_server_packet_parser_a0d7cdb123527dc30774466a944fdc5e4}{feed}} (const char \texorpdfstring{$\ast$}{*}data, int length)
-\item 
+\begin{DoxyCompactList}\small\item\em Appends raw bytes from the network stream into the internal buffer. \end{DoxyCompactList}\item 
 bool \doxymbox{\hyperlink{class_server_packet_parser_a156cdd86c8e8b3cc8da6a3b21b9b0686}{try\+Parse}} (\doxymbox{\hyperlink{struct_telemetry_packet}{Telemetry\+Packet}} \&out)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Attempts to decode one complete packet from the buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,6 +24,9 @@ std::\+vector$<$ char $>$ \doxymbox{\hyperlink{class_server_packet_parser_aa7c9d
 size\+\_\+t \doxymbox{\hyperlink{class_server_packet_parser_ac398cdbaab70b91bd81d10d046f9f65f}{m\+\_\+offset}} = 0
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Buffers raw incoming bytes and extracts complete \doxylink{struct_telemetry_packet}{Telemetry\+Packet} structures. 
 
 \label{doc-func-members}
 \Hypertarget{class_server_packet_parser_doc-func-members}
@@ -29,12 +37,35 @@ size\+\_\+t \doxymbox{\hyperlink{class_server_packet_parser_ac398cdbaab70b91bd81
 {\footnotesize\ttfamily \label{class_server_packet_parser_a0d7cdb123527dc30774466a944fdc5e4} 
 void Server\+Packet\+Parser::\+feed (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{int}]{length}{}\end{DoxyParamCaption})}
 
+
+
+Appends raw bytes from the network stream into the internal buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte array to append. \\
+\hline
+{\em length} & The number of bytes to read from the data array. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{class_server_packet_parser_a156cdd86c8e8b3cc8da6a3b21b9b0686}\index{ServerPacketParser@{ServerPacketParser}!tryParse@{tryParse}}
 \index{tryParse@{tryParse}!ServerPacketParser@{ServerPacketParser}}
 \doxysubsubsection{\texorpdfstring{tryParse()}{tryParse()}}
 {\footnotesize\ttfamily \label{class_server_packet_parser_a156cdd86c8e8b3cc8da6a3b21b9b0686} 
 bool Server\+Packet\+Parser::\+try\+Parse (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_telemetry_packet}{Telemetry\+Packet}} \&}]{out}{}\end{DoxyParamCaption})}
 
+
+
+Attempts to decode one complete packet from the buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em out} & The \doxylink{struct_telemetry_packet}{Telemetry\+Packet} to populate if enough data exists. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if a packet was successfully extracted, false if more bytes are needed. 
+\end{DoxyReturn}
 
 
 \label{doc-variable-members}

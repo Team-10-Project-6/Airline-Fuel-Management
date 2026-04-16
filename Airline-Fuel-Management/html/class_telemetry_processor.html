@@ -92,6 +92,9 @@ $(function(){initNavTree('class_telemetry_processor.html','','class_telemetry_pr
 </div><!--header-->
 <div class="contents">
 
+<p>Thread-safe processor that caches aircraft previous states to compute fuel consumption deltas.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_telemetry_processor_8h_source.html">TelemetryProcessor.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -101,13 +104,16 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afcb1b738717b36a4fdd42835ac75b165" id="r_afcb1b738717b36a4fdd42835ac75b165"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#afcb1b738717b36a4fdd42835ac75b165">process</a> (const <a class="el" href="struct_telemetry_packet.html">TelemetryPacket</a> &amp;packet, <a class="el" href="struct_fuel_consumption_record.html">FuelConsumptionRecord</a> &amp;out)</td></tr>
+<tr class="memdesc:afcb1b738717b36a4fdd42835ac75b165"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a telemetry packet to compute incremental fuel metrics.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:ab922a2a36e98ac7bd2dd1418a6e4fd79" id="r_ab922a2a36e98ac7bd2dd1418a6e4fd79"><td class="memItemLeft">std::unordered_map&lt; unsigned short, <a class="el" href="struct_telemetry_processor_1_1_aircraft_state.html">AircraftState</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab922a2a36e98ac7bd2dd1418a6e4fd79">m_state</a></td></tr>
 <tr class="memitem:adc380af091a49d8d642c75bfd3d06e32" id="r_adc380af091a49d8d642c75bfd3d06e32"><td class="memItemLeft">std::mutex&#160;</td><td class="memItemRight"><a class="el" href="#adc380af091a49d8d642c75bfd3d06e32">m_mutex</a></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Thread-safe processor that caches aircraft previous states to compute fuel consumption deltas. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="afcb1b738717b36a4fdd42835ac75b165" name="afcb1b738717b36a4fdd42835ac75b165"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afcb1b738717b36a4fdd42835ac75b165">&#9670;&#160;</a></span>process()</h2>
 
@@ -126,6 +132,16 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Processes a telemetry packet to compute incremental fuel metrics. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">packet</td><td>The generic decoded telemetry data representation. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out</td><td>Output structured parameter holding calculated rates and deltas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if variables were computed properly, false if this is the first packet (no previous delta reference) or an invalid timestamp occurred. </dd></dl>
 
 </div>
 </div>

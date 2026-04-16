@@ -92,17 +92,27 @@ $(function(){initNavTree('class_telemetry_parser.html','','class_telemetry_parse
 </div><!--header-->
 <div class="contents">
 
+<p>Handles reading and parsing telemetry data files.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_telemetry_parser_8h_source.html">TelemetryParser.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9c94806b352d7b421dee0a385cc75074" id="r_a9c94806b352d7b421dee0a385cc75074"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a9c94806b352d7b421dee0a385cc75074">TelemetryParser</a> (const std::string &amp;filePath)</td></tr>
+<tr class="memdesc:a9c94806b352d7b421dee0a385cc75074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="class_telemetry_parser.html" title="Handles reading and parsing telemetry data files.">TelemetryParser</a> object.  <br /></td></tr>
 <tr class="memitem:a9a05a4fb6f18cdc568bc4e8f52534977" id="r_a9a05a4fb6f18cdc568bc4e8f52534977"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a9a05a4fb6f18cdc568bc4e8f52534977">~TelemetryParser</a> ()</td></tr>
+<tr class="memdesc:a9a05a4fb6f18cdc568bc4e8f52534977"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. Closes the file.  <br /></td></tr>
 <tr class="memitem:ac331bcb654d19c86f04546eec9980774" id="r_ac331bcb654d19c86f04546eec9980774"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac331bcb654d19c86f04546eec9980774">open</a> ()</td></tr>
+<tr class="memdesc:ac331bcb654d19c86f04546eec9980774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the file stream.  <br /></td></tr>
 <tr class="memitem:a2a5116f0fd7b7d0788aede30dffeb281" id="r_a2a5116f0fd7b7d0788aede30dffeb281"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a2a5116f0fd7b7d0788aede30dffeb281">hasMore</a> () const</td></tr>
+<tr class="memdesc:a2a5116f0fd7b7d0788aede30dffeb281"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if there are more lines available in the file.  <br /></td></tr>
 <tr class="memitem:aaf9488765711f33d1cb95024acbcaa7a" id="r_aaf9488765711f33d1cb95024acbcaa7a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aaf9488765711f33d1cb95024acbcaa7a">nextLine</a> (std::string &amp;line)</td></tr>
+<tr class="memdesc:aaf9488765711f33d1cb95024acbcaa7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the next line from the file.  <br /></td></tr>
 <tr class="memitem:a0cb24a98591deec125d7f2d04c4d1467" id="r_a0cb24a98591deec125d7f2d04c4d1467"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0cb24a98591deec125d7f2d04c4d1467">lineNumber</a> () const</td></tr>
+<tr class="memdesc:a0cb24a98591deec125d7f2d04c4d1467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current line number being parsed.  <br /></td></tr>
 <tr class="memitem:a3587cfd202405ade2b7f15d6506c3b62" id="r_a3587cfd202405ade2b7f15d6506c3b62"><td class="memItemLeft">time_t&#160;</td><td class="memItemRight"><a class="el" href="#a3587cfd202405ade2b7f15d6506c3b62">currentTimestamp</a> () const</td></tr>
+<tr class="memdesc:a3587cfd202405ade2b7f15d6506c3b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the parsed unix timestamp of the current line.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -116,7 +126,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a51309cd51162d755e0d25b52239b3178" id="r_a51309cd51162d755e0d25b52239b3178"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a51309cd51162d755e0d25b52239b3178">m_hasMore</a></td></tr>
 <tr class="memitem:a044354f3cbecde7688099c41534b0549" id="r_a044354f3cbecde7688099c41534b0549"><td class="memItemLeft">time_t&#160;</td><td class="memItemRight"><a class="el" href="#a044354f3cbecde7688099c41534b0549">m_currentTimestamp</a></td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Handles reading and parsing telemetry data files. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9c94806b352d7b421dee0a385cc75074" name="a9c94806b352d7b421dee0a385cc75074"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9c94806b352d7b421dee0a385cc75074">&#9670;&#160;</a></span>TelemetryParser()</h2>
 
@@ -131,6 +143,14 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructs a new <a class="el" href="class_telemetry_parser.html" title="Handles reading and parsing telemetry data files.">TelemetryParser</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>The path to the telemetry input file. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -148,6 +168,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Destructor. Closes the file. </p>
 
 </div>
 </div>
@@ -167,6 +189,9 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns the parsed unix timestamp of the current line. </p>
+<dl class="section return"><dt>Returns</dt><dd>time_t The parsed timestamp. </dd></dl>
+
 </div>
 </div>
 <a id="a2a5116f0fd7b7d0788aede30dffeb281" name="a2a5116f0fd7b7d0788aede30dffeb281"></a>
@@ -183,6 +208,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Checks if there are more lines available in the file. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if more lines exist, false if EOF is reached. </dd></dl>
 
 </div>
 </div>
@@ -201,6 +229,9 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets the current line number being parsed. </p>
+<dl class="section return"><dt>Returns</dt><dd>int Current line number. </dd></dl>
+
 </div>
 </div>
 <a id="aaf9488765711f33d1cb95024acbcaa7a" name="aaf9488765711f33d1cb95024acbcaa7a"></a>
@@ -218,6 +249,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Retrieves the next line from the file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td>Reference to string to store the line contents. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success, false on failure or EOF. </dd></dl>
+
 </div>
 </div>
 <a id="ac331bcb654d19c86f04546eec9980774" name="ac331bcb654d19c86f04546eec9980774"></a>
@@ -234,6 +274,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Opens the file stream. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, false otherwise. </dd></dl>
 
 </div>
 </div>

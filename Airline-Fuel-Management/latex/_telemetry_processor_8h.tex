@@ -1,5 +1,10 @@
 \doxysection{Server/\+\+Server\+Project/\+\+Telemetry\+Processor.h File Reference}
 \hypertarget{_telemetry_processor_8h}{}\label{_telemetry_processor_8h}\index{Server/ServerProject/TelemetryProcessor.h@{Server/ServerProject/TelemetryProcessor.h}}
+
+
+Processes mathematical metrics calculation for telemetry packets.  
+
+
 {\ttfamily \+\#include $<$unordered\+\_\+map$>$}\newline
 {\ttfamily \+\#include $<$mutex$>$}\newline
 {\ttfamily \+\#include "{}Server\+Packet\+Parser.\+h"{}}\newline
@@ -7,8 +12,13 @@
 \begin{DoxyCompactItemize}
 \item 
 struct \doxymbox{\hyperlink{struct_fuel_consumption_record}{Fuel\+Consumption\+Record}}
-\item 
+\begin{DoxyCompactList}\small\item\em A calculated data record mapping an aircraft to specific consumption analytics. \end{DoxyCompactList}\item 
 class \doxymbox{\hyperlink{class_telemetry_processor}{Telemetry\+Processor}}
-\item 
+\begin{DoxyCompactList}\small\item\em Thread-\/safe processor that caches aircraft previous states to compute fuel consumption deltas. \end{DoxyCompactList}\item 
 struct \doxymbox{\hyperlink{struct_telemetry_processor_1_1_aircraft_state}{Telemetry\+Processor::\+\+Aircraft\+State}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Processes mathematical metrics calculation for telemetry packets. 
+

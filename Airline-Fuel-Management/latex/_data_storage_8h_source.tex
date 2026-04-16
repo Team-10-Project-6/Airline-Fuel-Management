@@ -2,34 +2,31 @@
 \hypertarget{_data_storage_8h_source}{}\label{_data_storage_8h_source}\index{Server/ServerProject/DataStorage.h@{Server/ServerProject/DataStorage.h}}
 \doxymbox{\hyperlink{_data_storage_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{00002\ }
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <mutex>}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_telemetry_processor_8h}{TelemetryProcessor.h}}"{}}}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{comment}{//\ Forward-\/declare\ the\ SQLite\ handle\ so\ callers\ don't\ need\ to\ include\ sqlite3.h}}
-\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }sqlite3;}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_data_storage_ad941bdddec209fcfd6f4718d84b4ae99}{DataStorage}}\ \{}
-\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00012\ \ \ \ \ \textcolor{comment}{//\ Opens\ (or\ creates)\ the\ SQLite\ database\ at\ dbPath\ and\ ensures\ the\ schema\ exists.}}
-\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{class_data_storage_ad941bdddec209fcfd6f4718d84b4ae99}{DataStorage}}(\textcolor{keyword}{const}\ std::string\&\ dbPath);}
-\DoxyCodeLine{00014\ \ \ \ \ \doxymbox{\hyperlink{class_data_storage_adf4ef73e6d368dc7fcd213ba80e1d618}{\string~DataStorage}}();}
-\DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//\ Inserts\ one\ fuel\ consumption\ record.\ \ Thread-\/safe.}}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ Returns\ true\ on\ success.}}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_data_storage_a11824f4e6053f1a6a9c32702d145a90e}{insert}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_fuel_consumption_record}{FuelConsumptionRecord}}\&\ record);}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//\ Returns\ the\ sum\ of\ fuel\_consumed\ for\ the\ given\ aircraft\ across\ all\ stored\ records.}}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ Returns\ -\/1.0\ on\ error\ or\ if\ the\ database\ is\ not\ open.}}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_data_storage_a93e24ab06b7fdf091fb674732b31d531}{sumConsumed}}(\textcolor{keyword}{const}\ std::string\&\ aircraftId);}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00025\ \ \ \ \ sqlite3*\ \ \ \doxymbox{\hyperlink{class_data_storage_a512d4b7ae494db4a3961a430f5587058}{m\_db}};}
-\DoxyCodeLine{00026\ \ \ \ \ std::mutex\ \doxymbox{\hyperlink{class_data_storage_aa5029add137f890d34c597d3139deef9}{m\_mutex}};}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_data_storage_a6f45c93659f23701b855cd2140f86539}{createSchema}}();}
-\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_telemetry_processor_8h}{TelemetryProcessor.h}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Forward-\/declare\ the\ SQLite\ handle\ so\ callers\ don't\ need\ to\ include\ sqlite3.h}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }sqlite3;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_data_storage_ad941bdddec209fcfd6f4718d84b4ae99}{DataStorage}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{class_data_storage_ad941bdddec209fcfd6f4718d84b4ae99}{DataStorage}}(\textcolor{keyword}{const}\ std::string\&\ dbPath);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \ \ \ \ \doxymbox{\hyperlink{class_data_storage_adf4ef73e6d368dc7fcd213ba80e1d618}{\string~DataStorage}}();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_data_storage_a11824f4e6053f1a6a9c32702d145a90e}{insert}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_fuel_consumption_record}{FuelConsumptionRecord}}\&\ record);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_data_storage_a93e24ab06b7fdf091fb674732b31d531}{sumConsumed}}(\textcolor{keyword}{const}\ std::string\&\ aircraftId);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00046\ \ \ \ \ sqlite3*\ \ \ \doxymbox{\hyperlink{class_data_storage_a512d4b7ae494db4a3961a430f5587058}{m\_db}};}
+\DoxyCodeLine{00047\ \ \ \ \ std::mutex\ \doxymbox{\hyperlink{class_data_storage_aa5029add137f890d34c597d3139deef9}{m\_mutex}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_data_storage_a6f45c93659f23701b855cd2140f86539}{createSchema}}();}
+\DoxyCodeLine{00050\ \};}
 
 \end{DoxyCode}

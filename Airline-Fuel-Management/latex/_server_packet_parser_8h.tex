@@ -1,10 +1,20 @@
 \doxysection{Server/\+\+Server\+Project/\+\+Server\+Packet\+Parser.h File Reference}
 \hypertarget{_server_packet_parser_8h}{}\label{_server_packet_parser_8h}\index{Server/ServerProject/ServerPacketParser.h@{Server/ServerProject/ServerPacketParser.h}}
+
+
+Parses incoming binary streams into distinct \doxylink{struct_telemetry_packet}{Telemetry\+Packet} structures.  
+
+
 {\ttfamily \+\#include $<$vector$>$}\newline
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \doxymbox{\hyperlink{struct_telemetry_packet}{Telemetry\+Packet}}
-\item 
+\begin{DoxyCompactList}\small\item\em Represents the decoded telemetry data received from an aircraft. \end{DoxyCompactList}\item 
 class \doxymbox{\hyperlink{class_server_packet_parser}{Server\+Packet\+Parser}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Buffers raw incoming bytes and extracts complete \doxylink{struct_telemetry_packet}{Telemetry\+Packet} structures. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Parses incoming binary streams into distinct \doxylink{struct_telemetry_packet}{Telemetry\+Packet} structures. 
+

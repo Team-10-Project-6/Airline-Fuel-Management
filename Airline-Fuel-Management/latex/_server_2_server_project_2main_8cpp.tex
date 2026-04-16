@@ -1,5 +1,10 @@
 \doxysection{Server/\+\+Server\+Project/\+main.cpp File Reference}
 \hypertarget{_server_2_server_project_2main_8cpp}{}\label{_server_2_server_project_2main_8cpp}\index{Server/ServerProject/main.cpp@{Server/ServerProject/main.cpp}}
+
+
+Entry point for the Airline Fuel Management Server application.  
+
+
 {\ttfamily \+\#include $<$iostream$>$}\newline
 {\ttfamily \+\#include $<$string$>$}\newline
 {\ttfamily \+\#include $<$boost/\+asio.\+hpp$>$}\newline
@@ -8,7 +13,12 @@
 \begin{DoxyCompactItemize}
 \item 
 int \doxymbox{\hyperlink{_server_2_server_project_2main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\+[$\,$]\+)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main execution function of the server binary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Entry point for the Airline Fuel Management Server application. 
+
 
 
 \label{doc-func-members}
@@ -20,3 +30,17 @@ int \doxymbox{\hyperlink{_server_2_server_project_2main_8cpp_a0ddf1224851353fc92
 {\footnotesize\ttfamily \label{_server_2_server_project_2main_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
 int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\+[$\,$]\+}\end{DoxyParamCaption})}
 
+
+
+Main execution function of the server binary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of command-\/line arguments. \\
+\hline
+{\em argv} & Array of command-\/line arguments (expects port number). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Exit status code. 
+\end{DoxyReturn}

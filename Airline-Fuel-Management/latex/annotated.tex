@@ -1,15 +1,15 @@
 \doxysection{Class List}
 Here are the classes, structs, unions and interfaces with brief descriptions:\+\begin{DoxyCompactList}
 \item\contentsline{section}{\doxymbox{\hyperlink{struct_telemetry_processor_1_1_aircraft_state}{Telemetry\+Processor::\+\+Aircraft\+State}} }{\pageref{struct_telemetry_processor_1_1_aircraft_state}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{class_connection_manager}{Connection\+Manager}} }{\pageref{class_connection_manager}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{class_data_storage}{Data\+Storage}} }{\pageref{class_data_storage}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{struct_fuel_consumption_record}{Fuel\+Consumption\+Record}} }{\pageref{struct_fuel_consumption_record}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{class_packet_handler}{Packet\+Handler}} }{\pageref{class_packet_handler}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{class_server_connection_manager}{Server\+Connection\+Manager}} }{\pageref{class_server_connection_manager}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{class_server_packet_parser}{Server\+Packet\+Parser}} }{\pageref{class_server_packet_parser}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{class_task_scheduler}{Task\+Scheduler}} }{\pageref{class_task_scheduler}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{struct_telemetry_packet}{Telemetry\+Packet}} }{\pageref{struct_telemetry_packet}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{class_telemetry_parser}{Telemetry\+Parser}} }{\pageref{class_telemetry_parser}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{class_telemetry_processor}{Telemetry\+Processor}} }{\pageref{class_telemetry_processor}}{}
-\item\contentsline{section}{\doxymbox{\hyperlink{struct_telemetry_wire_packet}{Telemetry\+Wire\+Packet}} }{\pageref{struct_telemetry_wire_packet}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{class_connection_manager}{Connection\+Manager}} \\*Handles establishing, maintaining, and tearing down the TCP connection to the telemetry server }{\pageref{class_connection_manager}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{class_data_storage}{Data\+Storage}} \\*Interfaces with a SQLite backend for thread-\/safe database interactions }{\pageref{class_data_storage}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{struct_fuel_consumption_record}{Fuel\+Consumption\+Record}} \\*A calculated data record mapping an aircraft to specific consumption analytics }{\pageref{struct_fuel_consumption_record}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{class_packet_handler}{Packet\+Handler}} \\*Parses raw string data lines and transmits them as binary Telemetry\+Wire\+Packets }{\pageref{class_packet_handler}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{class_server_connection_manager}{Server\+Connection\+Manager}} \\*Controls the main network listener and coordinates handshakes, tasks parsing, and session disconnects }{\pageref{class_server_connection_manager}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{class_server_packet_parser}{Server\+Packet\+Parser}} \\*Buffers raw incoming bytes and extracts complete \doxylink{struct_telemetry_packet}{Telemetry\+Packet} structures }{\pageref{class_server_packet_parser}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{class_task_scheduler}{Task\+Scheduler}} \\*Provides an interface to enqueue asynchronous tasks onto a Boost ASIO thread pool }{\pageref{class_task_scheduler}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{struct_telemetry_packet}{Telemetry\+Packet}} \\*Represents the decoded telemetry data received from an aircraft }{\pageref{struct_telemetry_packet}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{class_telemetry_parser}{Telemetry\+Parser}} \\*Handles reading and parsing telemetry data files }{\pageref{class_telemetry_parser}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{class_telemetry_processor}{Telemetry\+Processor}} \\*Thread-\/safe processor that caches aircraft previous states to compute fuel consumption deltas }{\pageref{class_telemetry_processor}}{}
+\item\contentsline{section}{\doxymbox{\hyperlink{struct_telemetry_wire_packet}{Telemetry\+Wire\+Packet}} \\*Lightweight structure representing the raw wire format of a telemetry packet }{\pageref{struct_telemetry_wire_packet}}{}
 \end{DoxyCompactList}

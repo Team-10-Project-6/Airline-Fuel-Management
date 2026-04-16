@@ -92,19 +92,26 @@ $(function(){initNavTree('class_server_packet_parser.html','','class_server_pack
 </div><!--header-->
 <div class="contents">
 
+<p>Buffers raw incoming bytes and extracts complete <a class="el" href="struct_telemetry_packet.html" title="Represents the decoded telemetry data received from an aircraft.">TelemetryPacket</a> structures.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_server_packet_parser_8h_source.html">ServerPacketParser.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0d7cdb123527dc30774466a944fdc5e4" id="r_a0d7cdb123527dc30774466a944fdc5e4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0d7cdb123527dc30774466a944fdc5e4">feed</a> (const char *data, int length)</td></tr>
+<tr class="memdesc:a0d7cdb123527dc30774466a944fdc5e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends raw bytes from the network stream into the internal buffer.  <br /></td></tr>
 <tr class="memitem:a156cdd86c8e8b3cc8da6a3b21b9b0686" id="r_a156cdd86c8e8b3cc8da6a3b21b9b0686"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a156cdd86c8e8b3cc8da6a3b21b9b0686">tryParse</a> (<a class="el" href="struct_telemetry_packet.html">TelemetryPacket</a> &amp;out)</td></tr>
+<tr class="memdesc:a156cdd86c8e8b3cc8da6a3b21b9b0686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to decode one complete packet from the buffer.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:aa7c9d18244efc43f774344b7fc6d91c9" id="r_aa7c9d18244efc43f774344b7fc6d91c9"><td class="memItemLeft">std::vector&lt; char &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa7c9d18244efc43f774344b7fc6d91c9">m_buffer</a></td></tr>
 <tr class="memitem:ac398cdbaab70b91bd81d10d046f9f65f" id="r_ac398cdbaab70b91bd81d10d046f9f65f"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#ac398cdbaab70b91bd81d10d046f9f65f">m_offset</a> = 0</td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Buffers raw incoming bytes and extracts complete <a class="el" href="struct_telemetry_packet.html" title="Represents the decoded telemetry data received from an aircraft.">TelemetryPacket</a> structures. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a0d7cdb123527dc30774466a944fdc5e4" name="a0d7cdb123527dc30774466a944fdc5e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d7cdb123527dc30774466a944fdc5e4">&#9670;&#160;</a></span>feed()</h2>
 
@@ -124,6 +131,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Appends raw bytes from the network stream into the internal buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The byte array to append. </td></tr>
+    <tr><td class="paramname">length</td><td>The number of bytes to read from the data array. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a156cdd86c8e8b3cc8da6a3b21b9b0686" name="a156cdd86c8e8b3cc8da6a3b21b9b0686"></a>
@@ -140,6 +156,15 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Attempts to decode one complete packet from the buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">out</td><td>The <a class="el" href="struct_telemetry_packet.html" title="Represents the decoded telemetry data received from an aircraft.">TelemetryPacket</a> to populate if enough data exists. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if a packet was successfully extracted, false if more bytes are needed. </dd></dl>
 
 </div>
 </div>

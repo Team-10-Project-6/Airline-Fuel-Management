@@ -2,6 +2,11 @@
 \hypertarget{class_telemetry_processor}{}\label{class_telemetry_processor}\index{TelemetryProcessor@{TelemetryProcessor}}
 
 
+Thread-\/safe processor that caches aircraft previous states to compute fuel consumption deltas.  
+
+
+
+
 {\ttfamily \+\#include $<$Telemetry\+Processor.\+h$>$}
 
 \doxysubsubsection*{Classes}
@@ -13,7 +18,7 @@ struct \doxymbox{\hyperlink{struct_telemetry_processor_1_1_aircraft_state}{Aircr
 \begin{DoxyCompactItemize}
 \item 
 bool \doxymbox{\hyperlink{class_telemetry_processor_afcb1b738717b36a4fdd42835ac75b165}{process}} (const \doxymbox{\hyperlink{struct_telemetry_packet}{Telemetry\+Packet}} \&packet, \doxymbox{\hyperlink{struct_fuel_consumption_record}{Fuel\+Consumption\+Record}} \&out)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Processes a telemetry packet to compute incremental fuel metrics. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -22,6 +27,9 @@ std::\+unordered\+\_\+map$<$ unsigned short, \doxymbox{\hyperlink{struct_telemet
 std::\+mutex \doxymbox{\hyperlink{class_telemetry_processor_adc380af091a49d8d642c75bfd3d06e32}{m\+\_\+mutex}}
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Thread-\/safe processor that caches aircraft previous states to compute fuel consumption deltas. 
 
 \label{doc-func-members}
 \Hypertarget{class_telemetry_processor_doc-func-members}
@@ -32,6 +40,20 @@ std::\+mutex \doxymbox{\hyperlink{class_telemetry_processor_adc380af091a49d8d642
 {\footnotesize\ttfamily \label{class_telemetry_processor_afcb1b738717b36a4fdd42835ac75b165} 
 bool Telemetry\+Processor::\+process (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_telemetry_packet}{Telemetry\+Packet}} \&}]{packet}{, }\item[{\doxymbox{\hyperlink{struct_fuel_consumption_record}{Fuel\+Consumption\+Record}} \&}]{out}{}\end{DoxyParamCaption})}
 
+
+
+Processes a telemetry packet to compute incremental fuel metrics. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em packet} & The generic decoded telemetry data representation. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out} & Output structured parameter holding calculated rates and deltas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if variables were computed properly, false if this is the first packet (no previous delta reference) or an invalid timestamp occurred. 
+\end{DoxyReturn}
 
 
 \label{doc-variable-members}

@@ -2,25 +2,30 @@
 \hypertarget{class_connection_manager}{}\label{class_connection_manager}\index{ConnectionManager@{ConnectionManager}}
 
 
+Handles establishing, maintaining, and tearing down the TCP connection to the telemetry server.  
+
+
+
+
 {\ttfamily \+\#include $<$Connection\+Manager.\+h$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \doxymbox{\hyperlink{class_connection_manager_a23c47794cff2ab07476071ed01394827}{Connection\+Manager}} (const std::\+string \&server\+Ip, int server\+Port)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_connection_manager}{Connection\+Manager} object. \end{DoxyCompactList}\item 
 \doxymbox{\hyperlink{class_connection_manager_a5c2a49d02244fc399deba3ce6ffe77ac}{\texorpdfstring{$\sim$}{\string~}\+Connection\+Manager}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Destructor that ensures the connection is properly closed. \end{DoxyCompactList}\item 
 bool \doxymbox{\hyperlink{class_connection_manager_a37841cd78e733546b8835922a1343640}{connect\+To\+Server}} (const std::\+string \&client\+ID)
-\item 
+\begin{DoxyCompactList}\small\item\em Connects to the server and performs the initial handshake. \end{DoxyCompactList}\item 
 bool \doxymbox{\hyperlink{class_connection_manager_a3c500efc30693e936a88b2b0a3c5f349}{reconnect}} (int max\+Attempts=10)
-\item 
+\begin{DoxyCompactList}\small\item\em Attempts to reconnect to the server if the connection is lost. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{class_connection_manager_a329f2a4206aa1a8474f02fa8a70dc2e1}{disconnect}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Gracefully disconnects from the server and closes the socket. \end{DoxyCompactList}\item 
 \doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} \doxymbox{\hyperlink{class_connection_manager_a92c54ab0999963149189aa58ed22c3dd}{get\+Socket}} () const
-\item 
+\begin{DoxyCompactList}\small\item\em Gets the active socket handle. \end{DoxyCompactList}\item 
 const std::\+string \& \doxymbox{\hyperlink{class_connection_manager_afe4f3f933999dc4914b52cfb15d51bcf}{get\+Aircraft\+Id}} () const
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets the vehicle/\+aircraft ID assigned by the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,6 +46,9 @@ std::\+string \doxymbox{\hyperlink{class_connection_manager_afbc446310196b184f99
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+Handles establishing, maintaining, and tearing down the TCP connection to the telemetry server. 
+
 \label{doc-constructors}
 \Hypertarget{class_connection_manager_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -50,11 +58,26 @@ std::\+string \doxymbox{\hyperlink{class_connection_manager_afbc446310196b184f99
 {\footnotesize\ttfamily \label{class_connection_manager_a23c47794cff2ab07476071ed01394827} 
 Connection\+Manager::\+\+Connection\+Manager (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{server\+Ip}{, }\item[{int}]{server\+Port}{}\end{DoxyParamCaption})}
 
+
+
+Constructs a new \doxylink{class_connection_manager}{Connection\+Manager} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em server\+Ip} & The IP address of the telemetry server. \\
+\hline
+{\em server\+Port} & The TCP port to connect to. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{class_connection_manager_a5c2a49d02244fc399deba3ce6ffe77ac}\index{ConnectionManager@{ConnectionManager}!````~ConnectionManager@{\texorpdfstring{$\sim$}{\string~}ConnectionManager}}
 \index{````~ConnectionManager@{\texorpdfstring{$\sim$}{\string~}ConnectionManager}!ConnectionManager@{ConnectionManager}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConnectionManager()}{\string~ConnectionManager()}}
 {\footnotesize\ttfamily \label{class_connection_manager_a5c2a49d02244fc399deba3ce6ffe77ac} 
 Connection\+Manager::\+\texorpdfstring{$\sim$}{\string~}\+Connection\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor that ensures the connection is properly closed. 
 
 
 
@@ -67,11 +90,27 @@ Connection\+Manager::\+\texorpdfstring{$\sim$}{\string~}\+Connection\+Manager (\
 {\footnotesize\ttfamily \label{class_connection_manager_a37841cd78e733546b8835922a1343640} 
 bool Connection\+Manager::\+connect\+To\+Server (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{client\+ID}{}\end{DoxyParamCaption})}
 
+
+
+Connects to the server and performs the initial handshake. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+ID} & The requested client ID string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if connection and handshake succeed, false otherwise. 
+\end{DoxyReturn}
 \Hypertarget{class_connection_manager_a329f2a4206aa1a8474f02fa8a70dc2e1}\index{ConnectionManager@{ConnectionManager}!disconnect@{disconnect}}
 \index{disconnect@{disconnect}!ConnectionManager@{ConnectionManager}}
 \doxysubsubsection{\texorpdfstring{disconnect()}{disconnect()}}
 {\footnotesize\ttfamily \label{class_connection_manager_a329f2a4206aa1a8474f02fa8a70dc2e1} 
 void Connection\+Manager::\+disconnect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gracefully disconnects from the server and closes the socket. 
 
 \Hypertarget{class_connection_manager_a239f58ca928f3bd1e9aeb64ab4901c49}\index{ConnectionManager@{ConnectionManager}!doHandshake@{doHandshake}}
 \index{doHandshake@{doHandshake}!ConnectionManager@{ConnectionManager}}
@@ -85,12 +124,26 @@ bool Connection\+Manager::\+do\+Handshake (\begin{DoxyParamCaption}\item[{\doxym
 {\footnotesize\ttfamily \label{class_connection_manager_afe4f3f933999dc4914b52cfb15d51bcf} 
 const string \& Connection\+Manager::\+get\+Aircraft\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
+
+
+Gets the vehicle/\+aircraft ID assigned by the server. 
+
+\begin{DoxyReturn}{Returns}
+const std::\+string\& The assigned aircraft ID. 
+\end{DoxyReturn}
 \Hypertarget{class_connection_manager_a92c54ab0999963149189aa58ed22c3dd}\index{ConnectionManager@{ConnectionManager}!getSocket@{getSocket}}
 \index{getSocket@{getSocket}!ConnectionManager@{ConnectionManager}}
 \doxysubsubsection{\texorpdfstring{getSocket()}{getSocket()}}
 {\footnotesize\ttfamily \label{class_connection_manager_a92c54ab0999963149189aa58ed22c3dd} 
 \doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} Connection\+Manager::\+get\+Socket (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
+
+
+Gets the active socket handle. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET} The active socket handle. 
+\end{DoxyReturn}
 \Hypertarget{class_connection_manager_aefcec4ecacd8e77a71276f06e8c4ceca}\index{ConnectionManager@{ConnectionManager}!openSocket@{openSocket}}
 \index{openSocket@{openSocket}!ConnectionManager@{ConnectionManager}}
 \doxysubsubsection{\texorpdfstring{openSocket()}{openSocket()}}
@@ -103,6 +156,18 @@ const string \& Connection\+Manager::\+get\+Aircraft\+Id (\begin{DoxyParamCaptio
 {\footnotesize\ttfamily \label{class_connection_manager_a3c500efc30693e936a88b2b0a3c5f349} 
 bool Connection\+Manager::\+reconnect (\begin{DoxyParamCaption}\item[{int}]{max\+Attempts}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
 
+
+
+Attempts to reconnect to the server if the connection is lost. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Attempts} & Maximum number of reconnect attempts before giving up. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successfully reconnected, false otherwise. 
+\end{DoxyReturn}
 
 
 \label{doc-variable-members}

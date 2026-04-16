@@ -2,19 +2,24 @@
 \hypertarget{class_data_storage}{}\label{class_data_storage}\index{DataStorage@{DataStorage}}
 
 
+Interfaces with a SQLite backend for thread-\/safe database interactions.  
+
+
+
+
 {\ttfamily \+\#include $<$Data\+Storage.\+h$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \doxymbox{\hyperlink{class_data_storage_ad941bdddec209fcfd6f4718d84b4ae99}{Data\+Storage}} (const std::\+string \&db\+Path)
-\item 
+\begin{DoxyCompactList}\small\item\em Opens (or creates) the SQLite database and ensures the schema exists. \end{DoxyCompactList}\item 
 \doxymbox{\hyperlink{class_data_storage_adf4ef73e6d368dc7fcd213ba80e1d618}{\texorpdfstring{$\sim$}{\string~}\+Data\+Storage}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Destructor. Cleans up handles and closes the database connection. \end{DoxyCompactList}\item 
 bool \doxymbox{\hyperlink{class_data_storage_a11824f4e6053f1a6a9c32702d145a90e}{insert}} (const \doxymbox{\hyperlink{struct_fuel_consumption_record}{Fuel\+Consumption\+Record}} \&record)
-\item 
+\begin{DoxyCompactList}\small\item\em Inserts one fuel consumption record into the database. Thread-\/safe. \end{DoxyCompactList}\item 
 double \doxymbox{\hyperlink{class_data_storage_a93e24ab06b7fdf091fb674732b31d531}{sum\+Consumed}} (const std::\+string \&aircraft\+Id)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns the total amount of fuel consumed for a specified aircraft across all records. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,6 +34,9 @@ std::\+mutex \doxymbox{\hyperlink{class_data_storage_aa5029add137f890d34c597d313
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+Interfaces with a SQLite backend for thread-\/safe database interactions. 
+
 \label{doc-constructors}
 \Hypertarget{class_data_storage_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -38,11 +46,24 @@ std::\+mutex \doxymbox{\hyperlink{class_data_storage_aa5029add137f890d34c597d313
 {\footnotesize\ttfamily \label{class_data_storage_ad941bdddec209fcfd6f4718d84b4ae99} 
 Data\+Storage::\+\+Data\+Storage (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{db\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
+
+
+Opens (or creates) the SQLite database and ensures the schema exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db\+Path} & The file path to the SQLite database. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{class_data_storage_adf4ef73e6d368dc7fcd213ba80e1d618}\index{DataStorage@{DataStorage}!````~DataStorage@{\texorpdfstring{$\sim$}{\string~}DataStorage}}
 \index{````~DataStorage@{\texorpdfstring{$\sim$}{\string~}DataStorage}!DataStorage@{DataStorage}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DataStorage()}{\string~DataStorage()}}
 {\footnotesize\ttfamily \label{class_data_storage_adf4ef73e6d368dc7fcd213ba80e1d618} 
 Data\+Storage::\+\texorpdfstring{$\sim$}{\string~}\+Data\+Storage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. Cleans up handles and closes the database connection. 
 
 
 
@@ -61,12 +82,36 @@ bool Data\+Storage::\+create\+Schema (\begin{DoxyParamCaption}{}{}\end{DoxyParam
 {\footnotesize\ttfamily \label{class_data_storage_a11824f4e6053f1a6a9c32702d145a90e} 
 bool Data\+Storage::\+insert (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_fuel_consumption_record}{Fuel\+Consumption\+Record}} \&}]{record}{}\end{DoxyParamCaption})}
 
+
+
+Inserts one fuel consumption record into the database. Thread-\/safe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em record} & The \doxylink{struct_fuel_consumption_record}{Fuel\+Consumption\+Record} structure to insert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success, false if the query fails. 
+\end{DoxyReturn}
 \Hypertarget{class_data_storage_a93e24ab06b7fdf091fb674732b31d531}\index{DataStorage@{DataStorage}!sumConsumed@{sumConsumed}}
 \index{sumConsumed@{sumConsumed}!DataStorage@{DataStorage}}
 \doxysubsubsection{\texorpdfstring{sumConsumed()}{sumConsumed()}}
 {\footnotesize\ttfamily \label{class_data_storage_a93e24ab06b7fdf091fb674732b31d531} 
 double Data\+Storage::\+sum\+Consumed (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{aircraft\+Id}{}\end{DoxyParamCaption})}
 
+
+
+Returns the total amount of fuel consumed for a specified aircraft across all records. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aircraft\+Id} & The unique identifier of the aircraft. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The total fuel consumed, or -\/1.\+0 on error or uninitialized Database. 
+\end{DoxyReturn}
 
 
 \label{doc-variable-members}

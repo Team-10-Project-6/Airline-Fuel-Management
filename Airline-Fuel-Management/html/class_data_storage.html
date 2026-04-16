@@ -92,14 +92,21 @@ $(function(){initNavTree('class_data_storage.html','','class_data_storage-member
 </div><!--header-->
 <div class="contents">
 
+<p>Interfaces with a SQLite backend for thread-safe database interactions.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_data_storage_8h_source.html">DataStorage.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad941bdddec209fcfd6f4718d84b4ae99" id="r_ad941bdddec209fcfd6f4718d84b4ae99"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad941bdddec209fcfd6f4718d84b4ae99">DataStorage</a> (const std::string &amp;dbPath)</td></tr>
+<tr class="memdesc:ad941bdddec209fcfd6f4718d84b4ae99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens (or creates) the SQLite database and ensures the schema exists.  <br /></td></tr>
 <tr class="memitem:adf4ef73e6d368dc7fcd213ba80e1d618" id="r_adf4ef73e6d368dc7fcd213ba80e1d618"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adf4ef73e6d368dc7fcd213ba80e1d618">~DataStorage</a> ()</td></tr>
+<tr class="memdesc:adf4ef73e6d368dc7fcd213ba80e1d618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. Cleans up handles and closes the database connection.  <br /></td></tr>
 <tr class="memitem:a11824f4e6053f1a6a9c32702d145a90e" id="r_a11824f4e6053f1a6a9c32702d145a90e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a11824f4e6053f1a6a9c32702d145a90e">insert</a> (const <a class="el" href="struct_fuel_consumption_record.html">FuelConsumptionRecord</a> &amp;record)</td></tr>
+<tr class="memdesc:a11824f4e6053f1a6a9c32702d145a90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts one fuel consumption record into the database. Thread-safe.  <br /></td></tr>
 <tr class="memitem:a93e24ab06b7fdf091fb674732b31d531" id="r_a93e24ab06b7fdf091fb674732b31d531"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a93e24ab06b7fdf091fb674732b31d531">sumConsumed</a> (const std::string &amp;aircraftId)</td></tr>
+<tr class="memdesc:a93e24ab06b7fdf091fb674732b31d531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the total amount of fuel consumed for a specified aircraft across all records.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -110,7 +117,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a512d4b7ae494db4a3961a430f5587058" id="r_a512d4b7ae494db4a3961a430f5587058"><td class="memItemLeft">sqlite3 *&#160;</td><td class="memItemRight"><a class="el" href="#a512d4b7ae494db4a3961a430f5587058">m_db</a></td></tr>
 <tr class="memitem:aa5029add137f890d34c597d3139deef9" id="r_aa5029add137f890d34c597d3139deef9"><td class="memItemLeft">std::mutex&#160;</td><td class="memItemRight"><a class="el" href="#aa5029add137f890d34c597d3139deef9">m_mutex</a></td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Interfaces with a SQLite backend for thread-safe database interactions. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad941bdddec209fcfd6f4718d84b4ae99" name="ad941bdddec209fcfd6f4718d84b4ae99"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad941bdddec209fcfd6f4718d84b4ae99">&#9670;&#160;</a></span>DataStorage()</h2>
 
@@ -134,6 +143,14 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Opens (or creates) the SQLite database and ensures the schema exists. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dbPath</td><td>The file path to the SQLite database. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="adf4ef73e6d368dc7fcd213ba80e1d618" name="adf4ef73e6d368dc7fcd213ba80e1d618"></a>
@@ -150,6 +167,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Destructor. Cleans up handles and closes the database connection. </p>
 
 </div>
 </div>
@@ -194,6 +213,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Inserts one fuel consumption record into the database. Thread-safe. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">record</td><td>The <a class="el" href="struct_fuel_consumption_record.html" title="A calculated data record mapping an aircraft to specific consumption analytics.">FuelConsumptionRecord</a> structure to insert. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success, false if the query fails. </dd></dl>
+
 </div>
 </div>
 <a id="a93e24ab06b7fdf091fb674732b31d531" name="a93e24ab06b7fdf091fb674732b31d531"></a>
@@ -210,6 +238,15 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns the total amount of fuel consumed for a specified aircraft across all records. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aircraftId</td><td>The unique identifier of the aircraft. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double The total fuel consumed, or -1.0 on error or uninitialized Database. </dd></dl>
 
 </div>
 </div>

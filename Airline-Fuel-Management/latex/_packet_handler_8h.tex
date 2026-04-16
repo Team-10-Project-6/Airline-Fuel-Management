@@ -1,5 +1,10 @@
 \doxysection{Client/\+\+Client\+Project/\+\+Packet\+Handler.h File Reference}
 \hypertarget{_packet_handler_8h}{}\label{_packet_handler_8h}\index{Client/ClientProject/PacketHandler.h@{Client/ClientProject/PacketHandler.h}}
+
+
+Handles formatting and sending telemetry packets.  
+
+
 {\ttfamily \+\#include "{}Connection\+Manager.\+h"{}}\newline
 {\ttfamily \+\#include $<$cstring$>$}\newline
 {\ttfamily \+\#include $<$ctime$>$}\newline
@@ -8,6 +13,11 @@
 \begin{DoxyCompactItemize}
 \item 
 struct \doxymbox{\hyperlink{struct_telemetry_wire_packet}{Telemetry\+Wire\+Packet}}
-\item 
+\begin{DoxyCompactList}\small\item\em Lightweight structure representing the raw wire format of a telemetry packet. \end{DoxyCompactList}\item 
 class \doxymbox{\hyperlink{class_packet_handler}{Packet\+Handler}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Parses raw string data lines and transmits them as binary Telemetry\+Wire\+Packets. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles formatting and sending telemetry packets. 
+

@@ -1,5 +1,10 @@
 \doxysection{Client/\+\+Client\+Project/\+\+Connection\+Manager.h File Reference}
 \hypertarget{_connection_manager_8h}{}\label{_connection_manager_8h}\index{Client/ClientProject/ConnectionManager.h@{Client/ClientProject/ConnectionManager.h}}
+
+
+Manages the TCP socket connection to the server.  
+
+
 {\ttfamily \+\#include $<$sys/\+socket.\+h$>$}\newline
 {\ttfamily \+\#include $<$arpa/\+inet.\+h$>$}\newline
 {\ttfamily \+\#include $<$netdb.\+h$>$}\newline
@@ -11,7 +16,7 @@
 \begin{DoxyCompactItemize}
 \item 
 class \doxymbox{\hyperlink{class_connection_manager}{Connection\+Manager}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Handles establishing, maintaining, and tearing down the TCP connection to the telemetry server. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -30,6 +35,11 @@ class \doxymbox{\hyperlink{class_connection_manager}{Connection\+Manager}}
 \item 
 typedef int \doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages the TCP socket connection to the server. 
+
 
 
 \label{doc-define-members}

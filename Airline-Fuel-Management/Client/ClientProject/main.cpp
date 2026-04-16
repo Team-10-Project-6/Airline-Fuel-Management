@@ -1,3 +1,7 @@
+/**
+ * @file main.cpp
+ * @brief Entry point for the Airline Fuel Management Client application.
+ */
 #include <iostream>
 #include <string>
 #include "ConnectionManager.h"
@@ -6,6 +10,12 @@
 
 using namespace std;
 
+/**
+ * @brief Main execution loop of the client process.
+ * @param argc Number of command-line arguments.
+ * @param argv Array of command-line arguments. 
+ * @return int Exit status code.
+ */
 int main(int argc, char* argv[]) {
 #ifdef _WIN32
     // Initialise Winsock on Windows

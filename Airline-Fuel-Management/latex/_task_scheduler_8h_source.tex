@@ -2,24 +2,25 @@
 \hypertarget{_task_scheduler_8h_source}{}\label{_task_scheduler_8h_source}\index{Server/ServerProject/TaskScheduler.h@{Server/ServerProject/TaskScheduler.h}}
 \doxymbox{\hyperlink{_task_scheduler_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{00002\ }
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <boost/asio/thread\_pool.hpp>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <boost/asio/post.hpp>}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_task_scheduler_ac6c22c897b8e4c34f22535a43da51db4}{TaskScheduler}}\ \{}
-\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00009\ \ \ \ \ \doxymbox{\hyperlink{class_task_scheduler_ac6c22c897b8e4c34f22535a43da51db4}{TaskScheduler}}(\textcolor{keywordtype}{size\_t}\ threadNum);}
-\DoxyCodeLine{00010\ \ \ \ \ \doxymbox{\hyperlink{class_task_scheduler_a7cf71af0caa688c25fbb9aa0f0d24130}{\string~TaskScheduler}}();}
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \ \ \ \ \textcolor{comment}{//\ pushes\ task\ to\ the\ telemetry\ processor}}
-\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_task_scheduler_a3c88d61e20e78e151ea88864460d844f}{enqueueTask}}(std::function<\textcolor{keywordtype}{void}()>\ task);}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_task_scheduler_aa344c294d072b86568b5c25cdb4481cb}{stop}}();}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00018\ \ \ \ \ boost::asio::thread\_pool\ \doxymbox{\hyperlink{class_task_scheduler_a2eebd69cd977f0abffa05404c4b780c0}{pool}};}
-\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <boost/asio/thread\_pool.hpp>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <boost/asio/post.hpp>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_task_scheduler_ac6c22c897b8e4c34f22535a43da51db4}{TaskScheduler}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \doxymbox{\hyperlink{class_task_scheduler_ac6c22c897b8e4c34f22535a43da51db4}{TaskScheduler}}(\textcolor{keywordtype}{size\_t}\ threadNum);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \ \ \ \ \doxymbox{\hyperlink{class_task_scheduler_a7cf71af0caa688c25fbb9aa0f0d24130}{\string~TaskScheduler}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_task_scheduler_a3c88d61e20e78e151ea88864460d844f}{enqueueTask}}(std::function<\textcolor{keywordtype}{void}()>\ task);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_task_scheduler_aa344c294d072b86568b5c25cdb4481cb}{stop}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00040\ \ \ \ \ boost::asio::thread\_pool\ \doxymbox{\hyperlink{class_task_scheduler_a2eebd69cd977f0abffa05404c4b780c0}{pool}};}
+\DoxyCodeLine{00041\ \};}
 
 \end{DoxyCode}
