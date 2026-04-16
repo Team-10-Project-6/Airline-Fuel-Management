@@ -177,7 +177,7 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
         while (parser.tryParse(packet)) {
             ++(*pending);
             scheduler.enqueueTask([this, packet, clientID, pending, runSummary, initialFuelRecorded]() {
-                cout << ("[" + clientID + "] ts=" + to_string(packet.timestamp) + " fuel=" + to_string(packet.fuel) + "\n");
+                //cout << ("[" + clientID + "] ts=" + to_string(packet.timestamp) + " fuel=" + to_string(packet.fuel) + "\n");
                 if (!initialFuelRecorded->load(std::memory_order_relaxed)) {
                     bool expected = false;
                     if (initialFuelRecorded->compare_exchange_strong(expected, true)) {
@@ -188,8 +188,8 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
 
                 FuelConsumptionRecord record;
                 if (m_telemetryProcessor.process(packet, record)) {
-                    cout << "[" + clientID + "] consumed: " + to_string(record.fuelConsumed) + " liters"
-                            " rate: " + to_string(record.consumptionRate) + " liters per second\n";
+                    //cout << "[" + clientID + "] consumed: " + to_string(record.fuelConsumed) + " liters"
+                            //" rate: " + to_string(record.consumptionRate) + " liters per second\n";
                     if (!m_dataStorage.insert(record)) {
                         cerr << "[" + clientID + "] Failed to persist fuel record.\n";
                     }

@@ -7,8 +7,6 @@ var dir_ab6a3a415e2b910122ecc9c1e7b77b22 =
     [ "ServerConnectionManager.h", "_server_connection_manager_8h.html", "_server_connection_manager_8h" ],
     [ "ServerPacketParser.cpp", "_server_packet_parser_8cpp.html", "_server_packet_parser_8cpp" ],
     [ "ServerPacketParser.h", "_server_packet_parser_8h.html", "_server_packet_parser_8h" ],
-    [ "sqlite3.c", "sqlite3_8c.html", "sqlite3_8c" ],
-    [ "sqlite3.h", "sqlite3_8h.html", "sqlite3_8h" ],
     [ "TaskScheduler.cpp", "_task_scheduler_8cpp.html", null ],
     [ "TaskScheduler.h", "_task_scheduler_8h.html", "_task_scheduler_8h" ],
     [ "TelemetryProcessor.cpp", "_telemetry_processor_8cpp.html", null ],

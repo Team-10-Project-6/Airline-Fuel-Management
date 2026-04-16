@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['qr_0',['QR',['../sqlite3_8c.html#a4268db82548169507af69ef6d595e35c',1,'sqlite3.c']]],
-  ['querysharedcachetablelock_1',['querySharedCacheTableLock',['../sqlite3_8c.html#a248343a0d79235a90b955d801713d243',1,'sqlite3.c']]],
-  ['quotedcompare_2',['quotedCompare',['../sqlite3_8c.html#a62d148e37fccac0ddf76e52244f5e3ab',1,'sqlite3.c']]],
-  ['quotefunc_3',['quoteFunc',['../sqlite3_8c.html#a8e64c0ef376144dfad6a4a3d499056b8',1,'sqlite3.c']]]
+  ['welcomesocket_0',['WelcomeSocket',['../class_server_connection_manager.html#a42881e053bc95b85849f692b7447e595',1,'ServerConnectionManager']]]
 ];

@@ -98,7 +98,7 @@ $(function(){initNavTree('_data_storage_8h_source.html','',''); });
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="_telemetry_processor_8h.html">TelemetryProcessor.h</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// Forward-declare the SQLite handle so callers don&#39;t need to include sqlite3.h</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">struct </span><a class="code hl_struct" href="structsqlite3.html">sqlite3</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">struct </span>sqlite3;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_data_storage.html">   10</a></span><span class="keyword">class </span><a class="code hl_function" href="class_data_storage.html#ad941bdddec209fcfd6f4718d84b4ae99">DataStorage</a> {</div>
@@ -116,7 +116,7 @@ $(function(){initNavTree('_data_storage_8h_source.html','',''); });
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="class_data_storage.html#a93e24ab06b7fdf091fb674732b31d531">sumConsumed</a>(<span class="keyword">const</span> std::string&amp; aircraftId);</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_data_storage.html#a512d4b7ae494db4a3961a430f5587058">   25</a></span>    <a class="code hl_struct" href="structsqlite3.html">sqlite3</a>*   <a class="code hl_variable" href="class_data_storage.html#a512d4b7ae494db4a3961a430f5587058">m_db</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_data_storage.html#a512d4b7ae494db4a3961a430f5587058">   25</a></span>    sqlite3*   <a class="code hl_variable" href="class_data_storage.html#a512d4b7ae494db4a3961a430f5587058">m_db</a>;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_data_storage.html#aa5029add137f890d34c597d3139deef9">   26</a></span>    std::mutex <a class="code hl_variable" href="class_data_storage.html#aa5029add137f890d34c597d3139deef9">m_mutex</a>;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_data_storage.html#a6f45c93659f23701b855cd2140f86539">createSchema</a>();</div>
@@ -131,7 +131,6 @@ $(function(){initNavTree('_data_storage_8h_source.html','',''); });
 <div class="ttc" id="aclass_data_storage_html_ad941bdddec209fcfd6f4718d84b4ae99"><div class="ttname"><a href="class_data_storage.html#ad941bdddec209fcfd6f4718d84b4ae99">DataStorage::DataStorage</a></div><div class="ttdeci">DataStorage(const std::string &amp;dbPath)</div><div class="ttdef"><b>Definition</b> DataStorage.cpp:5</div></div>
 <div class="ttc" id="aclass_data_storage_html_adf4ef73e6d368dc7fcd213ba80e1d618"><div class="ttname"><a href="class_data_storage.html#adf4ef73e6d368dc7fcd213ba80e1d618">DataStorage::~DataStorage</a></div><div class="ttdeci">~DataStorage()</div><div class="ttdef"><b>Definition</b> DataStorage.cpp:23</div></div>
 <div class="ttc" id="astruct_fuel_consumption_record_html"><div class="ttname"><a href="struct_fuel_consumption_record.html">FuelConsumptionRecord</a></div><div class="ttdef"><b>Definition</b> TelemetryProcessor.h:7</div></div>
-<div class="ttc" id="astructsqlite3_html"><div class="ttname"><a href="structsqlite3.html">sqlite3</a></div><div class="ttdef"><b>Definition</b> sqlite3.c:18656</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
