@@ -1,43 +1,34 @@
 #include "ServerPacketParser.h"
-#include <sstream>
-#include <stdexcept>
+#include <cstring>
+
+// Must match TelemetryWirePacket in the client's PacketHandler.h
+struct TelemetryWirePacket {
+    unsigned int timestamp;
+    float        fuel;
+    unsigned int aircraftId : 16;
+};
 
 void ServerPacketParser::feed(const char* data, int length) {
-    m_buffer.append(data, length);
+    m_buffer.insert(m_buffer.end(), data, data + length);
 }
 
 bool ServerPacketParser::tryParse(TelemetryPacket& out) {
-    size_t pos = m_buffer.find('\n');
-    if (pos == std::string::npos) {
-        return false; // No complete packet yet
-    }
-
-    std::string line = m_buffer.substr(0, pos);
-    m_buffer.erase(0, pos + 1);
-    //remove carriage return
-    if (!line.empty() && line.back() == '\r') {
-        line.pop_back();
-    }
-
-    return parseLine(line, out);
-}
-
-bool ServerPacketParser::parseLine(const std::string& line, TelemetryPacket& out) const {
-    //<aircraftId>,<timestamp>,<fuel>
-    std::istringstream ss(line);
-    std::string aircraftId, timestamp, fuelStr;
-
-    if (!std::getline(ss, aircraftId,  ',')) return false;
-    if (!std::getline(ss, timestamp,   ',')) return false;
-    if (!std::getline(ss, fuelStr,     ',')) return false;
-
-    try {
-        out.fuel = std::stod(fuelStr);
-    } catch (const std::exception&) {
+    if (m_buffer.size() - m_offset < sizeof(TelemetryWirePacket)) {
         return false;
     }
 
-    out.aircraftId  = std::move(aircraftId);
-    out.timestamp   = std::move(timestamp);
+    TelemetryWirePacket wire;
+    memcpy(&wire, m_buffer.data() + m_offset, sizeof(wire));
+    m_offset += sizeof(wire);
+
+    // Flush consumed bytes once the offset grows large enough
+    if (m_offset >= 4096) {
+        m_buffer.erase(m_buffer.begin(), m_buffer.begin() + m_offset);
+        m_offset = 0;
+    }
+
+    out.aircraftId = static_cast<unsigned short>(wire.aircraftId);
+    out.timestamp  = wire.timestamp;
+    out.fuel       = wire.fuel;
     return true;
 }

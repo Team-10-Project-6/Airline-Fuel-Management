@@ -1,3 +1,7 @@
+/**
+ * @file ServerConnectionManager.h
+ * @brief TCP Connection manager that accepts connections and spawns packet processing tasks.
+ */
 #pragma once
 
 #include <winsock2.h>
@@ -12,12 +16,32 @@
 #include "TelemetryProcessor.h"
 #include "DataStorage.h"
 
+/**
+ * @class ServerConnectionManager
+ * @brief Controls the main network listener and coordinates handshakes, tasks parsing, and session disconnects.
+ */
 class ServerConnectionManager {
 public:
+    /**
+     * @brief Constructs a new ServerConnectionManager.
+     * @param port The port to listen on.
+     * @param scheduler TaskScheduler pool to delegate tasks into.
+     */
     ServerConnectionManager(int port, TaskScheduler& scheduler);
+
+    /**
+     * @brief ServerConnectionManager Destructor. Cleans up sockets.
+     */
     ~ServerConnectionManager();
 
+    /**
+     * @brief Binds the listening socket and begins accepting client connections in an infinite loop.
+     */
     void startListening();
+
+    /**
+     * @brief Stops the server listener immediately.
+     */
     void stop();
 
 private:
@@ -41,9 +65,18 @@ private:
     std::unordered_map<std::string, double> m_initialFuel;
     std::mutex m_initialFuelMutex;
 
-    // Performs the HELLO handshake; sets clientID and returns true on success
+    /**
+     * @brief Performs the initial HELLO handshake process with a connected client.
+     * @param ConnectionSocket The raw client socket handle.
+     * @param[out] clientID The parsed or generated Client/Aircraft ID passed by reference.
+     * @return true if string handshake successfully completed, false on timeouts or bad formats.
+     */
     bool handleHandshake(SOCKET ConnectionSocket, std::string& clientID);
 
-    // Receives telemetry packets for an already-handshaked connection
+    /**
+     * @brief Constantly reads loop telemetry packets for an already-handshaked connection session.
+     * @param ConnectionSocket The raw client socket handle.
+     * @param clientID The associated Client/Aircraft ID for log/metrics associations.
+     */
     void handleClientSession(SOCKET ConnectionSocket, const std::string& clientID);
 };

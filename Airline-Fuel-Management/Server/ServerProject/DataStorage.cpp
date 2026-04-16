@@ -35,7 +35,9 @@ bool DataStorage::createSchema() {
         "  timestamp        TEXT    NOT NULL,"
         "  fuel_consumed    REAL    NOT NULL,"
         "  consumption_rate REAL    NOT NULL"
-        ");";
+        ");"
+        "CREATE INDEX IF NOT EXISTS idx_aircraft_id"
+        "  ON fuel_consumption(aircraft_id);";
 
     char* errMsg = nullptr;
     if (sqlite3_exec(m_db, sql, nullptr, nullptr, &errMsg) != SQLITE_OK) {

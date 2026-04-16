@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['m_5faircraftid_0',['m_aircraftId',['../class_connection_manager.html#afbc446310196b184f99f977824dcb31a',1,'ConnectionManager']]],
+  ['m_5fbuffer_1',['m_buffer',['../class_server_packet_parser.html#aa7c9d18244efc43f774344b7fc6d91c9',1,'ServerPacketParser']]],
+  ['m_5fconnmgr_2',['m_connMgr',['../class_packet_handler.html#a1549eee8bf6312b18894994dbd2468c2',1,'PacketHandler']]],
+  ['m_5fcurrenttimestamp_3',['m_currentTimestamp',['../class_telemetry_parser.html#a044354f3cbecde7688099c41534b0549',1,'TelemetryParser']]],
+  ['m_5fdatastorage_4',['m_dataStorage',['../class_server_connection_manager.html#a560b783f4d3dcf26cae856e44aec9de1',1,'ServerConnectionManager']]],
+  ['m_5fdb_5',['m_db',['../class_data_storage.html#a512d4b7ae494db4a3961a430f5587058',1,'DataStorage']]],
+  ['m_5ffile_6',['m_file',['../class_telemetry_parser.html#a994702771521137ea5237d5b52300261',1,'TelemetryParser']]],
+  ['m_5ffilepath_7',['m_filePath',['../class_telemetry_parser.html#a5e9b6b279503dd9c3e958f00387b11ef',1,'TelemetryParser']]],
+  ['m_5fhasmore_8',['m_hasMore',['../class_telemetry_parser.html#a51309cd51162d755e0d25b52239b3178',1,'TelemetryParser']]],
+  ['m_5finitialfuel_9',['m_initialFuel',['../class_server_connection_manager.html#aaf5861a3f53592fc596a366533d2e34b',1,'ServerConnectionManager']]],
+  ['m_5finitialfuelmutex_10',['m_initialFuelMutex',['../class_server_connection_manager.html#a6fd3f91832510fe60b0cb3e8632f1ddd',1,'ServerConnectionManager']]],
+  ['m_5flinenumber_11',['m_lineNumber',['../class_telemetry_parser.html#a387a41887ad075116ee7c703f6039861',1,'TelemetryParser']]],
+  ['m_5fmutex_12',['m_mutex',['../class_data_storage.html#aa5029add137f890d34c597d3139deef9',1,'DataStorage::m_mutex'],['../class_telemetry_processor.html#adc380af091a49d8d642c75bfd3d06e32',1,'TelemetryProcessor::m_mutex']]],
+  ['m_5foffset_13',['m_offset',['../class_server_packet_parser.html#ac398cdbaab70b91bd81d10d046f9f65f',1,'ServerPacketParser']]],
+  ['m_5fprevtimestamp_14',['m_prevTimestamp',['../class_packet_handler.html#a838b52ea352fb68383b7d621d17585c9',1,'PacketHandler']]],
+  ['m_5fserverip_15',['m_serverIp',['../class_connection_manager.html#a598d289533c650d914d6ad8cc378d134',1,'ConnectionManager']]],
+  ['m_5fserverport_16',['m_serverPort',['../class_connection_manager.html#a120a997e360121e350d76e621ace6322',1,'ConnectionManager']]],
+  ['m_5fsocket_17',['m_socket',['../class_connection_manager.html#ad29d7f4bfff3a4c2d06e3ffd526f0aa2',1,'ConnectionManager']]],
+  ['m_5fstate_18',['m_state',['../class_telemetry_processor.html#ab922a2a36e98ac7bd2dd1418a6e4fd79',1,'TelemetryProcessor']]],
+  ['m_5ftelemetryprocessor_19',['m_telemetryProcessor',['../class_server_connection_manager.html#a355dc0689c7f955b9473bd8441c455e2',1,'ServerConnectionManager']]]
+];

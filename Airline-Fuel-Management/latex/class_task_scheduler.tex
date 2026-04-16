@@ -1,0 +1,107 @@
+\doxysection{Task\+Scheduler Class Reference}
+\hypertarget{class_task_scheduler}{}\label{class_task_scheduler}\index{TaskScheduler@{TaskScheduler}}
+
+
+Provides an interface to enqueue asynchronous tasks onto a Boost ASIO thread pool.  
+
+
+
+
+{\ttfamily \+\#include $<$Task\+Scheduler.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_task_scheduler_ac6c22c897b8e4c34f22535a43da51db4}{Task\+Scheduler}} (size\+\_\+t thread\+Num)
+\begin{DoxyCompactList}\small\item\em Constructs a new Task Scheduler. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_task_scheduler_a7cf71af0caa688c25fbb9aa0f0d24130}{\texorpdfstring{$\sim$}{\string~}\+Task\+Scheduler}} ()
+\begin{DoxyCompactList}\small\item\em Destroys the Task Scheduler, waiting for pending tasks to finish. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_task_scheduler_a3c88d61e20e78e151ea88864460d844f}{enqueue\+Task}} (std::\+function$<$ void()$>$ task)
+\begin{DoxyCompactList}\small\item\em Pushes a new task lambda onto the thread pool queue. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_task_scheduler_aa344c294d072b86568b5c25cdb4481cb}{stop}} ()
+\begin{DoxyCompactList}\small\item\em Force stops the thread pool, dropping any tasks not yet started. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost::\+asio::\+thread\+\_\+pool \doxymbox{\hyperlink{class_task_scheduler_a2eebd69cd977f0abffa05404c4b780c0}{pool}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides an interface to enqueue asynchronous tasks onto a Boost ASIO thread pool. 
+
+\label{doc-constructors}
+\Hypertarget{class_task_scheduler_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_task_scheduler_ac6c22c897b8e4c34f22535a43da51db4}\index{TaskScheduler@{TaskScheduler}!TaskScheduler@{TaskScheduler}}
+\index{TaskScheduler@{TaskScheduler}!TaskScheduler@{TaskScheduler}}
+\doxysubsubsection{\texorpdfstring{TaskScheduler()}{TaskScheduler()}}
+{\footnotesize\ttfamily \label{class_task_scheduler_ac6c22c897b8e4c34f22535a43da51db4} 
+Task\+Scheduler::\+\+Task\+Scheduler (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{thread\+Num}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a new Task Scheduler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+Num} & The number of concurrent threads to spawn in the pool. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_task_scheduler_a7cf71af0caa688c25fbb9aa0f0d24130}\index{TaskScheduler@{TaskScheduler}!````~TaskScheduler@{\texorpdfstring{$\sim$}{\string~}TaskScheduler}}
+\index{````~TaskScheduler@{\texorpdfstring{$\sim$}{\string~}TaskScheduler}!TaskScheduler@{TaskScheduler}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TaskScheduler()}{\string~TaskScheduler()}}
+{\footnotesize\ttfamily \label{class_task_scheduler_a7cf71af0caa688c25fbb9aa0f0d24130} 
+Task\+Scheduler::\+\texorpdfstring{$\sim$}{\string~}\+Task\+Scheduler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destroys the Task Scheduler, waiting for pending tasks to finish. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_task_scheduler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_task_scheduler_a3c88d61e20e78e151ea88864460d844f}\index{TaskScheduler@{TaskScheduler}!enqueueTask@{enqueueTask}}
+\index{enqueueTask@{enqueueTask}!TaskScheduler@{TaskScheduler}}
+\doxysubsubsection{\texorpdfstring{enqueueTask()}{enqueueTask()}}
+{\footnotesize\ttfamily \label{class_task_scheduler_a3c88d61e20e78e151ea88864460d844f} 
+void Task\+Scheduler::\+enqueue\+Task (\begin{DoxyParamCaption}\item[{std::\+function$<$ void()$>$}]{task}{}\end{DoxyParamCaption})}
+
+
+
+Pushes a new task lambda onto the thread pool queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & A std::\+function wrapping the void() task logic. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_task_scheduler_aa344c294d072b86568b5c25cdb4481cb}\index{TaskScheduler@{TaskScheduler}!stop@{stop}}
+\index{stop@{stop}!TaskScheduler@{TaskScheduler}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \label{class_task_scheduler_aa344c294d072b86568b5c25cdb4481cb} 
+void Task\+Scheduler::\+stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Force stops the thread pool, dropping any tasks not yet started. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_task_scheduler_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_task_scheduler_a2eebd69cd977f0abffa05404c4b780c0}\index{TaskScheduler@{TaskScheduler}!pool@{pool}}
+\index{pool@{pool}!TaskScheduler@{TaskScheduler}}
+\doxysubsubsection{\texorpdfstring{pool}{pool}}
+{\footnotesize\ttfamily \label{class_task_scheduler_a2eebd69cd977f0abffa05404c4b780c0} 
+boost::\+asio::\+thread\+\_\+pool Task\+Scheduler::\+pool\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Server/\+\+Server\+Project/\+\doxymbox{\hyperlink{_task_scheduler_8h}{Task\+Scheduler.\+h}}\item 
+Server/\+\+Server\+Project/\+\doxymbox{\hyperlink{_task_scheduler_8cpp}{Task\+Scheduler.\+cpp}}\end{DoxyCompactItemize}

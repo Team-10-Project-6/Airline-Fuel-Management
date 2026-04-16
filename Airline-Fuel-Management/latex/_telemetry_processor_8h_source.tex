@@ -1,0 +1,35 @@
+\doxysection{Telemetry\+Processor.\+h}
+\hypertarget{_telemetry_processor_8h_source}{}\label{_telemetry_processor_8h_source}\index{Server/ServerProject/TelemetryProcessor.h@{Server/ServerProject/TelemetryProcessor.h}}
+\doxymbox{\hyperlink{_telemetry_processor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_server_packet_parser_8h}{ServerPacketParser.h}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_fuel_consumption_record}{FuelConsumptionRecord}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ std::string\ \doxymbox{\hyperlink{struct_fuel_consumption_record_a128d89818ff9af143cd45031a79e50c8}{aircraftId}};\ \ \ \textcolor{comment}{//\ Unique\ aircraft\ string\ identifier}}
+\DoxyCodeLine{00017\ \ \ \ \ std::string\ \doxymbox{\hyperlink{struct_fuel_consumption_record_af4018d0208f85aa7deb90c1f2d2cabe1}{timestamp}};\ \ \ \ \textcolor{comment}{//\ ISO-\/8601\ formatted\ timestamp}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{struct_fuel_consumption_record_a3d446ce510f45a520d1ff1ff91c501ab}{fuelConsumed}};\ \ \ \ \ \ \textcolor{comment}{//\ fuel\ delta\ since\ last\ packet}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{struct_fuel_consumption_record_a7e873a7af31e7eefef569366a88f2277}{consumptionRate}};\ \ \ \textcolor{comment}{//\ average\ fuel\ burned\ per\ second\ since\ first\ packet}}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_telemetry_processor}{TelemetryProcessor}}\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_telemetry_processor_afcb1b738717b36a4fdd42835ac75b165}{process}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_telemetry_packet}{TelemetryPacket}}\&\ packet,\ \doxymbox{\hyperlink{struct_fuel_consumption_record}{FuelConsumptionRecord}}\&\ out);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_telemetry_processor_1_1_aircraft_state}{AircraftState}}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{struct_telemetry_processor_1_1_aircraft_state_a90673ba445cce6732feafbe1baef3724}{prevFuel}};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{struct_telemetry_processor_1_1_aircraft_state_a096a11ca83727ce22d454f19d968bab5}{prevTimestamp}};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{struct_telemetry_processor_1_1_aircraft_state_a90b564053e29b3b8a0dd59db91a86c56}{initialFuel}};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{struct_telemetry_processor_1_1_aircraft_state_ae81025daf727b28106ca4cd2872fee8d}{initialTimestamp}};}
+\DoxyCodeLine{00042\ \ \ \ \ \};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ std::unordered\_map<unsigned\ short,\ AircraftState>\ \doxymbox{\hyperlink{class_telemetry_processor_ab922a2a36e98ac7bd2dd1418a6e4fd79}{m\_state}};}
+\DoxyCodeLine{00045\ \ \ \ \ std::mutex\ \doxymbox{\hyperlink{class_telemetry_processor_adc380af091a49d8d642c75bfd3d06e32}{m\_mutex}};}
+\DoxyCodeLine{00046\ \};}
+
+\end{DoxyCode}

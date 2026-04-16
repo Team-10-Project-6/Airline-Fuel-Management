@@ -1,0 +1,60 @@
+\doxysection{Connection\+Manager.\+h}
+\hypertarget{_connection_manager_8h_source}{}\label{_connection_manager_8h_source}\index{Client/ClientProject/ConnectionManager.h@{Client/ClientProject/ConnectionManager.h}}
+\doxymbox{\hyperlink{_connection_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\ \ \ \ \#include\ <winsock2.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\ \ \ \ \#include\ <ws2tcpip.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ \ \ \#define\ GET\_SOCKET\_ERR()\ WSAGetLastError()}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ comment(lib,\ "{}Ws2\_32.lib"{})}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ \ \ \#include\ <sys/socket.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \ \ \#include\ <arpa/inet.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ \ \ \#include\ <netdb.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ \ \ \#include\ <unistd.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ \ \ \#include\ <errno.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ \ \ \#include\ <string.h>}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{comment}{//\ Create\ common\ types}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}};}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ \ \ \#define\ INVALID\_SOCKET\ \ (SOCKET)(\string~0)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ \ \ \#define\ SOCKET\_ERROR\ \ \ \ \ \ \ \ \ \ \ \ (-\/1)}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ \ \ \#define\ closesocket(s)\ close(s)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ \ \ \#define\ GET\_SOCKET\_ERR()\ errno}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ \ \ \#define\ SD\_SEND\ SHUT\_WR}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_connection_manager_a23c47794cff2ab07476071ed01394827}{ConnectionManager}}\ \{}
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//Construction/destruction}}
+\DoxyCodeLine{00042\ \ \ \ \ \doxymbox{\hyperlink{class_connection_manager_a23c47794cff2ab07476071ed01394827}{ConnectionManager}}(\textcolor{keyword}{const}\ std::string\&\ serverIp,\ \textcolor{keywordtype}{int}\ serverPort);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ \doxymbox{\hyperlink{class_connection_manager_a5c2a49d02244fc399deba3ce6ffe77ac}{\string~ConnectionManager}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_connection_manager_a37841cd78e733546b8835922a1343640}{connectToServer}}(\textcolor{keyword}{const}\ std::string\&\ clientID);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_connection_manager_a3c500efc30693e936a88b2b0a3c5f349}{reconnect}}(\textcolor{keywordtype}{int}\ maxAttempts\ =\ 10);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_connection_manager_a329f2a4206aa1a8474f02fa8a70dc2e1}{disconnect}}();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \ \ \doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}\ \doxymbox{\hyperlink{class_connection_manager_a92c54ab0999963149189aa58ed22c3dd}{getSocket}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \doxymbox{\hyperlink{class_connection_manager_afe4f3f933999dc4914b52cfb15d51bcf}{getAircraftId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00081\ \ \ \ \ }
+\DoxyCodeLine{00082\ \ \ \ \ \doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}\ \doxymbox{\hyperlink{class_connection_manager_aefcec4ecacd8e77a71276f06e8c4ceca}{openSocket}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_connection_manager_a239f58ca928f3bd1e9aeb64ab4901c49}{doHandshake}}(\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}\ sock,\ \textcolor{keyword}{const}\ std::string\&\ clientID,\ std::string\&\ assignedId)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_connection_manager_a598d289533c650d914d6ad8cc378d134}{m\_serverIp}};\ \textcolor{comment}{//Server\ IP\ address}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_connection_manager_a120a997e360121e350d76e621ace6322}{m\_serverPort}};\ \textcolor{comment}{//Server\ TCP\ port}}
+\DoxyCodeLine{00088\ \ \ \ \ \doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}\ \doxymbox{\hyperlink{class_connection_manager_ad29d7f4bfff3a4c2d06e3ffd526f0aa2}{m\_socket}};\ \textcolor{comment}{//Active\ socket\ handle}}
+\DoxyCodeLine{00089\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_connection_manager_afbc446310196b184f99f977824dcb31a}{m\_aircraftId}};\ \textcolor{comment}{//Server\ assigned\ aircraft\ ID\ number}}
+\DoxyCodeLine{00090\ \};}
+
+\end{DoxyCode}

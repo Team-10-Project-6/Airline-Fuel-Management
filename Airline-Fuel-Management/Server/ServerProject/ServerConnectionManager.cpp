@@ -1,5 +1,6 @@
 #include "ServerConnectionManager.h"
 #include <iostream>
+#include <string_view>
 #include <thread>
 #include <memory>
 #include <atomic>
@@ -66,9 +67,15 @@ void ServerConnectionManager::startListening() {
         cout << "Client connection made.\n";
 
         std::thread([this, ConnectionSocket]() {
-            std::string clientID;
-            if (handleHandshake(ConnectionSocket, clientID)) {
-                handleClientSession(ConnectionSocket, clientID);
+            try {
+                std::string clientID;
+                if (handleHandshake(ConnectionSocket, clientID)) {
+                    handleClientSession(ConnectionSocket, clientID);
+                }
+            } catch (const std::exception& e) {
+                cerr << "[ERROR] Session thread threw: " << e.what() << "\n";
+            } catch (...) {
+                cerr << "[ERROR] Session thread threw an unknown exception.\n";
             }
             closesocket(ConnectionSocket);
         }).detach();
@@ -110,7 +117,7 @@ bool ServerConnectionManager::handleHandshake(SOCKET ConnectionSocket, string& c
 
     // send back assigned or existing ID
     string response = clientID + "\n";
-    if (send(ConnectionSocket, response.c_str(), response.size(), 0) == SOCKET_ERROR) {
+    if (send(ConnectionSocket, response.c_str(), (int)response.size(), 0) == SOCKET_ERROR) {
         cerr << "Failed to send handshake response.\n";
         return false;
     }
@@ -130,6 +137,7 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
     // FLIGHT_COMPLETE decrements the sentinel.
     // Whoever reaches 0 last runs the summary — exactly once, no polling, no blocking.
     auto pending = std::make_shared<std::atomic<int>>(1);
+    auto initialFuelRecorded = std::make_shared<std::atomic<bool>>(false);
 
     auto runSummary = [this, clientID]() {
         double total = m_dataStorage.sumConsumed(clientID);
@@ -153,46 +161,51 @@ void ServerConnectionManager::handleClientSession(SOCKET ConnectionSocket, const
             break;
         }
 
-        // Check for flight completion message before feeding the parser
-        string chunk(rxBuffer, bytesReceived);
-        if (chunk.find("FLIGHT_COMPLETE") != string::npos) {
-            cout << ("[" + clientID + "] Flight complete.\n");
-            // Decrement the sentinel. If all telemetry tasks already finished, run summary now.
-            if (--(*pending) == 0) {
-                scheduler.enqueueTask(runSummary);
-            }
-            break;
-        }
+        // Check if this chunk contains the flight-completion marker.
+        // Binary telemetry packets may arrive in the same TCP segment as FLIGHT_COMPLETE,
+        // so feed only the bytes that precede the marker to the parser.
+        string_view chunk(rxBuffer, bytesReceived);
+        size_t fcPos = chunk.find("FLIGHT_COMPLETE");
+        bool   flightComplete = (fcPos != string_view::npos);
 
-        parser.feed(rxBuffer, bytesReceived);
+        int feedLen = flightComplete ? static_cast<int>(fcPos) : bytesReceived;
+        if (feedLen > 0) {
+            parser.feed(rxBuffer, feedLen);
+        }
 
         TelemetryPacket packet;
         while (parser.tryParse(packet)) {
-            ++(*pending); // claim a slot before posting
-            scheduler.enqueueTask([this, packet, clientID, pending, runSummary]() {
-                cout << "[" + clientID + "] ts=" + packet.timestamp + " fuel=" + to_string(packet.fuel) + "\n";
-
-                // record initial fuel for this aircraft
-                {
-                    std::lock_guard<std::mutex> lock(m_initialFuelMutex);
-                    m_initialFuel.emplace(clientID, packet.fuel); // no-op if already present
+            ++(*pending);
+            scheduler.enqueueTask([this, packet, clientID, pending, runSummary, initialFuelRecorded]() {
+                //cout << ("[" + clientID + "] ts=" + to_string(packet.timestamp) + " fuel=" + to_string(packet.fuel) + "\n");
+                if (!initialFuelRecorded->load(std::memory_order_relaxed)) {
+                    bool expected = false;
+                    if (initialFuelRecorded->compare_exchange_strong(expected, true)) {
+                        std::lock_guard<std::mutex> lock(m_initialFuelMutex);
+                        m_initialFuel.emplace(clientID, packet.fuel);
+                    }
                 }
 
                 FuelConsumptionRecord record;
                 if (m_telemetryProcessor.process(packet, record)) {
-                    cout << "[" + clientID + "] consumed: " + to_string(record.fuelConsumed) + " liters"
-                            " rate: " + to_string(record.consumptionRate) + " liters per second\n";
+                    //cout << "[" + clientID + "] consumed: " + to_string(record.fuelConsumed) + " liters"
+                            //" rate: " + to_string(record.consumptionRate) + " liters per second\n";
                     if (!m_dataStorage.insert(record)) {
                         cerr << "[" + clientID + "] Failed to persist fuel record.\n";
                     }
                 }
-
-                // Release this task's slot. If FLIGHT_COMPLETE already fired and we're
-                // the last task to finish, run the summary.
                 if (--(*pending) == 0) {
                     runSummary();
                 }
             });
+        }
+
+        if (flightComplete) {
+            cout << ("[" + clientID + "] Flight complete.\n");
+            if (--(*pending) == 0) {
+                scheduler.enqueueTask(runSummary);
+            }
+            break;
         }
     }
 

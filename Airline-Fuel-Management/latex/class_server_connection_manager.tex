@@ -1,0 +1,212 @@
+\doxysection{Server\+Connection\+Manager Class Reference}
+\hypertarget{class_server_connection_manager}{}\label{class_server_connection_manager}\index{ServerConnectionManager@{ServerConnectionManager}}
+
+
+Controls the main network listener and coordinates handshakes, tasks parsing, and session disconnects.  
+
+
+
+
+{\ttfamily \+\#include $<$Server\+Connection\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_server_connection_manager_a88dc03672971c0321ebb07df107b5199}{Server\+Connection\+Manager}} (int \doxymbox{\hyperlink{class_server_connection_manager_ae59ad773698ba4e94a507cc33136f9ec}{port}}, \doxymbox{\hyperlink{class_task_scheduler}{Task\+Scheduler}} \&\doxymbox{\hyperlink{class_server_connection_manager_a579f7679e9a0679b5e300e513dd5909e}{scheduler}})
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_server_connection_manager}{Server\+Connection\+Manager}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_server_connection_manager_a272bcc07022ae6dd33288e3bbd12917e}{\texorpdfstring{$\sim$}{\string~}\+Server\+Connection\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_server_connection_manager}{Server\+Connection\+Manager} Destructor. Cleans up sockets. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_server_connection_manager_ab745912ae93096ffdb7e28a1f570f94b}{start\+Listening}} ()
+\begin{DoxyCompactList}\small\item\em Binds the listening socket and begins accepting client connections in an infinite loop. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_server_connection_manager_a8f4917f0e1ce79b1becfb744cf19c675}{stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the server listener immediately. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_server_connection_manager_a45f197630dc0182e99bedd7467222523}{handle\+Handshake}} (\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} Connection\+Socket, std::\+string \&client\+ID)
+\begin{DoxyCompactList}\small\item\em Performs the initial HELLO handshake process with a connected client. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_server_connection_manager_a8a961b7f1891f338af5d14e75079acaf}{handle\+Client\+Session}} (\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} Connection\+Socket, const std::\+string \&client\+ID)
+\begin{DoxyCompactList}\small\item\em Constantly reads loop telemetry packets for an already-\/handshaked connection session. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_server_connection_manager_ae59ad773698ba4e94a507cc33136f9ec}{port}}
+\item 
+\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} \doxymbox{\hyperlink{class_server_connection_manager_a42881e053bc95b85849f692b7447e595}{Welcome\+Socket}}
+\item 
+bool \doxymbox{\hyperlink{class_server_connection_manager_a521cae44632cbc0f6999e8cc6c964c6a}{is\+Running}}
+\item 
+std::\+atomic$<$ int $>$ \doxymbox{\hyperlink{class_server_connection_manager_a359c92f95ce7b4e22c35ae62d79f4308}{airplane\+Counter}} \{0\}
+\item 
+\doxymbox{\hyperlink{class_task_scheduler}{Task\+Scheduler}} \& \doxymbox{\hyperlink{class_server_connection_manager_a579f7679e9a0679b5e300e513dd5909e}{scheduler}}
+\item 
+\doxymbox{\hyperlink{class_telemetry_processor}{Telemetry\+Processor}} \doxymbox{\hyperlink{class_server_connection_manager_a355dc0689c7f955b9473bd8441c455e2}{m\+\_\+telemetry\+Processor}}
+\item 
+\doxymbox{\hyperlink{class_data_storage}{Data\+Storage}} \doxymbox{\hyperlink{class_server_connection_manager_a560b783f4d3dcf26cae856e44aec9de1}{m\+\_\+data\+Storage}}
+\item 
+std::\+unordered\+\_\+map$<$ std::\+string, double $>$ \doxymbox{\hyperlink{class_server_connection_manager_aaf5861a3f53592fc596a366533d2e34b}{m\+\_\+initial\+Fuel}}
+\item 
+std::\+mutex \doxymbox{\hyperlink{class_server_connection_manager_a6fd3f91832510fe60b0cb3e8632f1ddd}{m\+\_\+initial\+Fuel\+Mutex}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controls the main network listener and coordinates handshakes, tasks parsing, and session disconnects. 
+
+\label{doc-constructors}
+\Hypertarget{class_server_connection_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_server_connection_manager_a88dc03672971c0321ebb07df107b5199}\index{ServerConnectionManager@{ServerConnectionManager}!ServerConnectionManager@{ServerConnectionManager}}
+\index{ServerConnectionManager@{ServerConnectionManager}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{ServerConnectionManager()}{ServerConnectionManager()}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a88dc03672971c0321ebb07df107b5199} 
+Server\+Connection\+Manager::\+\+Server\+Connection\+Manager (\begin{DoxyParamCaption}\item[{int}]{port}{, }\item[{\doxymbox{\hyperlink{class_task_scheduler}{Task\+Scheduler}} \&}]{scheduler}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a new \doxylink{class_server_connection_manager}{Server\+Connection\+Manager}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \doxylink{class_server_connection_manager_ae59ad773698ba4e94a507cc33136f9ec}{port}} & The port to listen on. \\
+\hline
+{\em \doxylink{class_server_connection_manager_a579f7679e9a0679b5e300e513dd5909e}{scheduler}} & \doxylink{class_task_scheduler}{Task\+Scheduler} pool to delegate tasks into. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_server_connection_manager_a272bcc07022ae6dd33288e3bbd12917e}\index{ServerConnectionManager@{ServerConnectionManager}!````~ServerConnectionManager@{\texorpdfstring{$\sim$}{\string~}ServerConnectionManager}}
+\index{````~ServerConnectionManager@{\texorpdfstring{$\sim$}{\string~}ServerConnectionManager}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ServerConnectionManager()}{\string~ServerConnectionManager()}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a272bcc07022ae6dd33288e3bbd12917e} 
+Server\+Connection\+Manager::\+\texorpdfstring{$\sim$}{\string~}\+Server\+Connection\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_server_connection_manager}{Server\+Connection\+Manager} Destructor. Cleans up sockets. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_server_connection_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_server_connection_manager_a8a961b7f1891f338af5d14e75079acaf}\index{ServerConnectionManager@{ServerConnectionManager}!handleClientSession@{handleClientSession}}
+\index{handleClientSession@{handleClientSession}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{handleClientSession()}{handleClientSession()}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a8a961b7f1891f338af5d14e75079acaf} 
+void Server\+Connection\+Manager::\+handle\+Client\+Session (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}}]{Connection\+Socket}{, }\item[{const std::\+string \&}]{client\+ID}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Constantly reads loop telemetry packets for an already-\/handshaked connection session. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Connection\+Socket} & The raw client socket handle. \\
+\hline
+{\em client\+ID} & The associated Client/\+\+Aircraft ID for log/\+metrics associations. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_server_connection_manager_a45f197630dc0182e99bedd7467222523}\index{ServerConnectionManager@{ServerConnectionManager}!handleHandshake@{handleHandshake}}
+\index{handleHandshake@{handleHandshake}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{handleHandshake()}{handleHandshake()}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a45f197630dc0182e99bedd7467222523} 
+bool Server\+Connection\+Manager::\+handle\+Handshake (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}}]{Connection\+Socket}{, }\item[{std::\+string \&}]{client\+ID}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Performs the initial HELLO handshake process with a connected client. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em Connection\+Socket} & The raw client socket handle. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em client\+ID} & The parsed or generated Client/\+\+Aircraft ID passed by reference. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if string handshake successfully completed, false on timeouts or bad formats. 
+\end{DoxyReturn}
+\Hypertarget{class_server_connection_manager_ab745912ae93096ffdb7e28a1f570f94b}\index{ServerConnectionManager@{ServerConnectionManager}!startListening@{startListening}}
+\index{startListening@{startListening}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{startListening()}{startListening()}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_ab745912ae93096ffdb7e28a1f570f94b} 
+void Server\+Connection\+Manager::\+start\+Listening (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Binds the listening socket and begins accepting client connections in an infinite loop. 
+
+\Hypertarget{class_server_connection_manager_a8f4917f0e1ce79b1becfb744cf19c675}\index{ServerConnectionManager@{ServerConnectionManager}!stop@{stop}}
+\index{stop@{stop}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a8f4917f0e1ce79b1becfb744cf19c675} 
+void Server\+Connection\+Manager::\+stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the server listener immediately. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_server_connection_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_server_connection_manager_a359c92f95ce7b4e22c35ae62d79f4308}\index{ServerConnectionManager@{ServerConnectionManager}!airplaneCounter@{airplaneCounter}}
+\index{airplaneCounter@{airplaneCounter}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{airplaneCounter}{airplaneCounter}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a359c92f95ce7b4e22c35ae62d79f4308} 
+std::\+atomic$<$int$>$ Server\+Connection\+Manager::\+airplane\+Counter \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_connection_manager_a521cae44632cbc0f6999e8cc6c964c6a}\index{ServerConnectionManager@{ServerConnectionManager}!isRunning@{isRunning}}
+\index{isRunning@{isRunning}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{isRunning}{isRunning}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a521cae44632cbc0f6999e8cc6c964c6a} 
+bool Server\+Connection\+Manager::\+is\+Running\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_connection_manager_a560b783f4d3dcf26cae856e44aec9de1}\index{ServerConnectionManager@{ServerConnectionManager}!m\_dataStorage@{m\_dataStorage}}
+\index{m\_dataStorage@{m\_dataStorage}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{m\_dataStorage}{m\_dataStorage}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a560b783f4d3dcf26cae856e44aec9de1} 
+\doxymbox{\hyperlink{class_data_storage}{Data\+Storage}} Server\+Connection\+Manager::\+m\+\_\+data\+Storage\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_connection_manager_aaf5861a3f53592fc596a366533d2e34b}\index{ServerConnectionManager@{ServerConnectionManager}!m\_initialFuel@{m\_initialFuel}}
+\index{m\_initialFuel@{m\_initialFuel}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{m\_initialFuel}{m\_initialFuel}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_aaf5861a3f53592fc596a366533d2e34b} 
+std::\+unordered\+\_\+map$<$std::\+string, double$>$ Server\+Connection\+Manager::\+m\+\_\+initial\+Fuel\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_connection_manager_a6fd3f91832510fe60b0cb3e8632f1ddd}\index{ServerConnectionManager@{ServerConnectionManager}!m\_initialFuelMutex@{m\_initialFuelMutex}}
+\index{m\_initialFuelMutex@{m\_initialFuelMutex}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{m\_initialFuelMutex}{m\_initialFuelMutex}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a6fd3f91832510fe60b0cb3e8632f1ddd} 
+std::\+mutex Server\+Connection\+Manager::\+m\+\_\+initial\+Fuel\+Mutex\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_connection_manager_a355dc0689c7f955b9473bd8441c455e2}\index{ServerConnectionManager@{ServerConnectionManager}!m\_telemetryProcessor@{m\_telemetryProcessor}}
+\index{m\_telemetryProcessor@{m\_telemetryProcessor}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{m\_telemetryProcessor}{m\_telemetryProcessor}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a355dc0689c7f955b9473bd8441c455e2} 
+\doxymbox{\hyperlink{class_telemetry_processor}{Telemetry\+Processor}} Server\+Connection\+Manager::\+m\+\_\+telemetry\+Processor\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_connection_manager_ae59ad773698ba4e94a507cc33136f9ec}\index{ServerConnectionManager@{ServerConnectionManager}!port@{port}}
+\index{port@{port}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_ae59ad773698ba4e94a507cc33136f9ec} 
+int Server\+Connection\+Manager::\+port\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_connection_manager_a579f7679e9a0679b5e300e513dd5909e}\index{ServerConnectionManager@{ServerConnectionManager}!scheduler@{scheduler}}
+\index{scheduler@{scheduler}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{scheduler}{scheduler}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a579f7679e9a0679b5e300e513dd5909e} 
+\doxymbox{\hyperlink{class_task_scheduler}{Task\+Scheduler}}\& Server\+Connection\+Manager::\+scheduler\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_connection_manager_a42881e053bc95b85849f692b7447e595}\index{ServerConnectionManager@{ServerConnectionManager}!WelcomeSocket@{WelcomeSocket}}
+\index{WelcomeSocket@{WelcomeSocket}!ServerConnectionManager@{ServerConnectionManager}}
+\doxysubsubsection{\texorpdfstring{WelcomeSocket}{WelcomeSocket}}
+{\footnotesize\ttfamily \label{class_server_connection_manager_a42881e053bc95b85849f692b7447e595} 
+\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}} Server\+Connection\+Manager::\+\+Welcome\+Socket\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Server/\+\+Server\+Project/\+\doxymbox{\hyperlink{_server_connection_manager_8h}{Server\+Connection\+Manager.\+h}}\item 
+Server/\+\+Server\+Project/\+\doxymbox{\hyperlink{_server_connection_manager_8cpp}{Server\+Connection\+Manager.\+cpp}}\end{DoxyCompactItemize}

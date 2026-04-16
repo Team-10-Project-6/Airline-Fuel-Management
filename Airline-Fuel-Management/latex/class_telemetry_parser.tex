@@ -1,0 +1,201 @@
+\doxysection{Telemetry\+Parser Class Reference}
+\hypertarget{class_telemetry_parser}{}\label{class_telemetry_parser}\index{TelemetryParser@{TelemetryParser}}
+
+
+Handles reading and parsing telemetry data files.  
+
+
+
+
+{\ttfamily \+\#include $<$Telemetry\+Parser.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_telemetry_parser_a9c94806b352d7b421dee0a385cc75074}{Telemetry\+Parser}} (const std::\+string \&file\+Path)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_telemetry_parser}{Telemetry\+Parser} object. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_telemetry_parser_a9a05a4fb6f18cdc568bc4e8f52534977}{\texorpdfstring{$\sim$}{\string~}\+Telemetry\+Parser}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. Closes the file. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_telemetry_parser_ac331bcb654d19c86f04546eec9980774}{open}} ()
+\begin{DoxyCompactList}\small\item\em Opens the file stream. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_telemetry_parser_a2a5116f0fd7b7d0788aede30dffeb281}{has\+More}} () const
+\begin{DoxyCompactList}\small\item\em Checks if there are more lines available in the file. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_telemetry_parser_aaf9488765711f33d1cb95024acbcaa7a}{next\+Line}} (std::\+string \&line)
+\begin{DoxyCompactList}\small\item\em Retrieves the next line from the file. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_telemetry_parser_a0cb24a98591deec125d7f2d04c4d1467}{line\+Number}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current line number being parsed. \end{DoxyCompactList}\item 
+time\+\_\+t \doxymbox{\hyperlink{class_telemetry_parser_a3587cfd202405ade2b7f15d6506c3b62}{current\+Timestamp}} () const
+\begin{DoxyCompactList}\small\item\em Returns the parsed unix timestamp of the current line. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+time\+\_\+t \doxymbox{\hyperlink{class_telemetry_parser_a7aaf759960e24a2c1642539fa6b7f05e}{parse\+Timestamp}} (const std::\+string \&line) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_telemetry_parser_a5e9b6b279503dd9c3e958f00387b11ef}{m\+\_\+file\+Path}}
+\item 
+std::\+ifstream \doxymbox{\hyperlink{class_telemetry_parser_a994702771521137ea5237d5b52300261}{m\+\_\+file}}
+\item 
+int \doxymbox{\hyperlink{class_telemetry_parser_a387a41887ad075116ee7c703f6039861}{m\+\_\+line\+Number}}
+\item 
+bool \doxymbox{\hyperlink{class_telemetry_parser_a51309cd51162d755e0d25b52239b3178}{m\+\_\+has\+More}}
+\item 
+time\+\_\+t \doxymbox{\hyperlink{class_telemetry_parser_a044354f3cbecde7688099c41534b0549}{m\+\_\+current\+Timestamp}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles reading and parsing telemetry data files. 
+
+\label{doc-constructors}
+\Hypertarget{class_telemetry_parser_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_telemetry_parser_a9c94806b352d7b421dee0a385cc75074}\index{TelemetryParser@{TelemetryParser}!TelemetryParser@{TelemetryParser}}
+\index{TelemetryParser@{TelemetryParser}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{TelemetryParser()}{TelemetryParser()}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a9c94806b352d7b421dee0a385cc75074} 
+Telemetry\+Parser::\+\+Telemetry\+Parser (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{file\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a new \doxylink{class_telemetry_parser}{Telemetry\+Parser} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The path to the telemetry input file. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_telemetry_parser_a9a05a4fb6f18cdc568bc4e8f52534977}\index{TelemetryParser@{TelemetryParser}!````~TelemetryParser@{\texorpdfstring{$\sim$}{\string~}TelemetryParser}}
+\index{````~TelemetryParser@{\texorpdfstring{$\sim$}{\string~}TelemetryParser}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TelemetryParser()}{\string~TelemetryParser()}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a9a05a4fb6f18cdc568bc4e8f52534977} 
+Telemetry\+Parser::\+\texorpdfstring{$\sim$}{\string~}\+Telemetry\+Parser (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. Closes the file. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_telemetry_parser_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_telemetry_parser_a3587cfd202405ade2b7f15d6506c3b62}\index{TelemetryParser@{TelemetryParser}!currentTimestamp@{currentTimestamp}}
+\index{currentTimestamp@{currentTimestamp}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{currentTimestamp()}{currentTimestamp()}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a3587cfd202405ade2b7f15d6506c3b62} 
+time\+\_\+t Telemetry\+Parser::\+current\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the parsed unix timestamp of the current line. 
+
+\begin{DoxyReturn}{Returns}
+time\+\_\+t The parsed timestamp. 
+\end{DoxyReturn}
+\Hypertarget{class_telemetry_parser_a2a5116f0fd7b7d0788aede30dffeb281}\index{TelemetryParser@{TelemetryParser}!hasMore@{hasMore}}
+\index{hasMore@{hasMore}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{hasMore()}{hasMore()}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a2a5116f0fd7b7d0788aede30dffeb281} 
+bool Telemetry\+Parser::\+has\+More (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if there are more lines available in the file. 
+
+\begin{DoxyReturn}{Returns}
+true if more lines exist, false if EOF is reached. 
+\end{DoxyReturn}
+\Hypertarget{class_telemetry_parser_a0cb24a98591deec125d7f2d04c4d1467}\index{TelemetryParser@{TelemetryParser}!lineNumber@{lineNumber}}
+\index{lineNumber@{lineNumber}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{lineNumber()}{lineNumber()}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a0cb24a98591deec125d7f2d04c4d1467} 
+int Telemetry\+Parser::\+line\+Number (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current line number being parsed. 
+
+\begin{DoxyReturn}{Returns}
+int Current line number. 
+\end{DoxyReturn}
+\Hypertarget{class_telemetry_parser_aaf9488765711f33d1cb95024acbcaa7a}\index{TelemetryParser@{TelemetryParser}!nextLine@{nextLine}}
+\index{nextLine@{nextLine}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{nextLine()}{nextLine()}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_aaf9488765711f33d1cb95024acbcaa7a} 
+bool Telemetry\+Parser::\+next\+Line (\begin{DoxyParamCaption}\item[{std::\+string \&}]{line}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the next line from the file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & Reference to string to store the line contents. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success, false on failure or EOF. 
+\end{DoxyReturn}
+\Hypertarget{class_telemetry_parser_ac331bcb654d19c86f04546eec9980774}\index{TelemetryParser@{TelemetryParser}!open@{open}}
+\index{open@{open}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_ac331bcb654d19c86f04546eec9980774} 
+bool Telemetry\+Parser::\+open (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Opens the file stream. 
+
+\begin{DoxyReturn}{Returns}
+true if successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_telemetry_parser_a7aaf759960e24a2c1642539fa6b7f05e}\index{TelemetryParser@{TelemetryParser}!parseTimestamp@{parseTimestamp}}
+\index{parseTimestamp@{parseTimestamp}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{parseTimestamp()}{parseTimestamp()}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a7aaf759960e24a2c1642539fa6b7f05e} 
+time\+\_\+t Telemetry\+Parser::\+parse\+Timestamp (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{line}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_telemetry_parser_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_telemetry_parser_a044354f3cbecde7688099c41534b0549}\index{TelemetryParser@{TelemetryParser}!m\_currentTimestamp@{m\_currentTimestamp}}
+\index{m\_currentTimestamp@{m\_currentTimestamp}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{m\_currentTimestamp}{m\_currentTimestamp}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a044354f3cbecde7688099c41534b0549} 
+time\+\_\+t Telemetry\+Parser::\+m\+\_\+current\+Timestamp\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_telemetry_parser_a994702771521137ea5237d5b52300261}\index{TelemetryParser@{TelemetryParser}!m\_file@{m\_file}}
+\index{m\_file@{m\_file}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{m\_file}{m\_file}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a994702771521137ea5237d5b52300261} 
+std::\+ifstream Telemetry\+Parser::\+m\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_telemetry_parser_a5e9b6b279503dd9c3e958f00387b11ef}\index{TelemetryParser@{TelemetryParser}!m\_filePath@{m\_filePath}}
+\index{m\_filePath@{m\_filePath}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{m\_filePath}{m\_filePath}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a5e9b6b279503dd9c3e958f00387b11ef} 
+std::\+string Telemetry\+Parser::\+m\+\_\+file\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_telemetry_parser_a51309cd51162d755e0d25b52239b3178}\index{TelemetryParser@{TelemetryParser}!m\_hasMore@{m\_hasMore}}
+\index{m\_hasMore@{m\_hasMore}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{m\_hasMore}{m\_hasMore}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a51309cd51162d755e0d25b52239b3178} 
+bool Telemetry\+Parser::\+m\+\_\+has\+More\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_telemetry_parser_a387a41887ad075116ee7c703f6039861}\index{TelemetryParser@{TelemetryParser}!m\_lineNumber@{m\_lineNumber}}
+\index{m\_lineNumber@{m\_lineNumber}!TelemetryParser@{TelemetryParser}}
+\doxysubsubsection{\texorpdfstring{m\_lineNumber}{m\_lineNumber}}
+{\footnotesize\ttfamily \label{class_telemetry_parser_a387a41887ad075116ee7c703f6039861} 
+int Telemetry\+Parser::\+m\+\_\+line\+Number\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Client/\+\+Client\+Project/\+\doxymbox{\hyperlink{_telemetry_parser_8h}{Telemetry\+Parser.\+h}}\item 
+Client/\+\+Client\+Project/\+\doxymbox{\hyperlink{_telemetry_parser_8cpp}{Telemetry\+Parser.\+cpp}}\end{DoxyCompactItemize}

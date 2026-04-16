@@ -1,0 +1,52 @@
+\doxysection{Telemetry\+Wire\+Packet Struct Reference}
+\hypertarget{struct_telemetry_wire_packet}{}\label{struct_telemetry_wire_packet}\index{TelemetryWirePacket@{TelemetryWirePacket}}
+
+
+Lightweight structure representing the raw wire format of a telemetry packet.  
+
+
+
+
+{\ttfamily \+\#include $<$Packet\+Handler.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \doxymbox{\hyperlink{struct_telemetry_wire_packet_af3b859d35dece6b287089134739a3a31}{timestamp}}
+\item 
+float \doxymbox{\hyperlink{struct_telemetry_wire_packet_a2140e8325478671ff28a9190a9162526}{fuel}}
+\item 
+unsigned int \doxymbox{\hyperlink{struct_telemetry_wire_packet_a6406f42c6ce8928343b6a9e6a8af47e4}{aircraft\+Id}}:\+ 16
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Lightweight structure representing the raw wire format of a telemetry packet. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_telemetry_wire_packet_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_telemetry_wire_packet_a6406f42c6ce8928343b6a9e6a8af47e4}\index{TelemetryWirePacket@{TelemetryWirePacket}!aircraftId@{aircraftId}}
+\index{aircraftId@{aircraftId}!TelemetryWirePacket@{TelemetryWirePacket}}
+\doxysubsubsection{\texorpdfstring{aircraftId}{aircraftId}}
+{\footnotesize\ttfamily \label{struct_telemetry_wire_packet_a6406f42c6ce8928343b6a9e6a8af47e4} 
+unsigned int Telemetry\+Wire\+Packet::\+aircraft\+Id}
+
+\Hypertarget{struct_telemetry_wire_packet_a2140e8325478671ff28a9190a9162526}\index{TelemetryWirePacket@{TelemetryWirePacket}!fuel@{fuel}}
+\index{fuel@{fuel}!TelemetryWirePacket@{TelemetryWirePacket}}
+\doxysubsubsection{\texorpdfstring{fuel}{fuel}}
+{\footnotesize\ttfamily \label{struct_telemetry_wire_packet_a2140e8325478671ff28a9190a9162526} 
+float Telemetry\+Wire\+Packet::\+fuel}
+
+\Hypertarget{struct_telemetry_wire_packet_af3b859d35dece6b287089134739a3a31}\index{TelemetryWirePacket@{TelemetryWirePacket}!timestamp@{timestamp}}
+\index{timestamp@{timestamp}!TelemetryWirePacket@{TelemetryWirePacket}}
+\doxysubsubsection{\texorpdfstring{timestamp}{timestamp}}
+{\footnotesize\ttfamily \label{struct_telemetry_wire_packet_af3b859d35dece6b287089134739a3a31} 
+unsigned int Telemetry\+Wire\+Packet::\+timestamp}
+
+
+
+The documentation for this struct was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Client/\+\+Client\+Project/\+\doxymbox{\hyperlink{_packet_handler_8h}{Packet\+Handler.\+h}}\item 
+Server/\+\+Server\+Project/\+\doxymbox{\hyperlink{_server_packet_parser_8cpp}{Server\+Packet\+Parser.\+cpp}}\end{DoxyCompactItemize}

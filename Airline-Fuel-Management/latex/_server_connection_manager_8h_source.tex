@@ -1,0 +1,56 @@
+\doxysection{Server\+Connection\+Manager.\+h}
+\hypertarget{_server_connection_manager_8h_source}{}\label{_server_connection_manager_8h_source}\index{Server/ServerProject/ServerConnectionManager.h@{Server/ServerProject/ServerConnectionManager.h}}
+\doxymbox{\hyperlink{_server_connection_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <winsock2.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <ws2tcpip.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#pragma\ comment(lib,\ "{}ws2\_32.lib"{})}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_server_packet_parser_8h}{ServerPacketParser.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_task_scheduler_8h}{TaskScheduler.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_telemetry_processor_8h}{TelemetryProcessor.h}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_data_storage_8h}{DataStorage.h}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_server_connection_manager_a88dc03672971c0321ebb07df107b5199}{ServerConnectionManager}}\ \{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \doxymbox{\hyperlink{class_server_connection_manager_a88dc03672971c0321ebb07df107b5199}{ServerConnectionManager}}(\textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_server_connection_manager_ae59ad773698ba4e94a507cc33136f9ec}{port}},\ \doxymbox{\hyperlink{class_task_scheduler}{TaskScheduler}}\&\ \doxymbox{\hyperlink{class_server_connection_manager_a579f7679e9a0679b5e300e513dd5909e}{scheduler}});}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \doxymbox{\hyperlink{class_server_connection_manager_a272bcc07022ae6dd33288e3bbd12917e}{\string~ServerConnectionManager}}();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_server_connection_manager_ab745912ae93096ffdb7e28a1f570f94b}{startListening}}();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_server_connection_manager_a8f4917f0e1ce79b1becfb744cf19c675}{stop}}();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_server_connection_manager_ae59ad773698ba4e94a507cc33136f9ec}{port}};}
+\DoxyCodeLine{00049\ \ \ \ \ \doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}\ \doxymbox{\hyperlink{class_server_connection_manager_a42881e053bc95b85849f692b7447e595}{WelcomeSocket}};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_server_connection_manager_a521cae44632cbc0f6999e8cc6c964c6a}{isRunning}};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ counter\ for\ airplane\ id}}
+\DoxyCodeLine{00053\ \ \ \ \ std::atomic<int>\ \doxymbox{\hyperlink{class_server_connection_manager_a359c92f95ce7b4e22c35ae62d79f4308}{airplaneCounter}}\{0\};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ task\ queue\ pool}}
+\DoxyCodeLine{00056\ \ \ \ \ \doxymbox{\hyperlink{class_task_scheduler}{TaskScheduler}}\&\ \doxymbox{\hyperlink{class_server_connection_manager_a579f7679e9a0679b5e300e513dd5909e}{scheduler}};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{//\ computes\ per-\/packet\ fuel\ consumption\ and\ rate}}
+\DoxyCodeLine{00059\ \ \ \ \ \doxymbox{\hyperlink{class_telemetry_processor}{TelemetryProcessor}}\ \doxymbox{\hyperlink{class_server_connection_manager_a355dc0689c7f955b9473bd8441c455e2}{m\_telemetryProcessor}};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ persists\ fuel\ consumption\ records\ to\ SQLite}}
+\DoxyCodeLine{00062\ \ \ \ \ \doxymbox{\hyperlink{class_data_storage}{DataStorage}}\ \doxymbox{\hyperlink{class_server_connection_manager_a560b783f4d3dcf26cae856e44aec9de1}{m\_dataStorage}};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//\ tracks\ the\ first\ fuel\ reading\ per\ aircraft\ for\ FLIGHT\_COMPLETE\ totals}}
+\DoxyCodeLine{00065\ \ \ \ \ std::unordered\_map<std::string,\ double>\ \doxymbox{\hyperlink{class_server_connection_manager_aaf5861a3f53592fc596a366533d2e34b}{m\_initialFuel}};}
+\DoxyCodeLine{00066\ \ \ \ \ std::mutex\ \doxymbox{\hyperlink{class_server_connection_manager_a6fd3f91832510fe60b0cb3e8632f1ddd}{m\_initialFuelMutex}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_server_connection_manager_a45f197630dc0182e99bedd7467222523}{handleHandshake}}(\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}\ ConnectionSocket,\ std::string\&\ clientID);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_server_connection_manager_a8a961b7f1891f338af5d14e75079acaf}{handleClientSession}}(\doxymbox{\hyperlink{_connection_manager_8h_a8dc8083897335125630f1af5dafd5831}{SOCKET}}\ ConnectionSocket,\ \textcolor{keyword}{const}\ std::string\&\ clientID);}
+\DoxyCodeLine{00082\ \};}
+
+\end{DoxyCode}

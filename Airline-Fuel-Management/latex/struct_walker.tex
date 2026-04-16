@@ -1,0 +1,223 @@
+\doxysection{Walker Struct Reference}
+\hypertarget{struct_walker}{}\label{struct_walker}\index{Walker@{Walker}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_parse}{Parse}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_ac6e8e756b5da8f187b9cf6b94560f352}{p\+Parse}}
+\item 
+int(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a46cbdf0ccdcf736096a2f168218d28fe}{x\+Expr\+Callback}} )(\doxymbox{\hyperlink{struct_walker}{Walker}} \texorpdfstring{$\ast$}{*}, \doxymbox{\hyperlink{struct_expr}{Expr}} \texorpdfstring{$\ast$}{*})
+\item 
+int(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a76a2f8850bf1db17955fe85d65831cb0}{x\+Select\+Callback}} )(\doxymbox{\hyperlink{struct_walker}{Walker}} \texorpdfstring{$\ast$}{*}, \doxymbox{\hyperlink{struct_select}{Select}} \texorpdfstring{$\ast$}{*})
+\item 
+void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_ad35c57031847321ab3db9b7c0946b5e7}{x\+Select\+Callback2}} )(\doxymbox{\hyperlink{struct_walker}{Walker}} \texorpdfstring{$\ast$}{*}, \doxymbox{\hyperlink{struct_select}{Select}} \texorpdfstring{$\ast$}{*})
+\item 
+int \doxymbox{\hyperlink{struct_walker_a1183df46d2b0ecac73e76336067cf207}{walker\+Depth}}
+\item 
+\doxymbox{\hyperlink{sqlite3_8c_a20f2299e322dcbde37cb07b16910b843}{u16}} \doxymbox{\hyperlink{struct_walker_a9b3b4c4db76d5c5a9c4eca60e347f5ee}{e\+Code}}
+\item 
+\doxymbox{\hyperlink{sqlite3_8c_a20f2299e322dcbde37cb07b16910b843}{u16}} \doxymbox{\hyperlink{struct_walker_ab0b60708a638a1a224518819d671ff28}{m\+WFlags}}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\doxymbox{\hyperlink{struct_name_context}{NameContext}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_adbf5872a6c5a9311adbfe01c0e444388}{pNC}}\\
+\>int \doxymbox{\hyperlink{struct_walker_af204341fce4aff29cd9158450226b05d}{n}}\\
+\>int \doxymbox{\hyperlink{struct_walker_afb8e209cee52c2f25e89b89bdbeb25f5}{iCur}}\\
+\>int \doxymbox{\hyperlink{struct_walker_ad3645a2a77a89622066dc270bb5e57bc}{sz}}\\
+\>\doxymbox{\hyperlink{struct_src_list}{SrcList}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_aa09fe5df040b732226cdae1bff741e0d}{pSrcList}}\\
+\>struct CCurHint \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a70279073fa129d7495c7a88af55cf4b4}{pCCurHint}}\\
+\>struct \doxymbox{\hyperlink{struct_ref_src_list}{RefSrcList}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a350ad0613b79213230940bfd0f527488}{pRefSrcList}}\\
+\>int \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_abf7a6262dd1656e813b150a46c4b170e}{aiCol}}\\
+\>struct \doxymbox{\hyperlink{struct_idx_cover}{IdxCover}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_af183095ecc6ae7ee8bd00babd915901c}{pIdxCover}}\\
+\>\doxymbox{\hyperlink{struct_expr_list}{ExprList}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_afa30acf714235acde42049207dbad838}{pGroupBy}}\\
+\>\doxymbox{\hyperlink{struct_select}{Select}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a660213ef8927c88c231102952fe66565}{pSelect}}\\
+\>struct \doxymbox{\hyperlink{struct_window_rewrite}{WindowRewrite}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_ad85088e268eee2a9357e00a85d0e11bf}{pRewrite}}\\
+\>struct \doxymbox{\hyperlink{struct_where_const}{WhereConst}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a14cd651397b91711f18507959398cca1}{pConst}}\\
+\>struct \doxymbox{\hyperlink{struct_rename_ctx}{RenameCtx}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a48077f45d72681843d23b44a04488b4d}{pRename}}\\
+\>struct \doxymbox{\hyperlink{struct_table}{Table}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_acaf1e26f90b76a4a37e5e9bec2fb8315}{pTab}}\\
+\>struct \doxymbox{\hyperlink{struct_covering_index_check}{CoveringIndexCheck}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a25c6f0b5217b83c51d53d4096fac3e71}{pCovIdxCk}}\\
+\>\doxymbox{\hyperlink{struct_src_item}{SrcItem}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a5999f6e53c8c4f56334f69d89e41c6cc}{pSrcItem}}\\
+\>\doxymbox{\hyperlink{struct_db_fixer}{DbFixer}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a5635518d415fb804e87a5043dc896d61}{pFix}}\\
+\>\doxymbox{\hyperlink{sqlite3_8c_a6a58ea0b22f29d55f73a700dca50eb2d}{Mem}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a81937ce6c68c14c05a592af4ce55d3c2}{aMem}}\\
+\>struct \doxymbox{\hyperlink{struct_check_on_ctx}{CheckOnCtx}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_walker_a0860871c79d2bbce37063dfc10e52b21}{pCheckOnCtx}}\\
+\} \doxymbox{\hyperlink{struct_walker_a3c9a38c0a0d250c5e2948e42c5267c70}{u}}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_walker_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_walker_abf7a6262dd1656e813b150a46c4b170e}\index{Walker@{Walker}!aiCol@{aiCol}}
+\index{aiCol@{aiCol}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{aiCol}{aiCol}}
+{\footnotesize\ttfamily \label{struct_walker_abf7a6262dd1656e813b150a46c4b170e} 
+int\texorpdfstring{$\ast$}{*} Walker::\+ai\+Col}
+
+\Hypertarget{struct_walker_a81937ce6c68c14c05a592af4ce55d3c2}\index{Walker@{Walker}!aMem@{aMem}}
+\index{aMem@{aMem}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{aMem}{aMem}}
+{\footnotesize\ttfamily \label{struct_walker_a81937ce6c68c14c05a592af4ce55d3c2} 
+\doxymbox{\hyperlink{sqlite3_8c_a6a58ea0b22f29d55f73a700dca50eb2d}{Mem}}\texorpdfstring{$\ast$}{*} Walker::\+a\+Mem}
+
+\Hypertarget{struct_walker_a9b3b4c4db76d5c5a9c4eca60e347f5ee}\index{Walker@{Walker}!eCode@{eCode}}
+\index{eCode@{eCode}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{eCode}{eCode}}
+{\footnotesize\ttfamily \label{struct_walker_a9b3b4c4db76d5c5a9c4eca60e347f5ee} 
+\doxymbox{\hyperlink{sqlite3_8c_a20f2299e322dcbde37cb07b16910b843}{u16}} Walker::\+e\+Code}
+
+\Hypertarget{struct_walker_afb8e209cee52c2f25e89b89bdbeb25f5}\index{Walker@{Walker}!iCur@{iCur}}
+\index{iCur@{iCur}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{iCur}{iCur}}
+{\footnotesize\ttfamily \label{struct_walker_afb8e209cee52c2f25e89b89bdbeb25f5} 
+int Walker::\+i\+Cur}
+
+\Hypertarget{struct_walker_ab0b60708a638a1a224518819d671ff28}\index{Walker@{Walker}!mWFlags@{mWFlags}}
+\index{mWFlags@{mWFlags}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{mWFlags}{mWFlags}}
+{\footnotesize\ttfamily \label{struct_walker_ab0b60708a638a1a224518819d671ff28} 
+\doxymbox{\hyperlink{sqlite3_8c_a20f2299e322dcbde37cb07b16910b843}{u16}} Walker::\+m\+WFlags}
+
+\Hypertarget{struct_walker_af204341fce4aff29cd9158450226b05d}\index{Walker@{Walker}!n@{n}}
+\index{n@{n}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily \label{struct_walker_af204341fce4aff29cd9158450226b05d} 
+int Walker::\+n}
+
+\Hypertarget{struct_walker_a70279073fa129d7495c7a88af55cf4b4}\index{Walker@{Walker}!pCCurHint@{pCCurHint}}
+\index{pCCurHint@{pCCurHint}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pCCurHint}{pCCurHint}}
+{\footnotesize\ttfamily \label{struct_walker_a70279073fa129d7495c7a88af55cf4b4} 
+struct CCur\+Hint\texorpdfstring{$\ast$}{*} Walker::\+p\+CCur\+Hint}
+
+\Hypertarget{struct_walker_a0860871c79d2bbce37063dfc10e52b21}\index{Walker@{Walker}!pCheckOnCtx@{pCheckOnCtx}}
+\index{pCheckOnCtx@{pCheckOnCtx}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pCheckOnCtx}{pCheckOnCtx}}
+{\footnotesize\ttfamily \label{struct_walker_a0860871c79d2bbce37063dfc10e52b21} 
+struct \doxymbox{\hyperlink{struct_check_on_ctx}{Check\+On\+Ctx}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Check\+On\+Ctx}
+
+\Hypertarget{struct_walker_a14cd651397b91711f18507959398cca1}\index{Walker@{Walker}!pConst@{pConst}}
+\index{pConst@{pConst}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pConst}{pConst}}
+{\footnotesize\ttfamily \label{struct_walker_a14cd651397b91711f18507959398cca1} 
+struct \doxymbox{\hyperlink{struct_where_const}{Where\+Const}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Const}
+
+\Hypertarget{struct_walker_a25c6f0b5217b83c51d53d4096fac3e71}\index{Walker@{Walker}!pCovIdxCk@{pCovIdxCk}}
+\index{pCovIdxCk@{pCovIdxCk}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pCovIdxCk}{pCovIdxCk}}
+{\footnotesize\ttfamily \label{struct_walker_a25c6f0b5217b83c51d53d4096fac3e71} 
+struct \doxymbox{\hyperlink{struct_covering_index_check}{Covering\+Index\+Check}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Cov\+Idx\+Ck}
+
+\Hypertarget{struct_walker_a5635518d415fb804e87a5043dc896d61}\index{Walker@{Walker}!pFix@{pFix}}
+\index{pFix@{pFix}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pFix}{pFix}}
+{\footnotesize\ttfamily \label{struct_walker_a5635518d415fb804e87a5043dc896d61} 
+\doxymbox{\hyperlink{struct_db_fixer}{Db\+Fixer}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Fix}
+
+\Hypertarget{struct_walker_afa30acf714235acde42049207dbad838}\index{Walker@{Walker}!pGroupBy@{pGroupBy}}
+\index{pGroupBy@{pGroupBy}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pGroupBy}{pGroupBy}}
+{\footnotesize\ttfamily \label{struct_walker_afa30acf714235acde42049207dbad838} 
+\doxymbox{\hyperlink{struct_expr_list}{Expr\+List}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Group\+By}
+
+\Hypertarget{struct_walker_af183095ecc6ae7ee8bd00babd915901c}\index{Walker@{Walker}!pIdxCover@{pIdxCover}}
+\index{pIdxCover@{pIdxCover}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pIdxCover}{pIdxCover}}
+{\footnotesize\ttfamily \label{struct_walker_af183095ecc6ae7ee8bd00babd915901c} 
+struct \doxymbox{\hyperlink{struct_idx_cover}{Idx\+Cover}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Idx\+Cover}
+
+\Hypertarget{struct_walker_adbf5872a6c5a9311adbfe01c0e444388}\index{Walker@{Walker}!pNC@{pNC}}
+\index{pNC@{pNC}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pNC}{pNC}}
+{\footnotesize\ttfamily \label{struct_walker_adbf5872a6c5a9311adbfe01c0e444388} 
+\doxymbox{\hyperlink{struct_name_context}{Name\+Context}}\texorpdfstring{$\ast$}{*} Walker::\+p\+NC}
+
+\Hypertarget{struct_walker_ac6e8e756b5da8f187b9cf6b94560f352}\index{Walker@{Walker}!pParse@{pParse}}
+\index{pParse@{pParse}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pParse}{pParse}}
+{\footnotesize\ttfamily \label{struct_walker_ac6e8e756b5da8f187b9cf6b94560f352} 
+\doxymbox{\hyperlink{struct_parse}{Parse}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Parse}
+
+\Hypertarget{struct_walker_a350ad0613b79213230940bfd0f527488}\index{Walker@{Walker}!pRefSrcList@{pRefSrcList}}
+\index{pRefSrcList@{pRefSrcList}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pRefSrcList}{pRefSrcList}}
+{\footnotesize\ttfamily \label{struct_walker_a350ad0613b79213230940bfd0f527488} 
+struct \doxymbox{\hyperlink{struct_ref_src_list}{Ref\+Src\+List}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Ref\+Src\+List}
+
+\Hypertarget{struct_walker_a48077f45d72681843d23b44a04488b4d}\index{Walker@{Walker}!pRename@{pRename}}
+\index{pRename@{pRename}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pRename}{pRename}}
+{\footnotesize\ttfamily \label{struct_walker_a48077f45d72681843d23b44a04488b4d} 
+struct \doxymbox{\hyperlink{struct_rename_ctx}{Rename\+Ctx}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Rename}
+
+\Hypertarget{struct_walker_ad85088e268eee2a9357e00a85d0e11bf}\index{Walker@{Walker}!pRewrite@{pRewrite}}
+\index{pRewrite@{pRewrite}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pRewrite}{pRewrite}}
+{\footnotesize\ttfamily \label{struct_walker_ad85088e268eee2a9357e00a85d0e11bf} 
+struct \doxymbox{\hyperlink{struct_window_rewrite}{Window\+Rewrite}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Rewrite}
+
+\Hypertarget{struct_walker_a660213ef8927c88c231102952fe66565}\index{Walker@{Walker}!pSelect@{pSelect}}
+\index{pSelect@{pSelect}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pSelect}{pSelect}}
+{\footnotesize\ttfamily \label{struct_walker_a660213ef8927c88c231102952fe66565} 
+\doxymbox{\hyperlink{struct_select}{Select}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Select}
+
+\Hypertarget{struct_walker_a5999f6e53c8c4f56334f69d89e41c6cc}\index{Walker@{Walker}!pSrcItem@{pSrcItem}}
+\index{pSrcItem@{pSrcItem}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pSrcItem}{pSrcItem}}
+{\footnotesize\ttfamily \label{struct_walker_a5999f6e53c8c4f56334f69d89e41c6cc} 
+\doxymbox{\hyperlink{struct_src_item}{Src\+Item}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Src\+Item}
+
+\Hypertarget{struct_walker_aa09fe5df040b732226cdae1bff741e0d}\index{Walker@{Walker}!pSrcList@{pSrcList}}
+\index{pSrcList@{pSrcList}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pSrcList}{pSrcList}}
+{\footnotesize\ttfamily \label{struct_walker_aa09fe5df040b732226cdae1bff741e0d} 
+\doxymbox{\hyperlink{struct_src_list}{Src\+List}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Src\+List}
+
+\Hypertarget{struct_walker_acaf1e26f90b76a4a37e5e9bec2fb8315}\index{Walker@{Walker}!pTab@{pTab}}
+\index{pTab@{pTab}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{pTab}{pTab}}
+{\footnotesize\ttfamily \label{struct_walker_acaf1e26f90b76a4a37e5e9bec2fb8315} 
+struct \doxymbox{\hyperlink{struct_table}{Table}}\texorpdfstring{$\ast$}{*} Walker::\+p\+Tab}
+
+\Hypertarget{struct_walker_ad3645a2a77a89622066dc270bb5e57bc}\index{Walker@{Walker}!sz@{sz}}
+\index{sz@{sz}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{sz}{sz}}
+{\footnotesize\ttfamily \label{struct_walker_ad3645a2a77a89622066dc270bb5e57bc} 
+int Walker::\+sz}
+
+\Hypertarget{struct_walker_a3c9a38c0a0d250c5e2948e42c5267c70}\index{Walker@{Walker}!u@{u}}
+\index{u@{u}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{[union]}{[union]}}
+{\footnotesize\ttfamily \label{struct_walker_a3c9a38c0a0d250c5e2948e42c5267c70} 
+union  \{ ... \}  Walker::\+u}
+
+\Hypertarget{struct_walker_a1183df46d2b0ecac73e76336067cf207}\index{Walker@{Walker}!walkerDepth@{walkerDepth}}
+\index{walkerDepth@{walkerDepth}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{walkerDepth}{walkerDepth}}
+{\footnotesize\ttfamily \label{struct_walker_a1183df46d2b0ecac73e76336067cf207} 
+int Walker::\+walker\+Depth}
+
+\Hypertarget{struct_walker_a46cbdf0ccdcf736096a2f168218d28fe}\index{Walker@{Walker}!xExprCallback@{xExprCallback}}
+\index{xExprCallback@{xExprCallback}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{xExprCallback}{xExprCallback}}
+{\footnotesize\ttfamily \label{struct_walker_a46cbdf0ccdcf736096a2f168218d28fe} 
+int(\texorpdfstring{$\ast$}{*} Walker::\+x\+Expr\+Callback) (\doxymbox{\hyperlink{struct_walker}{Walker}} \texorpdfstring{$\ast$}{*}, \doxymbox{\hyperlink{struct_expr}{Expr}} \texorpdfstring{$\ast$}{*})}
+
+\Hypertarget{struct_walker_a76a2f8850bf1db17955fe85d65831cb0}\index{Walker@{Walker}!xSelectCallback@{xSelectCallback}}
+\index{xSelectCallback@{xSelectCallback}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{xSelectCallback}{xSelectCallback}}
+{\footnotesize\ttfamily \label{struct_walker_a76a2f8850bf1db17955fe85d65831cb0} 
+int(\texorpdfstring{$\ast$}{*} Walker::\+x\+Select\+Callback) (\doxymbox{\hyperlink{struct_walker}{Walker}} \texorpdfstring{$\ast$}{*}, \doxymbox{\hyperlink{struct_select}{Select}} \texorpdfstring{$\ast$}{*})}
+
+\Hypertarget{struct_walker_ad35c57031847321ab3db9b7c0946b5e7}\index{Walker@{Walker}!xSelectCallback2@{xSelectCallback2}}
+\index{xSelectCallback2@{xSelectCallback2}!Walker@{Walker}}
+\doxysubsubsection{\texorpdfstring{xSelectCallback2}{xSelectCallback2}}
+{\footnotesize\ttfamily \label{struct_walker_ad35c57031847321ab3db9b7c0946b5e7} 
+void(\texorpdfstring{$\ast$}{*} Walker::\+x\+Select\+Callback2) (\doxymbox{\hyperlink{struct_walker}{Walker}} \texorpdfstring{$\ast$}{*}, \doxymbox{\hyperlink{struct_select}{Select}} \texorpdfstring{$\ast$}{*})}
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Server/\+\+Server\+Project/\+\doxymbox{\hyperlink{sqlite3_8c}{sqlite3.\+c}}\end{DoxyCompactItemize}
